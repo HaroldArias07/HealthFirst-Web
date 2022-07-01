@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <title>Perfil</title>
+        <meta name="keywords" content="keywords" />
+        <meta name="description" content="description" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470075/Logos/logo-hf_ywc9o3.png" />
+        <link href="/assets/styles/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/pe-icon-7-stroke/css/helper.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/styles/minimal-menu.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/styles/flat-form.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/styles/fancySelect.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/styles/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/styles/allinone_bannerRotator.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/styles/owl.carousel.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/styles/owl.theme.default.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/styles/styles.css" rel="stylesheet" type="text/css" />
+        <script src="/assets/scripts/libs/prefixfree.min.js"></script>
+        <script src="/assets/scripts/libs/modernizr.js"></script>
+    </head>
+    <body class="home7">
+        <div class="topbar">
+            <div class="container">
+            	<div class="left-topbar">
+                    <ul class="list-inline">
+                        <li>
+	                        <div th:if="${session.usuarios != null}">
+	                            <div th:if="${session.usuarios.rol == 'ADMIN'}" class="left-topbar">
+	                                <a class="link2 btn btn-danger btn-long" th:href="@{/admin/admin}"><span>Ver como administrador</span></a >
+	                             </div>
+	                             <div th:if="${session.usuarios.rol != 'ADMIN'}" class="left-topbar">
+	                             </div>
+	                        </div >
+                        </li>
+                    </ul>
+                </div>
+                <div class="right-topbar">
+                    <ul class="list-inline">
+                        <li>
+                            <div class="left-topbar">
+                            <form th:action="@{/logout}" method="POST">
+                               <button class="btn btn-block btn-logout"><img class="img-logout" src="https://res.cloudinary.com/covid19-essentials/image/upload/v1639014745/Logos/logout_kugzgd.svg"><span> </span><a>CERRAR SESIÓN</a> </button>
+                            </form>
+                            <!--
+                            	<form th:action="@{/logout}" method="POST">
+                                	<button class="btn btn-danger" type="submit">CERRAR SESIÓN</button  >
+                                </form>	
+                            -->
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.right-topbar -->
+            </div>
+        </div>
+        <!-- /.topbar -->
+        <hr class="gray-line" />
+        <header>
+            <div class="container">
+            	<div>
+            		<a class="logo" th:href="@{/private/index}" th:if="${session.usuarios != null}">
+                		<img src="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
+            		</a>
+	                <a class="logo" th:href="@{/public/index}" th:if="${session.usuarios == null}">
+                		<img src="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
+            		</a>
+            	</div>
+                <!-- /.top-cart -->
+                <nav class="main-nav">
+                    <div class="minimal-menu">
+                        <ul class="menu">
+                        
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/index}">INICIO</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/index}">INICIO</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/shop}">COMPRAR</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/shop}">COMPRAR</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/stores}">TIENDAS</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/stores}">TIENDAS</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/blog}">BLOG</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/blog}">BLOG</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/aboutus}">NOSOTROS</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/aboutus}">NOSOTROS</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/contact}">CONTACTO</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/contact}">CONTACTO</a>
+                            </li >
+                        </ul>
+                    </div>
+                    <!-- /.minimal-menu -->
+                </nav>
+                <!-- /.main-nav -->
+            </div>
+        </header>
+        
+        <div class="container">
+            <div class="theme-features">
+                <h3>PERFIL DE USUARIO</h3>
+                <h5>Bienvenido</h5>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="card card-user">
+                    <div class="image">
+                        <img src="https://res.cloudinary.com/covid19-essentials/image/upload/v1639014114/Usuarios/card-body_hxxz4u.jpg" >
+                    </div>
+                    <div class="card-body">
+                        <div class="author">
+                        <a>
+                            <img class="avatar border-gray" th:src="${session.usuarios.imagen}">
+                            <h3 class="title" th:text="${session.usuarios.username}"></h3>
+                        </a>
+                        <p class="description">
+                        	<span th:text="${session.usuarios.email}"></span >
+                        </p>
+                        </div>
+                        <p class="description text-center">
+                        	<span th:text="${session.usuarios.nombre}"></span >
+	                  		<span th:text="${session.usuarios.apellido}"></span >
+                        </p>
+                        <p class="description text-center">
+                        	<span th:text="${session.usuarios.telefono}"></span >
+                        </p>
+                        <p class="description text-center">
+                        	<span th:text="${session.usuarios.fecha}"></span >
+                        </p>
+                        <p class="description text-center">
+		                  <span th:text="${session.usuarios.rol}"></span >
+		                </p>
+                    </div>
+                    <div class="card-footer pdb-20">
+                        <hr>
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                <!--
+                                <form method="post" action="editprofile.html">
+                                    <a  th:href="@{/private/editprofile}" class="btn btn-animated btn-block btn-primary">Editar</a> 
+                                 </form>
+                                 -->
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                        <button th:href="@{/private/eliminar/profile/}+${session.usuarios.id}" 
+                                  	 			th:onclick="eliminarProfile([[${session.usuarios.id}]])" 
+                                  	 			class="btn btn-animated btn-block btn-danger">Eliminar cuenta</button> 
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                        </div>                         
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>  
+        </div>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <h3>ADDRESS INFO</h3>
+                        <!--<div class="address">Mall Aventura - Florida - <br />Miami</div>-->
+                        <p>Tel. <a href="tel:+51 916541436">+51 916 541 436</a></p>
+                        <p>Email. <a href="mailto:healthfirst@gmail.com">healthfirst@gmail.com</a></p>
+                        
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h3>INICIO</h3>
+                        <ul class="list-link">
+                            <li><a href="#">INICIO</a></li>
+                            <li><a href="#">COMPRAR</a></li>
+                            <li><a href="#">BLOG</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h3>POLITICAS</h3>
+                        <ul class="list-link">
+                            <li><a href="#">POLÍTICAS AMBIENTALES</a></li>
+                            <li><a href="#">POLÍTICA PRIVADA</a></li>
+                            <li><a href="#">CONDICIONES</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h3>COMPAÑIA</h3>
+                        <ul class="list-link">
+                            <li><a href="#">NOSOTROS</a></li>
+                            <li><a href="#">TIENDAS</a></li>
+                            <li><a href="#">CONTACTO</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bottom-footer">
+                    <div class="copyright">
+                        ©COPYRIGHT 2022. HEALTH FIRST. TODOS LOS DERECHOS RESERVADOS. 
+                    </div>
+                    <!-- /.copyright -->
+                    <ul class="list-payment">
+                        <li><a href="#"><img src="/assets/images/visa.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/paypal.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/2co.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/ae.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/skrill.png" alt="img" /></a></li>
+                    </ul>
+                    <!-- /.list-payment -->
+                </div>
+            </div>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="/assets/functions/funciones.js"></script>
+        <script src="/assets/scripts/libs/jquery-1.11.2.min.js"></script>
+        <script src="/assets/scripts/libs/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+        <script src="/assets/scripts/libs/jquery.easing.1.3.js"></script>
+        <script src="/assets/scripts/libs/bootstrap.min.js"></script>
+        <script src="/assets/scripts/libs/fancySelect.js"></script>
+        <script src="/assets/scripts/libs/jquery.fancybox.pack.js"></script>
+        <script src="/assets/scripts/libs/jquery.ui.touch-punch.min.js"></script>
+        <script src="/assets/scripts/libs/jquery.mousewheel.min.js"></script>
+        <script src="/assets/scripts/libs/allinone_bannerRotator.js"></script>
+        <script src="/assets/scripts/libs/owl.carousel.min.js"></script>
+        <script src="/assets/scripts/libs/jquery.countdown.min.js"></script>
+        <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <script src="/assets/scripts/libs/gmaps.js"></script>
+        <script src="/assets/scripts/functions.js"></script>
+    </body>
+</html>

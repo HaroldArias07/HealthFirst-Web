@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" xmlns:th="https://www.thymeleaf.org">
+	<head>
+	    <meta charset="utf-8">
+	    <title>Detalle Producto</title>
+	    <meta name="keywords" content="keywords" />
+	    <meta name="description" content="description" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470075/Logos/logo-hf_ywc9o3.png" />
+	    <link href="/assets/styles/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/pe-icon-7-stroke/css/helper.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/minimal-menu.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/flat-form.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/fancySelect.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/allinone_bannerRotator.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/owl.carousel.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/owl.theme.default.min.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/styles.css" rel="stylesheet" type="text/css" />
+	    <script src="/assets/scripts/libs/prefixfree.min.js"></script>
+	    <script src="/assets/scripts/libs/modernizr.js"></script>
+	</head>
+    <body class="home7">
+        <div class="topbar">
+            <div class="container">
+            
+             	<div class="left-topbar">
+                    <ul class="list-inline">
+                        <li>
+	                        <div th:if="${session.usuarios != null}">
+	                            <div th:if="${session.usuarios.rol == 'ADMIN'}" class="left-topbar">
+	                                <a class="link2 btn btn-danger btn-long" th:href="@{/admin/admin}"><span>Ver como administrador</span></a >
+	                             </div>
+	                             <div th:if="${session.usuarios.rol != 'ADMIN'}" class="left-topbar">
+	                             </div>
+	                        </div >
+                        </li>
+                    </ul>
+                </div>
+                <div class="right-topbar">
+                    <ul class="list-inline">
+                        <li>
+                            <div th:if="${session.usuarios == null}" class="left-topbar">
+                                <a th:href="@{/auth/login}">INICIAR SESIÓN</a> / <a th:href="@{/auth/register}">REGISTRARME</a>
+                             </div>
+                             <div th:if="${session.usuarios != null}" class="left-topbar">
+                             <a th:href="@{/private/profile}"><img class="img-profile" th:src="${session.usuarios.imagen}">  <span th:text="${session.usuarios.username}"></span ></a>
+                             <!--
+                                <form th:action="@{/logout}" method="POST">
+                                	<button type="submit">CERRAR SESIÓN</button >
+                                </form>	
+                             -->
+                             </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.right-topbar -->
+            </div>
+        </div>
+        <!-- /.topbar -->
+        <hr class="gray-line" />
+        <header>
+            <div class="container">
+            	<div>
+            		<a class="logo" th:href="@{/private/index}" th:if="${session.usuarios != null}">
+                		<img src="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
+            		</a>
+	                <a class="logo" th:href="@{/public/index}" th:if="${session.usuarios == null}">
+                		<img src="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
+            		</a>
+            	</div>
+                <!-- /.top-cart -->
+                <nav class="main-nav">
+                    <div class="minimal-menu">
+                        <ul class="menu">
+                        
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/index}">INICIO</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/index}">INICIO</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}" class="current-menu-item">
+                                <a th:href="@{/private/shop}">COMPRAR</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}" class="current-menu-item">
+                                <a th:href="@{/public/shop}">COMPRAR</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/stores}">TIENDAS</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/stores}">TIENDAS</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/blog}">BLOG</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/blog}">BLOG</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/aboutus}">NOSOTROS</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/aboutus}">NOSOTROS</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/contact}">CONTACTO</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/contact}">CONTACTO</a>
+                            </li >
+                        </ul>
+                    </div>
+                    <!-- /.minimal-menu -->
+                </nav>
+                <!-- /.main-nav -->
+            </div>
+        </header>
+        <div class="main">
+            <div class="container">
+                <div class="main-content">
+                    <div class="product">
+                        <div class="row" th:each="producto:${productos}">
+                            <div class="col-md-6">
+                                <div class="images">
+                                    <div id="product-showcase">
+                                        <div class="gallery">
+                                            <div class="full">
+                                                <img th:src="${producto.imagen_producto}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            <br><br><br>
+                            
+                            </div>
+                            
+                            <div class="col-md-6">
+
+                                <!-- /.breadcrumb -->
+                                <div class="summary">
+                                    <h2 class="product-name" th:text="${producto.nombre_producto}"></h2>
+                                    <div class="price">
+										S/ <span th:text="${producto.precio_producto}"></span >
+                                    </div>
+                                    <div class="short-desc">
+                                        <strong>Descripción del producto</strong> <span th:text="${producto.descripcion_producto}"></span >
+                                    </div>
+                                    <div class="product-action">
+                                        <div class="clearfix">
+                                         	<div class="quantity">
+                                                <input type="number" min="1" th:max="${producto.stock_producto}"/>
+                                         	</div>
+                                            <button type="submit" class="add-to-cart-btn">ADD TO CART</button>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <ul class="ul-product">
+                                        <li>Categorias <strong th:text="${producto.categoria_producto}"></strong ></li>
+                                        <li>Tipo: <strong th:text="${producto.tipo_producto}"></strong ></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.product-tabs -->
+                    </div>
+                    <!-- /.product -->
+
+                    <!-- /.related-products -->
+                </div>
+                <!-- /.main-content -->
+            </div>
+            <br>
+        </div>
+
+        <hr class="gray-line" />
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <h3>ADDRESS INFO</h3>
+                        <!--<div class="address">Mall Aventura - Florida - <br />Miami</div>-->
+                        <p>Tel. <a href="tel:+51 916541436">+51 916 541 436</a></p>
+                        <p>Email. <a href="mailto:healthfirst@gmail.com">healthfirst@gmail.com</a></p>
+                        
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h3>INICIO</h3>
+                        <ul class="list-link">
+                            <li><a href="#">INICIO</a></li>
+                            <li><a href="#">COMPRAR</a></li>
+                            <li><a href="#">BLOG</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h3>POLITICAS</h3>
+                        <ul class="list-link">
+                            <li><a href="#">POLÍTICAS AMBIENTALES</a></li>
+                            <li><a href="#">POLÍTICA PRIVADA</a></li>
+                            <li><a href="#">CONDICIONES</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h3>COMPAÑIA</h3>
+                        <ul class="list-link">
+                            <li><a href="#">NOSOTROS</a></li>
+                            <li><a href="#">TIENDAS</a></li>
+                            <li><a href="#">CONTACTO</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bottom-footer">
+                    <div class="copyright">
+                        ©COPYRIGHT 2022. HEALTH FIRST. TODOS LOS DERECHOS RESERVADOS. 
+                    </div>
+                    <!-- /.copyright -->
+                    <ul class="list-payment">
+                        <li><a href="#"><img src="/assets/images/visa.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/paypal.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/2co.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/ae.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/skrill.png" alt="img" /></a></li>
+                    </ul>
+                    <!-- /.list-payment -->
+                </div>
+            </div>
+        </footer>
+        <script src="/assets/scripts/libs/jquery-1.11.2.min.js"></script>
+        <script src="/assets/scripts/libs/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+        <script src="/assets/scripts/libs/jquery.easing.1.3.js"></script>
+        <script src="/assets/scripts/libs/bootstrap.min.js"></script>
+        <script src="/assets/scripts/libs/fancySelect.js"></script>
+        <script src="/assets/scripts/libs/jquery.fancybox.pack.js"></script>
+        <script src="/assets/scripts/libs/jquery.ui.touch-punch.min.js"></script>
+        <script src="/assets/scripts/libs/jquery.mousewheel.min.js"></script>
+        <script src="/assets/scripts/libs/allinone_bannerRotator.js"></script>
+        <script src="/assets/scripts/libs/owl.carousel.min.js"></script>
+        <script src="/assets/scripts/libs/jquery.countdown.min.js"></script>
+        <script src="/assets/scripts/libs/easyResponsiveTabs.js"></script>
+        <script src="/assets/scripts/libs/jquery.raty-fa.js"></script>
+        <script src="/assets/scripts/functions.js"></script>
+    </body>
+</html>

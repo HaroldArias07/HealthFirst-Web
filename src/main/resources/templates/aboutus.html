@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" xmlns:th="https://www.thymeleaf.org">
+	<head>
+	    <meta charset="utf-8">
+	    <title>Nosotros</title>
+	    <meta name="keywords" content="keywords" />
+	    <meta name="description" content="description" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470075/Logos/logo-hf_ywc9o3.png" />
+	    <link href="/assets/styles/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/pe-icon-7-stroke/css/helper.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/minimal-menu.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/flat-form.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/fancySelect.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/allinone_bannerRotator.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/owl.carousel.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/owl.theme.default.min.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/styles.css" rel="stylesheet" type="text/css" />
+	    <script src="/assets/scripts/libs/prefixfree.min.js"></script>
+	    <script src="/assets/scripts/libs/modernizr.js"></script>
+	</head>
+    <body class="home7">
+        <div class="topbar">
+            <div class="container">
+            
+             	<div class="left-topbar">
+                    <ul class="list-inline">
+                        <li>
+	                        <div th:if="${session.usuarios != null}">
+	                            <div th:if="${session.usuarios.rol == 'ADMIN'}" class="left-topbar">
+	                                <a class="link2 btn btn-danger btn-long" th:href="@{/admin/admin}"><span>Ver como administrador</span></a >
+	                             </div>
+	                             <div th:if="${session.usuarios.rol != 'ADMIN'}" class="left-topbar">
+	                             </div>
+	                        </div >
+                        </li>
+                    </ul>
+                </div>
+                <div class="right-topbar">
+                    <ul class="list-inline">
+                        <li>
+                            <div th:if="${session.usuarios == null}" class="left-topbar">
+                                <a th:href="@{/auth/login}">INICIAR SESIÓN</a> / <a th:href="@{/auth/register}">REGISTRARME</a>
+                             </div>
+                             <div th:if="${session.usuarios != null}" class="left-topbar">
+                             <a th:href="@{/private/profile}"><img class="img-profile" th:src="${session.usuarios.imagen}">  <span th:text="${session.usuarios.username}"></span ></a>
+                             <!--
+                                <form th:action="@{/logout}" method="POST">
+                                	<button type="submit">CERRAR SESIÓN</button >
+                                </form>	
+                             -->
+                             </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.right-topbar -->
+            </div>
+        </div>
+        <!-- /.topbar -->
+        <hr class="gray-line" />
+        <header>
+            <div class="container">
+            	<div>
+            		<a class="logo" th:href="@{/private/index}" th:if="${session.usuarios != null}">
+                		<img src="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
+            		</a>
+	                <a class="logo" th:href="@{/public/index}" th:if="${session.usuarios == null}">
+                		<img src="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
+            		</a>
+            	</div>
+                <!-- /.top-cart -->
+                <nav class="main-nav">
+                    <div class="minimal-menu">
+                        <ul class="menu">
+                        
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/index}">INICIO</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/index}">INICIO</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/shop}">COMPRAR</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/shop}">COMPRAR</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/stores}">TIENDAS</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/stores}">TIENDAS</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/blog}">BLOG</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/blog}">BLOG</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}" class="current-menu-item">
+                                <a th:href="@{/private/aboutus}">NOSOTROS</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}" class="current-menu-item">
+                                <a th:href="@{/public/aboutus}">NOSOTROS</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/contact}">CONTACTO</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/contact}">CONTACTO</a>
+                            </li >
+                        </ul>
+                    </div>
+                    <!-- /.minimal-menu -->
+                </nav>
+                <!-- /.main-nav -->
+            </div>
+        </header>
+        <div class="theme-features">
+            <div class="container">
+                <h3>HEALTH FIRST</h3>
+                <h5>Sobre nosotros</h5>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="feature-item">
+                            <h4 class="text-center">¿QUIENES SOMOS?</h4 >
+                            <p  class="text-justify">En esta tienda podemos encontrar diferentes tipos de productos desde los productos más especializados para prevención ante este virus tales como esterilizadores portátiles de luz UV o dispensadores de esterilización de suelas de zapatos, hasta los productos más demandados como las mascarillas faciales, los guantes desinfectantes para las manos y el alcohol en gel desinfectante.</p >
+                            <p  class="text-justify">Inicialmente, los propietarios realmente no estaban seguros de que la idea funcionara. Abrieron la primera tienda justo cuando los centros comerciales volvían a abrir después de las cuarentenas.</p >
+                            <p  class="text-justify">
+                            “Realmente no comprendimos qué tan grande sería”, dijo Benimetzky. “No lo analizamos con la idea de abrir muchas tiendas. Pero hemos estado ocupados desde el momento en que abrimos “.
+                            </p >
+                            <p  class="text-justify">
+                            “Nos quita un poco de nuestra personalidad cuando todo el mundo camina con máscaras desechables”, dijo Chen. “Parece un hospital, como si todo el mundo estuviera enfermo”.
+                            </p >
+                                
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="feature-item">
+                            <h4 class="text-center">TIENDA EN MIAMI</h4 >
+                            <img class="img-responsive" src="https://res.cloudinary.com/covid19-essentials/image/upload/v1638994472/Sobre%20nosotros/AboutUs_i7hnql.jpg">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <br>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="feature-item">
+                            <h4 class="text-center">NADAV BENIMETZKY</h4 >
+                            <img class="img-responsive" src="https://res.cloudinary.com/covid19-essentials/image/upload/v1638994472/Sobre%20nosotros/AboutUs2_ejzqjs.jpg">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="feature-item">
+                            <h4 class="text-center">FUNDADOR</h4  >
+                            <p  class="text-justify">Benimetzky abrió la primera tienda COVID-19 Essentials en el Aventura Mall en los suburbios de Miami después de ver la demanda de máscaras N95 al principio de la pandemia. “Son feas e incómodas, y todo el mundo las odia”, dijo. “Si vas a usar una máscara, también puede estar a la moda y ser bonita”.</p >
+                            <p  class="text-justify">
+                            La mayoría de las máscaras están cosidas específicamente para la cadena, incluidas muchas hechas a mano. Uno de sus proveedores es una familia de inmigrantes vietnamitas que cosen máscaras en su casa de Los Ángeles, dijo Benimetzky.  
+                            </p >
+                            <p  class="text-justify">
+                            Chen dijo que era difícil tener máscaras en stock y que todos los días hay un nuevo diseño que es éxito de ventas.    
+                            </p >
+                            <p  class="text-justify">
+                            Dorothy Lovett, de 80 años, se detuvo frente a la tienda, apoyada en un bastón con un diseño de estampado animal. “Tuve que retroceder y decir, ‘¿Qué diablos es esto?’”, dijo. “Nunca antes había visto una tienda de máscaras”.   
+                            </p >
+                            <p  class="text-justify">
+                            Examinó la vitrina, notando que necesitaba encontrar una mejor opción que la versión de tela que estaba usando.    
+                            </p >
+                            <p  class="text-justify">
+                            “No puedo respirar con ésta”, dijo Lovett, antes de decidirse por su favorita. “Me gusta la máscara Black Lives Matter”.    
+                            </p >
+                        </div>
+                    </div>
+                </div>
+                
+                <br><br><br>
+                
+                <hr class="gray-line" />
+                
+                <div class="row">
+                    <br><br>
+                    <h3>PREGUNTAS FRECUENTES</h3>
+                    <h5>Health First</h5>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="feature-item pe-7s-star">
+                            <h4>¿PORQUE NOSOTROS?</h4>
+                            <p  class="text-justify">Inicialmente, los propietarios realmente no estaban seguros de que la idea funcionara. Abrieron la primera tienda justo cuando los centros comerciales volvían a abrir después de las cuarentenas.</p  >
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="feature-item pe-7s-mail-open-file">
+                            <h4>¿NOS APROBARAN LA TESIS?</h4>
+                            <p  class="text-justify">
+                            “Nos quita un poco de nuestra personalidad cuando todo el mundo camina con máscaras desechables”, dijo Chen. “Parece un hospital, como si todo el mundo estuviera enfermo”.
+                            </p >
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="feature-item pe-7s-cart">
+                            <h4>¿FRONTEND ES FÁCIL COMO DICEN?</h4>
+                            <p  class="text-justify">
+                            “Nos quita un poco de nuestra personalidad cuando todo el mundo camina con máscaras desechables”, dijo Chen. “Parece un hospital, como si todo el mundo estuviera enfermo”.
+                            </p >
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="feature-item pe-7s-airplay">
+                            <h4>¿FRONTEND ES FÁCIL COMO DICEN?</h4>
+                            <p  class="text-justify">Inicialmente, los propietarios realmente no estaban seguros de que la idea funcionara. Abrieron la primera tienda justo cuando los centros comerciales volvían a abrir después de las cuarentenas.
+                            </p >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="gray-line" />
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <h3>ADDRESS INFO</h3>
+                        <!--<div class="address">Mall Aventura - Florida - <br />Miami</div>-->
+                        <p>Tel. <a href="tel:+51 916541436">+51 916 541 436</a></p>
+                        <p>Email. <a href="mailto:healthfirst@gmail.com">healthfirst@gmail.com</a></p>
+                        
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h3>INICIO</h3>
+                        <ul class="list-link">
+                            <li><a href="#">INICIO</a></li>
+                            <li><a href="#">COMPRAR</a></li>
+                            <li><a href="#">BLOG</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h3>POLITICAS</h3>
+                        <ul class="list-link">
+                            <li><a href="#">POLÍTICAS AMBIENTALES</a></li>
+                            <li><a href="#">POLÍTICA PRIVADA</a></li>
+                            <li><a href="#">CONDICIONES</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h3>COMPAÑIA</h3>
+                        <ul class="list-link">
+                            <li><a href="#">NOSOTROS</a></li>
+                            <li><a href="#">TIENDAS</a></li>
+                            <li><a href="#">CONTACTO</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bottom-footer">
+                    <div class="copyright">
+                        ©COPYRIGHT 2022. HEALTH FIRST. TODOS LOS DERECHOS RESERVADOS. 
+                    </div>
+                    <!-- /.copyright -->
+                    <ul class="list-payment">
+                        <li><a href="#"><img src="/assets/images/visa.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/paypal.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/2co.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/ae.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/skrill.png" alt="img" /></a></li>
+                    </ul>
+                    <!-- /.list-payment -->
+                </div>
+            </div>
+        </footer>
+        <script src="/assets/scripts/libs/jquery-1.11.2.min.js"></script>
+        <script src="/assets/scripts/libs/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+        <script src="/assets/scripts/libs/jquery.easing.1.3.js"></script>
+        <script src="/assets/scripts/libs/bootstrap.min.js"></script>
+        <script src="/assets/scripts/libs/fancySelect.js"></script>
+        <script src="/assets/scripts/libs/jquery.fancybox.pack.js"></script>
+        <script src="/assets/scripts/libs/jquery.ui.touch-punch.min.js"></script>
+        <script src="/assets/scripts/libs/jquery.mousewheel.min.js"></script>
+        <script src="/assets/scripts/libs/allinone_bannerRotator.js"></script>
+        <script src="/assets/scripts/libs/owl.carousel.min.js"></script>
+        <script src="/assets/scripts/libs/jquery.countdown.min.js"></script>
+        <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <script src="assets/scripts/libs/gmaps.js"></script>
+        <script src="assets/scripts/functions.js"></script>
+    </body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" xmlns:th="https://www.thymeleaf.org">
+	<head>
+	    <meta charset="utf-8">
+	    <title>Detalle Post</title>
+	    <meta name="keywords" content="keywords" />
+	    <meta name="description" content="description" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470075/Logos/logo-hf_ywc9o3.png" />
+	    <link href="/assets/styles/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/pe-icon-7-stroke/css/helper.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/minimal-menu.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/flat-form.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/fancySelect.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/allinone_bannerRotator.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/owl.carousel.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/owl.theme.default.min.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/styles.css" rel="stylesheet" type="text/css" />
+	    <script src="/assets/scripts/libs/prefixfree.min.js"></script>
+	    <script src="/assets/scripts/libs/modernizr.js"></script>
+	</head>
+    <body class="home7">
+        <div class="topbar">
+            <div class="container">
+            
+             	<div class="left-topbar">
+                    <ul class="list-inline">
+                        <li>
+	                        <div th:if="${session.usuarios != null}">
+	                            <div th:if="${session.usuarios.rol == 'ADMIN'}" class="left-topbar">
+	                                <a class="link2 btn btn-danger btn-long" th:href="@{/admin/admin}"><span>Ver como administrador</span></a >
+	                             </div>
+	                             <div th:if="${session.usuarios.rol != 'ADMIN'}" class="left-topbar">
+	                             </div>
+	                        </div >
+                        </li>
+                    </ul>
+                </div>
+                <div class="right-topbar">
+                    <ul class="list-inline">
+                        <li>
+                            <div th:if="${session.usuarios == null}" class="left-topbar">
+                                <a th:href="@{/auth/login}">INICIAR SESIÓN</a> / <a th:href="@{/auth/register}">REGISTRARME</a>
+                             </div>
+                             <div th:if="${session.usuarios != null}" class="left-topbar">
+                             <a th:href="@{/private/profile}"><img class="img-profile" th:src="${session.usuarios.imagen}">  <span th:text="${session.usuarios.username}"></span ></a>
+                             <!--
+                                <form th:action="@{/logout}" method="POST">
+                                	<button type="submit">CERRAR SESIÓN</button >
+                                </form>	
+                             -->
+                             </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.right-topbar -->
+            </div>
+        </div>
+        <!-- /.topbar -->
+        <hr class="gray-line" />
+        <header>
+            <div class="container">
+            	<div>
+            		<a class="logo" th:href="@{/private/index}" th:if="${session.usuarios != null}">
+                		<img src="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
+            		</a>
+	                <a class="logo" th:href="@{/public/index}" th:if="${session.usuarios == null}">
+                		<img src="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
+            		</a>
+            	</div>
+                <!-- /.top-cart -->
+                <nav class="main-nav">
+                    <div class="minimal-menu">
+                        <ul class="menu">
+                        
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/index}">INICIO</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/index}">INICIO</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/shop}">COMPRAR</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/shop}">COMPRAR</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/stores}">TIENDAS</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/stores}">TIENDAS</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}" class="current-menu-item">
+                                <a th:href="@{/private/blog}">BLOG</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}" class="current-menu-item">
+                                <a th:href="@{/public/blog}">BLOG</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/aboutus}">NOSOTROS</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/aboutus}">NOSOTROS</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/contact}">CONTACTO</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/contact}">CONTACTO</a>
+                            </li >
+                        </ul>
+                    </div>
+                    <!-- /.minimal-menu -->
+                </nav>
+                <!-- /.main-nav -->
+            </div>
+        </header>
+        <div class="main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="main-content">
+                            <div class="post-item">
+                                <h1 class="post-title">Mauris at urna at est porta tristique</h1>
+                                <div class="post-info">
+                                    <span><a href="#"><i class="pe-7s-users"></i> ADMIN</a></span>
+                                    <span><a href="#"><i class="pe-7s-clock"></i> JANUARY 15, 2015</a></span>
+                                    <span><a href="#"><i class="pe-7s-comment"></i> 10 COMMENTS</a></span>
+                                </div>
+                                <div class="post-main-img">
+                                    <img class="img-responsive" src="/assets/images/blog-img-4.jpg" alt="img" />
+                                </div>
+                                <div class="post-content">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis iaculis lorem. Vivamus rhoncus euismod nisl at sodales. Praesent id est ultrices, sollicitudin nulla sed, commodo nulla. Donec eu porttitor mauris. Cras posuere magna quis risus ultricies fringilla. Praesent tortor erat, fringilla et lacus eu, dignissim pretium justo. Phasellus molestie lobortis erat, ac elementum nibh varius id. Pellentesque non sodales arcu, a iaculis tortor. Quisque varius orci dui, nec blandit mi mattis posuere. Curabitur convallis est et orci accumsan ornare. Fusce tristique consectetur euismod.</p>
+                                    <p>Quisque gravida, enim sit amet lobortis pretium, nibh eros porttitor urna, nec egestas magna purus id nunc. Donec vulputate ante nisl, cursus rutrum lectus luctus non. Vestibulum euismod vestibulum mi at malesuada. Etiam vel dui vitae nisl varius ultrices. Quisque nec neque massa. Cras elementum, mauris in aliquet faucibus, quam tellus dapibus libero, ultricies pretium dui enim sit amet nisl. Nulla a nisi ex.</p>
+                                    <p>Aenean tempor laoreet malesuada. Suspendisse laoreet viverra iaculis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut libero est, gravida sit amet leo at, lobortis malesuada lacus. Nulla sagittis augue id rutrum aliquet. Maecenas urna libero, posuere quis elementum vel, euismod at odio. Cras eget massa fringilla, rutrum elit fringilla, fringilla arcu. Donec rutrum est dolor, eget consequat nulla venenatis a. Nulla cursus iaculis tincidunt. Morbi facilisis, ex quis viverra dignissim, augue ex pellentesque arcu, vitae volutpat justo magna vitae lacus. Curabitur vitae lectus malesuada, feugiat lectus id, pulvinar est. Nullam congue, purus sit amet feugiat pretium, nisi nisi efficitur enim, non blandit ex turpis eu nunc. Nam venenatis fringilla fermentum.</p>
+                                </div>
+                            </div>
+                            <!-- /.post-item -->
+                            <div class="comments-area">
+                                <div class="comment-account media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="avatar" src="/assets/images/cmt-avatar-1.jpg" alt="img" />
+                                        </a>
+                                        <h4>LAURA BERNSHTEIN</h4>
+                                        <h5>Stylist</h5>
+                                    </div>
+                                    <div class="media-body">
+                                        Nulla mattis mi quis elit porttitor. Ut ut laoreet justo. Suspendisse nulla ligula, aliquet sed cursus ut, sodales sit amet metus. Proin sollicitudin, urna nec placerat faucibus, ex elit mattis nulla, sed placerat libero dui sem. Etiam non auctor odio. Cras posuere ante vitae molestie. Nunc imperdiet viverra nunc, eget aliquet diam.
+                                    </div>
+                                </div>
+                                <p class="comment-count">5 COMMENTS</p>
+                                <ol class="comment-list media-list">
+                                    <li class="comment parent">
+                                        <article class="comment-body media">
+                                            <div class="media-left">
+                                                <a href="#">
+                                                    <img class="avatar" src="/assets/images/cmt-avatar-2.jpg" alt="img" />
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="comment-content">
+                                                    Nulla mattis mi quis elit porttitor gravida. Ut ut laoreet justo. Suspendisse nulla ligula
+                                                </div>
+                                                <div class="comment-info">
+                                                    <h5>ElISE CRASEL</h5>
+                                                    <div class="comment-date">
+                                                        <a href="#"><i class="pe-7s-clock"></i>JANUARY 15, 2015</a>
+                                                    </div>
+                                                    <div class="comment-reply">
+                                                        <a class='comment-reply-link' href='#'>Reply</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        <ul class="children">
+                                            <li class="comment">
+                                                <article class="comment-body media">
+                                                    <div class="media-left">
+                                                        <a href="#">
+                                                            <img class="avatar" src="/assets/images/cmt-avatar-3.jpg" alt="img" />
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="comment-content">
+                                                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla fermentum libero libero, ac mollis nisl commodo in.
+                                                        </div>
+                                                        <div class="comment-info">
+                                                            <h5>JOHN DOE</h5>
+                                                            <div class="comment-date">
+                                                                <a href="#"><i class="pe-7s-clock"></i>JANUARY 15, 2015</a>
+                                                            </div>
+                                                            <div class="comment-reply">
+                                                                <a class='comment-reply-link' href='#'>Reply</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </li>
+                                            <li class="comment">
+                                                <article class="comment-body media">
+                                                    <div class="media-left">
+                                                        <a href="#">
+                                                            <img class="avatar" src="/assets/images/cmt-avatar-2.jpg" alt="img" />
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="comment-content">
+                                                            Nulla mattis mi quis elit porttitor gravida.
+                                                        </div>
+                                                        <div class="comment-info">
+                                                            <h5>ElISE CRASEL</h5>
+                                                            <div class="comment-date">
+                                                                <a href="#"><i class="pe-7s-clock"></i>JANUARY 15, 2015</a>
+                                                            </div>
+                                                            <div class="comment-reply">
+                                                                <a class='comment-reply-link' href='#'>Reply</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="comment">
+                                        <article class="comment-body media">
+                                            <div class="media-left">
+                                                <a href="#">
+                                                    <img class="avatar" src="/assets/images/cmt-avatar-4.jpg" alt="img" />
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="comment-content">
+                                                    Phasellus finibus neque in elementum sagittis. Integer congue cursus ullamcorper. Pellentesque a metus pulvinar, varius nisl porta, cursus nibh. Praesent ut dapibus nisl, ut faucibus sem. Maecenas non congue ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam vitae vehicula justo, at tincidunt nulla.
+                                                </div>
+                                                <div class="comment-info">
+                                                    <h5>LAURA BERNSHTEIN</h5>
+                                                    <div class="comment-date">
+                                                        <a href="#"><i class="pe-7s-clock"></i>JANUARY 15, 2015</a>
+                                                    </div>
+                                                    <div class="comment-reply">
+                                                        <a class='comment-reply-link' href='#'>Reply</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </li>
+                                </ol>
+                                <div class="comment-respond pe-7s-user">
+                                    <form action="#" class="comment-form">
+                                        <div class="wrap-textarea">
+                                            <textarea class="textarea-form" placeholder="YOUR COMMENT"></textarea>
+                                        </div>
+                                        <button type="submit">ADD COMMENT</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- /.comments-area -->
+                        </div>
+                        <!-- /.main-content -->
+                    </div>
+                    <div class="col-md-3">
+                        <div class="sidebar">
+                            <aside class="widget">
+                                <h4 class="widget-title">GET CONNECTED</h4>
+                                <ul class="list-social-2">
+                                    <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="#" class="vk"><i class="fa fa-vk"></i></a></li>
+                                    <li><a href="#" class="behance"><i class="fa fa-behance"></i></a></li>
+                                    <li><a href="#" class="youtube"><i class="fa fa-youtube-play"></i></a></li>
+                                </ul>
+                                <!-- /.list-social-2 -->
+                            </aside>
+                            <aside class="widget">
+                                <h4 class="widget-title">SEARCH THE BLOG</h4>
+                                <form action="#" class="search-form">
+                                    <input class="input-form" type="text" placeholder="LET’S SEARCH" />
+                                    <button type="submit"><i class="pe-7s-search"></i></button>
+                                </form>
+                            </aside>
+
+                            <aside class="widget">
+                                <h4 class="widget-title">POPULAR TAGS</h4>
+                                <ul class="list-tags">
+                                    <li><a href="blog.html">CLOTHES</a></li>
+                                    <li><a href="blog.html">MEN</a></li>
+                                    <li><a href="blog.html">WOMEN</a></li>
+                                    <li><a href="blog.html">KID</a></li>
+                                    <li><a href="blog.html">TREND COAT</a></li>
+                                </ul>
+                            </aside>
+                        </div>
+                        <!-- /.sidebar -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="gray-line" />
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <h3>ADDRESS INFO</h3>
+                        <!--<div class="address">Mall Aventura - Florida - <br />Miami</div>-->
+                        <p>Tel. <a href="tel:+51 916541436">+51 916 541 436</a></p>
+                        <p>Email. <a href="mailto:healthfirst@gmail.com">healthfirst@gmail.com</a></p>
+                        
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h3>INICIO</h3>
+                        <ul class="list-link">
+                            <li><a href="#">INICIO</a></li>
+                            <li><a href="#">COMPRAR</a></li>
+                            <li><a href="#">BLOG</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h3>POLITICAS</h3>
+                        <ul class="list-link">
+                            <li><a href="#">POLÍTICAS AMBIENTALES</a></li>
+                            <li><a href="#">POLÍTICA PRIVADA</a></li>
+                            <li><a href="#">CONDICIONES</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h3>COMPAÑIA</h3>
+                        <ul class="list-link">
+                            <li><a href="#">NOSOTROS</a></li>
+                            <li><a href="#">TIENDAS</a></li>
+                            <li><a href="#">CONTACTO</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bottom-footer">
+                    <div class="copyright">
+                        ©COPYRIGHT 2022. HEALTH FIRST. TODOS LOS DERECHOS RESERVADOS. 
+                    </div>
+                    <!-- /.copyright -->
+                    <ul class="list-payment">
+                        <li><a href="#"><img src="/assets/images/visa.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/paypal.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/2co.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/ae.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/skrill.png" alt="img" /></a></li>
+                    </ul>
+                    <!-- /.list-payment -->
+                </div>
+            </div>
+        </footer>
+        <script src="/assets/scripts/libs/jquery-1.11.2.min.js"></script>
+        <script src="/assets/scripts/libs/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+        <script src="/assets/scripts/libs/jquery.easing.1.3.js"></script>
+        <script src="/assets/scripts/libs/bootstrap.min.js"></script>
+        <script src="/assets/scripts/libs/fancySelect.js"></script>
+        <script src="/assets/scripts/libs/jquery.fancybox.pack.js"></script>
+        <script src="/assets/scripts/libs/jquery.ui.touch-punch.min.js"></script>
+        <script src="/assets/scripts/libs/jquery.mousewheel.min.js"></script>
+        <script src="/assets/scripts/libs/allinone_bannerRotator.js"></script>
+        <script src="/assets/scripts/libs/owl.carousel.min.js"></script>
+        <script src="/assets/scripts/libs/jquery.countdown.min.js"></script>
+        <script src="/assets/scripts/functions.js"></script>
+    </body>
+</html>

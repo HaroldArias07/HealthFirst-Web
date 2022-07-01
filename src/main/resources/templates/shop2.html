@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" xmlns:th="https://www.thymeleaf.org">
+	<head>
+	    <meta charset="utf-8">
+	    <title>Comprar</title>
+	    <meta name="keywords" content="keywords" />
+	    <meta name="description" content="description" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470075/Logos/logo-hf_ywc9o3.png" />
+	    <link href="/assets/styles/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/pe-icon-7-stroke/css/helper.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/minimal-menu.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/flat-form.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/fancySelect.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/allinone_bannerRotator.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/owl.carousel.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/owl.theme.default.min.css" rel="stylesheet" type="text/css" />
+	    <link href="/assets/styles/styles.css" rel="stylesheet" type="text/css" />
+	    <script src="/assets/scripts/libs/prefixfree.min.js"></script>
+	    <script src="/assets/scripts/libs/modernizr.js"></script>
+	</head>
+    <body class="home7">
+		<div class="topbar">
+            <div class="container">
+            
+             	<div class="left-topbar">
+                    <ul class="list-inline">
+                        <li>
+	                        <div th:if="${session.usuarios != null}">
+	                            <div th:if="${session.usuarios.rol == 'ADMIN'}" class="left-topbar">
+	                                <a class="link2 btn btn-danger btn-long" th:href="@{/admin/admin}"><span>Ver como administrador</span></a >
+	                             </div>
+	                             <div th:if="${session.usuarios.rol != 'ADMIN'}" class="left-topbar">
+	                             </div>
+	                        </div >
+                        </li>
+                    </ul>
+                </div>
+                <div class="right-topbar">
+                    <ul class="list-inline">
+                        <li>
+                            <div th:if="${session.usuarios == null}" class="left-topbar">
+                                <a th:href="@{/auth/login}">INICIAR SESIÓN</a> / <a th:href="@{/auth/register}">REGISTRARME</a>
+                             </div>
+                             <div th:if="${session.usuarios != null}" class="left-topbar">
+                             <a th:href="@{/private/profile}"><img class="img-profile" th:src="${session.usuarios.imagen}">  <span th:text="${session.usuarios.username}"></span ></a>
+                             <!--
+                                <form th:action="@{/logout}" method="POST">
+                                	<button type="submit">CERRAR SESIÓN</button >
+                                </form>	
+                             -->
+                             </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.right-topbar -->
+            </div>
+        </div>
+        <!-- /.topbar -->
+        <hr class="gray-line" />
+        <header>
+            <div class="container">
+            	<div>
+            		<a class="logo" th:href="@{/private/index}" th:if="${session.usuarios != null}">
+                		<img src="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
+            		</a>
+	                <a class="logo" th:href="@{/public/index}" th:if="${session.usuarios == null}">
+                		<img src="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
+            		</a>
+            	</div>
+                <!-- /.top-cart -->
+                <nav class="main-nav">
+                    <div class="minimal-menu">
+                        <ul class="menu">
+                        
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/index}">INICIO</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/index}">INICIO</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}" class="current-menu-item">
+                                <a th:href="@{/private/shop}">COMPRAR</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}" class="current-menu-item">
+                                <a th:href="@{/public/shop}">COMPRAR</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/stores}">TIENDAS</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/stores}">TIENDAS</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/blog}">BLOG</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/blog}">BLOG</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/aboutus}">NOSOTROS</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/aboutus}">NOSOTROS</a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/contact}">CONTACTO</a>
+                            </li >
+                            <li th:if="${session.usuarios == null}">
+                                <a th:href="@{/public/contact}">CONTACTO</a>
+                            </li >
+                        </ul>
+                    </div>
+                    <!-- /.minimal-menu -->
+                </nav>
+                <!-- /.main-nav -->
+            </div>
+        </header>
+        <div class="main">
+            <div class="container">
+                <div class="header-page">
+                    <h1>Productos</h1>
+                </div>
+                <!-- /.header-page -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="sidebar">
+                            <aside class="widget">
+                                <h4 class="widget-title">Categorias</h4>
+                                <ul class="ul-sidebar">
+                                	<li>
+                                        <a >Alcohol</a >
+                                        <ul class="children works-filter">
+                                            <li class="filter" data-filter=".Alcohol_Gel"> Gel</li >
+                                            <li class="filter" data-filter=".Alcohol_Liquido"> Liquido</li >
+                                            <br>
+                                        </ul>
+                                    </li>
+                                    
+                                    <li>
+                                        <a >Guantes</a >
+                                        <ul class="children works-filter">
+                                            <li class="filter" data-filter=".Guante_Tela"> Tela</li >
+                                            <li class="filter" data-filter=".Guante_Quirurgico"> Quirurgicos</li >
+                                            <br>
+                                        </ul>
+                                    </li>
+                                    
+                                    <li>
+                                        <a >Mascarillas</a >
+                                        <ul class="children works-filter">
+                                        	<li class="filter" data-filter=".Mascarilla_Deportiva"> Deportiva</li >
+                                            <li class="filter" data-filter=".Mascarilla_KN95"> KN95</li >
+                                            <li class="filter" data-filter=".Mascarilla_Tela"> Tela</li >
+                                            <li class="filter" data-filter=".Mascarilla_Quirurgica"> Quirurgica</li >
+                                            <br>
+                                        </ul>
+                                    </li  >
+                                    
+                                    <li>
+                                        <a>Protector facial</a>
+                                        <ul class="children works-filter">
+                                            <li class="filter" data-filter=".Facial_Lentes"> Lentes</li >
+                                            <li class="filter" data-filter=".Facial_Vincha"> Vincha</li >
+                                            <br>
+                                        </ul>
+                                    </li>
+                                    
+                                </ul>
+                            </aside>
+                        </div>
+                        <!-- /.sidebar -->
+                    </div>
+                    <div class="col-md-9">
+                        <div class="main-content">
+                            <div class="top-products">
+                                <div class="showing-results">
+                                    Mostrando 13–24 productos
+                                </div>
+                            </div>
+                            <div class="box-product row list-works">
+                            <div class="row">
+                                <div th:each="producto:${productos}" th:if="${producto.id_producto} > 12 AND ${producto.id_producto} < 40" th:class="'mix col-md-4 '+${producto.tipo_producto}+' col-sm-6'">
+                                    <div class="product-item ">
+                                        <div class="product-thumb">
+                                            <div class="main-img">
+                                                <a>
+                                                    <img class="img-responsive" th:src="${producto.imagen_producto}" alt="img" />
+                                                </a>
+                                            </div>
+                                            <a href="#" class="details"><i class="pe-7s-search"></i></a>
+                                        </div>
+                                        <h4 class="product-name"><a href="single-product.html"><strong th:text="${producto.nombre_producto}"></strong ></a></h4>
+                                        <p class="product-price">
+                                        <ins><span class="amount"> S/</span> <span class="amount" th:text="${producto.precio_producto}"></span></ins>
+                                        </p>
+                                        <div class="group-buttons center-all">
+                                            <a th:if="${session.usuarios != null}" th:href="@{/private/singleproduct}" type="button" class="add-to-cart" data-toggle="tooltip" data-placement="top" title="Comprar">
+                                            	<span>Comprar</span> <i class="fa fa-shopping-cart"></i>
+                                            </a  >
+                                            <a th:if="${session.usuarios == null}" th:href="@{/auth/login}" type="button" class="add-to-cart" data-toggle="tooltip" data-placement="top" title="Comprar">
+                                            	<span>Comprar</span> <i class="fa fa-shopping-cart"></i>
+                                            </a  >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div >
+                            </div>
+                            <!-- /.box-product -->
+                            <nav class="pagination">
+                                <ul class="page-numbers">
+                                    <li><a th:if="${session.usuarios != null}" th:href="@{/private/shop}">1</a></li>
+                                    <li><a th:if="${session.usuarios == null}" th:href="@{/public/shop}">1</a></li>
+                                    <li><span class="current">2</span></li>
+                                    <li><a class="last " href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                                </ul>
+                            </nav>
+                            <!-- /.pagination -->
+                        </div>
+                        <!-- /.main-content -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="gray-line" />
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <h3>ADDRESS INFO</h3>
+                        <!--<div class="address">Mall Aventura - Florida - <br />Miami</div>-->
+                        <p>Tel. <a href="tel:+51 916541436">+51 916 541 436</a></p>
+                        <p>Email. <a href="mailto:healthfirst@gmail.com">healthfirst@gmail.com</a></p>
+                        
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h3>INICIO</h3>
+                        <ul class="list-link">
+                            <li><a href="#">INICIO</a></li>
+                            <li><a href="#">COMPRAR</a></li>
+                            <li><a href="#">BLOG</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h3>POLITICAS</h3>
+                        <ul class="list-link">
+                            <li><a href="#">POLÍTICAS AMBIENTALES</a></li>
+                            <li><a href="#">POLÍTICA PRIVADA</a></li>
+                            <li><a href="#">CONDICIONES</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h3>COMPAÑIA</h3>
+                        <ul class="list-link">
+                            <li><a href="#">NOSOTROS</a></li>
+                            <li><a href="#">TIENDAS</a></li>
+                            <li><a href="#">CONTACTO</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bottom-footer">
+                    <div class="copyright">
+                        ©COPYRIGHT 2022. HEALTH FIRST. TODOS LOS DERECHOS RESERVADOS. 
+                    </div>
+                    <!-- /.copyright -->
+                    <ul class="list-payment">
+                        <li><a href="#"><img src="/assets/images/visa.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/paypal.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/2co.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/ae.png" alt="img" /></a></li>
+                        <li><a href="#"><img src="/assets/images/skrill.png" alt="img" /></a></li>
+                    </ul>
+                    <!-- /.list-payment -->
+                </div>
+            </div>
+        </footer>
+        <script src="/assets/scripts/libs/jquery-1.11.2.min.js"></script>
+        <script src="/assets/scripts/libs/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+        <script src="/assets/scripts/libs/jquery.easing.1.3.js"></script>
+        <script src="/assets/scripts/libs/bootstrap.min.js"></script>
+        <script src="/assets/scripts/libs/fancySelect.js"></script>
+        <script src="/assets/scripts/libs/jquery.fancybox.pack.js"></script>
+        <script src="/assets/scripts/libs/jquery.ui.touch-punch.min.js"></script>
+        <script src="/assets/scripts/libs/jquery.mousewheel.min.js"></script>
+        <script src="/assets/scripts/libs/allinone_bannerRotator.js"></script>
+        <script src="/assets/scripts/libs/owl.carousel.min.js"></script>
+        <script src="/assets/scripts/libs/jquery.countdown.min.js"></script>
+        <script src="/assets/scripts/libs/jquery.mixitup.min.js"></script>
+        <script src="/assets/scripts/functions.js"></script>
+    </body>
+</html>
