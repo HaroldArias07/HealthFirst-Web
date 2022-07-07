@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.essentials.demo.models.entity.Blogs;
 import com.essentials.demo.models.entity.Carrusels;
+import com.essentials.demo.models.entity.Contactos;
 import com.essentials.demo.models.entity.Productos;
 import com.essentials.demo.models.entity.Testimonios;
 import com.essentials.demo.models.entity.Tiendas;
 import com.essentials.demo.models.entity.Usuarios;
 import com.essentials.demo.models.service.IBlogService;
 import com.essentials.demo.models.service.ICarruselService;
+import com.essentials.demo.models.service.IContactoService;
 import com.essentials.demo.models.service.IProductoService;
 import com.essentials.demo.models.service.ITestimonioService;
 import com.essentials.demo.models.service.ITiendaService;
@@ -50,6 +52,9 @@ public class PrivateController {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private IContactoService contactoService;
 	
 	@GetMapping("/index")
 	public String index(Authentication auth, HttpSession session, Model model, Model model2, Model model3, Model model4) {
@@ -143,7 +148,7 @@ public class PrivateController {
 	}
 	
 	@GetMapping("/contact")
-	public String contact(Authentication auth, HttpSession session) {
+	public String contact(Authentication auth, HttpSession session, Model model, Model model2) {
 		String username = auth.getName();
 		
 		if(session.getAttribute("usuarios") == null) {
@@ -151,7 +156,28 @@ public class PrivateController {
 			usuarios.setPassword(null);
 			session.setAttribute("usuarios", usuarios);
 		}
+		List<Contactos>contactos = contactoService.listar();
+		model.addAttribute("contactos", contactos);
+		model2.addAttribute("contact", new Contactos());
 		return "contact";
+	}
+	
+	@PostMapping("/save/contact")
+	public String saveContactos(@Validated Contactos con, Model model2) {
+		contactoService.save(con);
+		return "redirect:/private/enviado";
+	}
+	
+	@GetMapping("/enviado")
+	public String enviado(Authentication auth, HttpSession session) {
+		String username = auth.getName();
+		
+		if(session.getAttribute("usuarios") == null) {
+			Usuarios usuarios = usuarioService.findByUsername(username);
+			usuarios.setPassword(null);
+			session.setAttribute("usuarios", usuarios);
+		}
+		return "enviado";
 	}
 	
 	@GetMapping("/cuatrocerocuatro")

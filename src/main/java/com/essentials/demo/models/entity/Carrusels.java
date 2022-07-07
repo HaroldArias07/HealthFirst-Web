@@ -60,7 +60,11 @@ public class Carrusels {
 	public Carrusels() {
 		super();
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Carrusels [id_carrusel=" + id_carrusel + ", titulo_carrusel=" + titulo_carrusel
+				+ ", descripcion_carrusel=" + descripcion_carrusel + ", imagen_carrusel=" + imagen_carrusel + "]";
+	}
 	
 }

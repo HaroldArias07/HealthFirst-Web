@@ -6,7 +6,7 @@
         <meta name="keywords" content="keywords" />
         <meta name="description" content="description" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470075/Logos/logo-hf_ywc9o3.png" />
+        <link rel="shortcut icon" href="https://res.cloudinary.com/health-first/image/upload/v1656470075/Logos/logo-hf_ywc9o3.png" />
         <link href="/assets/styles/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="/assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet" type="text/css" />
         <link href="/assets/pe-icon-7-stroke/css/helper.css" rel="stylesheet" type="text/css" />
@@ -64,10 +64,10 @@
             <div class="container">
             	<div>
             		<a class="logo" th:href="@{/private/index}" th:if="${session.usuarios != null}">
-                		<img src="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
+                		<img src="https://res.cloudinary.com/health-first/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
             		</a>
 	                <a class="logo" th:href="@{/public/index}" th:if="${session.usuarios == null}">
-                		<img src="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
+                		<img src="https://res.cloudinary.com/health-first/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
             		</a>
             	</div>
                 <!-- /.top-cart -->
@@ -158,14 +158,23 @@
                         <p>Email. <a href="mailto:healthfirst@gmail.com">healthfirst@gmail.com</a></p>
                         
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-sm-6" th:if="${session.usuarios == null}">
                         <h3>INICIO</h3>
                         <ul class="list-link">
-                            <li><a href="#">INICIO</a></li>
-                            <li><a href="#">COMPRAR</a></li>
-                            <li><a href="#">BLOG</a></li>
+                            <li><a th:href="@{/public/index}">INICIO</a></li>
+                            <li><a th:href="@{/public/shop}">COMPRAR</a></li>
+                            <li><a th:href="@{/public/blog}">BLOG</a></li>
                         </ul>
                     </div>
+                    <div class="col-md-3 col-sm-6" th:if="${session.usuarios != null}">
+                        <h3>INICIO</h3>
+                        <ul class="list-link">
+                            <li><a th:href="@{/private/index}">INICIO</a></li>
+                            <li><a th:href="@{/private/shop}">COMPRAR</a></li>
+                            <li><a th:href="@{/private/blog}">BLOG</a></li>
+                        </ul>
+                    </div>
+                    
                     <div class="col-md-3 col-sm-6">
                         <h3>POLITICAS</h3>
                         <ul class="list-link">
@@ -174,14 +183,24 @@
                             <li><a href="#">CONDICIONES</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    
+                    <div class="col-md-3 col-sm-6" th:if="${session.usuarios == null}">
                         <h3>COMPAÑIA</h3>
                         <ul class="list-link">
-                            <li><a href="#">NOSOTROS</a></li>
-                            <li><a href="#">TIENDAS</a></li>
-                            <li><a href="#">CONTACTO</a></li>
+                            <li><a th:href="@{/public/aboutus}">NOSOTROS</a></li>
+                            <li><a th:href="@{/public/stores}">TIENDAS</a></li>
+                            <li><a th:href="@{/public/contact}">CONTACTO</a></li>
                         </ul>
                     </div>
+                    <div class="col-md-3 col-sm-6" th:if="${session.usuarios != null}">
+                        <h3>COMPAÑIA</h3>
+                        <ul class="list-link">
+                            <li><a th:href="@{/private/aboutus}">NOSOTROS</a></li>
+                            <li><a th:href="@{/private/stores}">TIENDAS</a></li>
+                            <li><a th:href="@{/private/contact}">CONTACTO</a></li>
+                        </ul>
+                    </div>
+                    
                 </div>
                 <div class="bottom-footer">
                     <div class="copyright">

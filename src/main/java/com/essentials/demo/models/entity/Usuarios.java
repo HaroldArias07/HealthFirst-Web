@@ -122,6 +122,13 @@ public class Usuarios implements Serializable{
 	public Usuarios() {
 		super();
 	}
+	
+	@Override
+	public String toString() {
+		return "Usuarios [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono
+				+ ", fecha=" + fecha + ", email=" + email + ", imagen=" + imagen + ", rol=" + rol + ", username="
+				+ username + ", password=" + password + "]";
+	}
 
 	private static final long serialVersionUID = 1L;
 	

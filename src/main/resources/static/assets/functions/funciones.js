@@ -27,7 +27,7 @@ function eliminarBlog(id) {
 		});
 }
 
-function eliminarCarrusel(id) {
+function eliminarCarruseles(id) {
 	swal({
 		  title: "¿Esta seguro de Eliminar?",
 		  text: "Una vez eliminado no se prodra restablecer!",
@@ -38,7 +38,7 @@ function eliminarCarrusel(id) {
 		.then((OK) => {
 		  if (OK) {
 			  $.ajax({
-				 url:"/admin/eliminar/carrusels/"+id,
+				 url:"/admin/eliminar/carruseles/"+id,
 				 success: function(res) {
 					console.log(res);
 				},			
@@ -47,7 +47,36 @@ function eliminarCarrusel(id) {
 		      icon: "success",
 		    }).then((ok)=>{
 		    	if(ok){
-		    		location.href="/admin/carrusel";
+		    		location.href="/admin/carruseles";
+		    	}
+		    });
+		  } else {
+			swal("Tu registro está seguro!")
+		}
+		});
+}
+
+function eliminarContactos(id) {
+	swal({
+		  title: "¿Esta seguro de Eliminar?",
+		  text: "Una vez eliminado no se prodra restablecer!",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((OK) => {
+		  if (OK) {
+			  $.ajax({
+				 url:"/admin/eliminar/contactos/"+id,
+				 success: function(res) {
+					console.log(res);
+				},			
+			  });
+		    swal("Poof! Registro eliminado!", {
+		      icon: "success",
+		    }).then((ok)=>{
+		    	if(ok){
+		    		location.href="/admin/contactos";
 		    	}
 		    });
 		  } else {

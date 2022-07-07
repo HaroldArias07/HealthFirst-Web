@@ -6,7 +6,7 @@
 	    <meta name="keywords" content="keywords" />
 	    <meta name="description" content="description" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470075/Logos/logo-hf_ywc9o3.png" />
+        <link rel="shortcut icon" href="https://res.cloudinary.com/health-first/image/upload/v1656470075/Logos/logo-hf_ywc9o3.png" />
 	    <link href="/assets/styles/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	    <link href="/assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet" type="text/css" />
 	    <link href="/assets/pe-icon-7-stroke/css/helper.css" rel="stylesheet" type="text/css" />
@@ -64,10 +64,10 @@
             <div class="container">
             	<div>
             		<a class="logo" th:href="@{/private/index}" th:if="${session.usuarios != null}">
-                		<img src="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
+                		<img src="https://res.cloudinary.com/health-first/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
             		</a>
 	                <a class="logo" th:href="@{/public/index}" th:if="${session.usuarios == null}">
-                		<img src="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
+                		<img src="https://res.cloudinary.com/health-first/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials" />
             		</a>
             	</div>
                 <!-- /.top-cart -->
@@ -129,20 +129,63 @@
                     <div class="col-md-6 pdt-70">
                         <div id="map"></div>
                     </div>
-                    <div class="col-md-6 pdt-70">
+                    <div class="col-md-6 pdt-70" th:if="${session.usuarios == null}">
                         <h3>ENTRAR EN CONTACTO</h3>
-                        <p>Envianos un mensaje y te responderemos lo más pronto posible!</p>
+                        <div class="alert alert-danger" role="alert">Necesitas estar logueado para insertar el texto</div>
                         <form action="sendmail.php" method="post" class="contact-form">
-                            <label for="your_name">Su nombre*</label>
-                            <input class="input-form" type="text" name="your_name" id="your_name" />
-                            <label for="your_email">Su correo*</label>
-                            <input class="input-form" type="email" name="your_email" id="your_email" />
-                            <label for="your_message">Su mensaje*</label>
-                            <textarea class="textarea-form" name="your_message" id="your_message"></textarea>
-                            <button class="submit-btn" type="submit">Enviar</button>
+                            <label for="your_name">Su nombre completo *</label>
+                            <input class="input-form" type="text" disabled name="your_name" id="your_name" />
+                            <label for="your_email">Su correo *</label>
+                            <input class="input-form" type="email" disabled name="your_email" id="your_email" />
+                            <label for="your_email">Su teléfono *</label>
+                            <input class="input-form" type="number" disabled name="your_number" id="your_number" />
+                            <label for="your_message">Su mensaje *</label>
+                            <textarea class="textarea-form" disabled name="your_message" id="your_message"></textarea>
+                            <input class="btn btn-danger" type="submit" value="Enviar"/>
                         </form>
-                        <div class="form-note"></div>
                     </div>
+                    
+                    <div class="col-md-6 pdt-70" th:if="${session.usuarios != null}">
+                    
+                    	<!-- DATOS DEL USUARIO MOSTRADO -->
+                    	<span id="span_nombre" th:text="${session.usuarios.nombre} + ' ' + ${session.usuarios.apellido}" style="visibility: hidden"></span>
+                    	<span id="span_correo" th:text="${session.usuarios.email}" style="visibility: hidden"></span>
+                    	<span id="span_telefono" th:text="${session.usuarios.telefono}" style="visibility: hidden"></span>
+                    	<span id="span_fecha" style="visibility: hidden"></span>
+                    	<span id="span_estado" style="visibility: hidden">PENDIENTE</span>
+                    	
+                    	<!-- DATOS LLEVADOS A LA BD -->
+                    	<span id="span_nombre_bd" th:text="${session.usuarios.nombre} + ' ' + ${session.usuarios.apellido}" style="visibility: hidden"></span>
+                    	<span id="span_correo_bd" th:text="${session.usuarios.email}" style="visibility: hidden"></span>
+                    	<span id="span_telefono_bd" th:text="${session.usuarios.telefono}" style="visibility: hidden"></span>
+ 
+                        <h3>ENTRAR EN CONTACTO</h3>
+                        <p>¡Envianos un mensaje y te responderemos lo más pronto posible!</p>
+                        <form th:action="@{/private/save/contact}" th:object=${contact} method="POST" >
+                        
+                        	<!-- DATOS MOSTRADOS -->
+                            <label for="your_name">Su nombre completo *</label>
+                            <input class="input-form" type="text" th:field="*{nombre_contacto}" disabled id="your_name" />
+                            <label for="your_email">Su correo *</label>
+                            <input class="input-form" type="email" th:field="*{nombre_contacto}" disabled id="your_email" />
+                            <label for="your_number">Su teléfono *</label>
+                            <input class="input-form" type="text" th:field="*{nombre_contacto}" disabled id="your_number" />
+                            <label for="your_message">Su mensaje *</label>
+                            <textarea class="textarea-form" th:field="*{mensaje_contacto}" id="your_message" required></textarea>
+                            
+                            <!-- DATOS SUBIDOS -->
+                            <input class="input-form" type="hidden" th:field="*{nombre_contacto}" id="your_name_bd"  />
+                            <input class="input-form" type="hidden" th:field="*{correo_contacto}" id="your_email_bd" />
+                            <input class="input-form" type="hidden" th:field="*{telefono_contacto}" id="your_number_bd" />
+                            <input class="input-form" type="hidden" th:field="*{fecha_contacto}" id="your_date_bd" />
+                            <input class="input-form" type="hidden" th:field="*{estado_contacto}" id="your_status_bd" />
+                            
+                            <!-- BOTÓN ENVIAR -->
+                            <input class="btn btn-danger" type="submit" value="Enviar"/>
+                            
+                        </form>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -157,14 +200,23 @@
                         <p>Email. <a href="mailto:healthfirst@gmail.com">healthfirst@gmail.com</a></p>
                         
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-sm-6" th:if="${session.usuarios == null}">
                         <h3>INICIO</h3>
                         <ul class="list-link">
-                            <li><a href="#">INICIO</a></li>
-                            <li><a href="#">COMPRAR</a></li>
-                            <li><a href="#">BLOG</a></li>
+                            <li><a th:href="@{/public/index}">INICIO</a></li>
+                            <li><a th:href="@{/public/shop}">COMPRAR</a></li>
+                            <li><a th:href="@{/public/blog}">BLOG</a></li>
                         </ul>
                     </div>
+                    <div class="col-md-3 col-sm-6" th:if="${session.usuarios != null}">
+                        <h3>INICIO</h3>
+                        <ul class="list-link">
+                            <li><a th:href="@{/private/index}">INICIO</a></li>
+                            <li><a th:href="@{/private/shop}">COMPRAR</a></li>
+                            <li><a th:href="@{/private/blog}">BLOG</a></li>
+                        </ul>
+                    </div>
+                    
                     <div class="col-md-3 col-sm-6">
                         <h3>POLITICAS</h3>
                         <ul class="list-link">
@@ -173,14 +225,24 @@
                             <li><a href="#">CONDICIONES</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    
+                    <div class="col-md-3 col-sm-6" th:if="${session.usuarios == null}">
                         <h3>COMPAÑIA</h3>
                         <ul class="list-link">
-                            <li><a href="#">NOSOTROS</a></li>
-                            <li><a href="#">TIENDAS</a></li>
-                            <li><a href="#">CONTACTO</a></li>
+                            <li><a th:href="@{/public/aboutus}">NOSOTROS</a></li>
+                            <li><a th:href="@{/public/stores}">TIENDAS</a></li>
+                            <li><a th:href="@{/public/contact}">CONTACTO</a></li>
                         </ul>
                     </div>
+                    <div class="col-md-3 col-sm-6" th:if="${session.usuarios != null}">
+                        <h3>COMPAÑIA</h3>
+                        <ul class="list-link">
+                            <li><a th:href="@{/private/aboutus}">NOSOTROS</a></li>
+                            <li><a th:href="@{/private/stores}">TIENDAS</a></li>
+                            <li><a th:href="@{/private/contact}">CONTACTO</a></li>
+                        </ul>
+                    </div>
+                    
                 </div>
                 <div class="bottom-footer">
                     <div class="copyright">
@@ -212,5 +274,36 @@
         <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
         <script src="/assets/scripts/libs/gmaps.js"></script>
         <script src="/assets/scripts/functions.js"></script>
+        <script type="text/javascript">     
+          /* FECHA */
+          let date = new Date();
+          document.querySelector('span[id="span_fecha"]').innerHTML = date.toISOString().split('T')[0]; 
+    	  
+          /* DATOS MOSTADOS */
+          let nombre = document.getElementById("span_nombre").innerHTML;
+		  document.getElementById('your_name').value= nombre;
+		  
+		  let correo = document.getElementById("span_correo").innerHTML;
+		  document.getElementById('your_email').value= correo;
+		  
+		  let telefono = document.getElementById("span_telefono").innerHTML;
+		  document.getElementById('your_number').value= telefono;
+		  
+		  /* DATOS SUBIDOS */
+		  let nombre_bd = document.getElementById("span_nombre_bd").innerHTML;
+		  document.getElementById('your_name_bd').value= nombre_bd;
+		  
+		  let correo_bd = document.getElementById("span_correo_bd").innerHTML;
+		  document.getElementById('your_email_bd').value= correo_bd;
+		  
+		  let telefono_bd = document.getElementById("span_telefono_bd").innerHTML;
+		  document.getElementById('your_number_bd').value= telefono_bd;
+		  
+		  let fecha_bd = document.getElementById("span_fecha").innerHTML;
+		  document.getElementById('your_date_bd').value= fecha_bd;
+		  
+		  let estado_bd = document.getElementById("span_estado").innerHTML;
+		  document.getElementById('your_status_bd').value= estado_bd;
+		</script>
     </body>
 </html>

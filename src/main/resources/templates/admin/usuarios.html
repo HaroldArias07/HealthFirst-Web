@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="shortcut icon" href="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470075/Logos/logo-hf_ywc9o3.png" />
+  <link rel="shortcut icon" href="https://res.cloudinary.com/health-first/image/upload/v1656470075/Logos/logo-hf_ywc9o3.png" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     Usuarios
@@ -28,7 +28,7 @@
 	      <div class="logo">
 	        <a th:href="@{/admin/admin}" class="simple-text logo-mini">
 	          <div class="logo-image-small">
-	            <img src="https://res.cloudinary.com/covid19-essentials/image/upload/v1656470075/Logos/logo-hf_ywc9o3.png">
+	            <img src="https://res.cloudinary.com/health-first/image/upload/v1656470075/Logos/logo-hf_ywc9o3.png">
 	          </div>
 	        </a>
 	        <a th:href="@{/admin/admin}" class="simple-text logo-normal">
@@ -50,9 +50,15 @@
 	            </a>
 	          </li>
 	          <li>
-	            <a th:href="@{/admin/carrusel}">
+	            <a th:href="@{/admin/carruseles}">
 	              <i class="nc-icon nc-album-2"></i>
 	              <p>Carruseles</p>
+	            </a>
+	          </li>
+	          <li>
+	            <a th:href="@{/admin/contactos}">
+	              <i class="nc-icon nc-email-85"></i>
+	              <p>Contactos</p>
 	            </a>
 	          </li>
 	          <li>
@@ -210,10 +216,10 @@
                                 <td>
                                 <!--
                                   <button href="#" class="button-action-edit">
-                                    <img class="icon-action" src="https://res.cloudinary.com/covid19-essentials/image/upload/v1639017872/Logos/edit-ic_iksypi.svg">
+                                    <img class="icon-action" src="https://res.cloudinary.com/health-first/image/upload/v1639017872/Logos/edit-ic_iksypi.svg">
                                   </button>-->
                                   <button th:href="@{/admin/eliminar/usuarios/}+${usuario.id}" class="button-action-delete">
-                                    <img class="icon-action" src="https://res.cloudinary.com/covid19-essentials/image/upload/v1639017872/Logos/delete-ic_hi5e63.svg">
+                                    <img class="icon-action" src="https://res.cloudinary.com/health-first/image/upload/v1639017872/Logos/delete-ic_hi5e63.svg">
                                   </button>
                                 </td>
                               </tr >
@@ -237,15 +243,15 @@
                       <div class="card-body">
                         <form th:action="@{/admin/save/usuarios}" th:object=${usuario} method="POST">
                           <div class="row">
-                            <div class="col-md-6 pl-1">
+                            <div class="col-md-6 pr-1">
                               <div class="form-group">
-                                <label>Nombres</label>
+                                <label>Nombres *</label>
                                 <input th:field="*{nombre}" type="text" class="form-control" required placeholder="Nombres">
                               </div>
                             </div>
                             <div class="col-md-6 pl-1">
                               <div class="form-group">
-                                <label>Apellidos</label>
+                                <label>Apellidos *</label>
                                 <input type="text" th:field="*{apellido}" class="form-control" required placeholder="Apellidos">
                               </div>
                             </div>
@@ -253,19 +259,19 @@
                           <div class="row">
                             <div class="col-md-3 pr-1">
                               <div class="form-group">
-                                <label>Teléfono</label>
-                                <input th:field="*{telefono}" type="number" class="form-control" required placeholder="999999999">
+                                <label>Teléfono *</label>
+                                <input th:field="*{telefono}" type="number" min="900000000" max="999999999" class="form-control" required placeholder="999999999">
                               </div>
                             </div>
                             <div class="col-md-4 pl-1">
                               <div class="form-group">
-                                <label>Fecha de nacimiento</label>
+                                <label>Fecha de nacimiento *</label>
                                 <input type="date" th:field="*{fecha}" min="1950-01-01" required class="form-control">
                               </div>
                             </div>
                             <div class="col-md-5 pl-1">
                               <div class="form-group">
-                                <label>Email</label>
+                                <label>Email *</label>
                                 <input th:field="*{email}" type="email" class="form-control" required placeholder="email@example.com">
                               </div>
                             </div>
@@ -273,7 +279,7 @@
                           <div class="row">
                             <div class="col-md-3 pr-1">
                               <div class="form-group">
-                                <label>Rol</label>
+                                <label>Rol *</label>
                                 <select  class="form-control" th:field="*{rol}" required>
                                   <option value="USER">Usuario</option>
                                   <option value="ADMIN">Administrador</option>
@@ -282,13 +288,13 @@
                             </div>
                             <div class="col-md-4 pl-1">
                               <div class="form-group">
-                                <label>Username</label>
+                                <label>Username *</label>
                                 <input type="text" th:field="*{username}" class="form-control" required placeholder="Username">
                               </div>
                             </div>
                             <div class="col-md-5 pl-1">
                               <div class="form-group">
-                                <label>Password</label>
+                                <label>Password *</label>
                                 <input th:field="*{password}" type="password" class="form-control" required placeholder="*******">
                               </div>
                             </div>
@@ -296,7 +302,7 @@
                           <div class="row">
                             <div class="col-md-12 px-3">
                               <div class="form-group">
-                                <label>URL Imagen</label>
+                                <label>URL Imagen *</label>
                                 <input id="imagen" th:field="*{imagen}" type="text" class="form-control" required placeholder="https://">
                               </div>
                             </div>
@@ -348,7 +354,7 @@
   <script src="../assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script><!-- Paper Dashboard DEMO methods, don't include it in your project! -->
   <script src="../assets/demo/demo.js"></script>
   <script type="text/javascript">
-  	document.getElementById('imagen').value='https://res.cloudinary.com/covid19-essentials/image/upload/v1638940028/Usuarios/testimonial-avatar1_edvv9z.png';
+  	document.getElementById('imagen').value='https://res.cloudinary.com/health-first/image/upload/v1638940028/Usuarios/testimonial-avatar1_edvv9z.png';
   </script>
 </body>
 

@@ -23,8 +23,7 @@ public class CarruselServiceImpl implements ICarruselService {
 
 	@Override
 	public Optional<Carrusels> listarId(int id_carrusel) {
-		// TODO Auto-generated method stub
-		return null;
+		return carruselDao.findById(id_carrusel);
 	}
 
 	@Override

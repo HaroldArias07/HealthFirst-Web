@@ -81,5 +81,12 @@ public class Testimonios {
 	public Testimonios() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "Testimonios [id_testimonio=" + id_testimonio + ", descripcion_testimonio=" + descripcion_testimonio
+				+ ", usuario_testimonio=" + usuario_testimonio + ", imagen_testimonio=" + imagen_testimonio
+				+ ", fecha_testimonio=" + fecha_testimonio + ", rol_testimonio=" + rol_testimonio + "]";
+	}
 	
 }

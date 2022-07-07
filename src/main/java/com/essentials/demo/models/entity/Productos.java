@@ -101,7 +101,13 @@ public class Productos {
 	public Productos() {
 		super();
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Productos [id_producto=" + id_producto + ", nombre_producto=" + nombre_producto + ", precio_producto="
+				+ precio_producto + ", stock_producto=" + stock_producto + ", categoria_producto=" + categoria_producto
+				+ ", tipo_producto=" + tipo_producto + ", descripcion_producto=" + descripcion_producto
+				+ ", imagen_producto=" + imagen_producto + "]";
+	}
 	
 }

@@ -81,7 +81,12 @@ public class Tiendas {
 	public Tiendas() {
 		super();
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Tiendas [id_tienda=" + id_tienda + ", nombre_tienda=" + nombre_tienda + ", direccion_tienda="
+				+ direccion_tienda + ", distrito_tienda=" + distrito_tienda + ", pais_tienda=" + pais_tienda
+				+ ", imagen_tienda=" + imagen_tienda + "]";
+	}
 	
 }

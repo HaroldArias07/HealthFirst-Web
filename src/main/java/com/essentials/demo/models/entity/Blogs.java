@@ -18,8 +18,9 @@ public class Blogs {
 	private String fecha_blog;
 	private String idioma_blog;
 	private String rol_blog;
+	private String link_blog;
 	private String imagen_blog;
-
+	
 	public int getId_blog() {
 		return id_blog;
 	}
@@ -68,6 +69,14 @@ public class Blogs {
 		this.rol_blog = rol_blog;
 	}
 
+	public String getLink_blog() {
+		return link_blog;
+	}
+
+	public void setLink_blog(String link_blog) {
+		this.link_blog = link_blog;
+	}
+
 	public String getImagen_blog() {
 		return imagen_blog;
 	}
@@ -75,9 +84,9 @@ public class Blogs {
 	public void setImagen_blog(String imagen_blog) {
 		this.imagen_blog = imagen_blog;
 	}
-
+	
 	public Blogs(int id_blog, String titulo_blog, String descripcion_blog, String fecha_blog, String idioma_blog,
-			String rol_blog, String imagen_blog) {
+			String rol_blog, String link_blog, String imagen_blog) {
 		super();
 		this.id_blog = id_blog;
 		this.titulo_blog = titulo_blog;
@@ -85,13 +94,19 @@ public class Blogs {
 		this.fecha_blog = fecha_blog;
 		this.idioma_blog = idioma_blog;
 		this.rol_blog = rol_blog;
+		this.link_blog = link_blog;
 		this.imagen_blog = imagen_blog;
 	}
-
+	
 	public Blogs() {
 		super();
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Blogs [id_blog=" + id_blog + ", titulo_blog=" + titulo_blog + ", descripcion_blog=" + descripcion_blog
+				+ ", fecha_blog=" + fecha_blog + ", idioma_blog=" + idioma_blog + ", rol_blog=" + rol_blog
+				+ ", link_blog=" + link_blog + ", imagen_blog=" + imagen_blog + "]";
+	}
 	
 }

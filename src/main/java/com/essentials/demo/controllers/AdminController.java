@@ -1,6 +1,7 @@
 package com.essentials.demo.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.essentials.demo.models.entity.Blogs;
 import com.essentials.demo.models.entity.Carrusels;
+import com.essentials.demo.models.entity.Contactos;
 import com.essentials.demo.models.entity.Productos;
 import com.essentials.demo.models.entity.Testimonios;
 import com.essentials.demo.models.entity.Tiendas;
 import com.essentials.demo.models.entity.Usuarios;
 import com.essentials.demo.models.service.IBlogService;
 import com.essentials.demo.models.service.ICarruselService;
+import com.essentials.demo.models.service.IContactoService;
 import com.essentials.demo.models.service.IProductoService;
 import com.essentials.demo.models.service.ITestimonioService;
 import com.essentials.demo.models.service.ITiendaService;
@@ -48,6 +51,9 @@ public class AdminController {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private IContactoService contactoService;
 	
 	@GetMapping("/admin")
 	public String dashboard(Authentication auth, HttpSession session) {
@@ -82,22 +88,20 @@ public class AdminController {
 		return "redirect:/admin/blogs";
 	}
 	
-	/*
 	@GetMapping("/editar/blogs/{id_blog}")
 	public String editarBlogs(@PathVariable int id_blog, Model model2) {
 		Optional<Blogs>blogs=blogService.listarId(id_blog);
 		model2.addAttribute("blog", blogs);
 		return "admin/editblogs";
 	}
-	*/
-	
+
 	@GetMapping("/eliminar/blogs/{id_blog}")
 	public String deleteBlogs(Model model, @PathVariable int id_blog) {
 		blogService.delete(id_blog);
 		return "redirect:/admin/blogs";
 	}
 	
-	@GetMapping("/carrusel")
+	@GetMapping("/carruseles")
 	public String carrusel(Authentication auth, HttpSession session, Model model, Model model2) {
 		String username = auth.getName();
 		
@@ -109,19 +113,26 @@ public class AdminController {
 		List<Carrusels>carrusels = carruselService.listar();
 		model.addAttribute("carrusels", carrusels);
 		model2.addAttribute("carrusel", new Carrusels());
-		return "admin/carrusel";
+		return "admin/carruseles";
 	}
 	
-	@PostMapping("/save/carrusels")
+	@PostMapping("/save/carruseles")
 	public String saveCarrusels(@Validated Carrusels c, Model model2) {
 		carruselService.save(c);
-		return "redirect:/admin/carrusel";
+		return "redirect:/admin/carruseles";
 	}
 	
-	@GetMapping("/eliminar/carrusels/{id_carrusel}")
+	@GetMapping("/editar/carruseles/{id_carrusel}")
+	public String editarCarruseles(@PathVariable int id_carrusel, Model model2) {
+		Optional<Carrusels>carruseles=carruselService.listarId(id_carrusel);
+		model2.addAttribute("carrusel", carruseles);
+		return "admin/editcarruseles";
+	}
+	
+	@GetMapping("/eliminar/carruseles/{id_carrusel}")
 	public String deleteCarrusels(Model model, @PathVariable int id_carrusel) {
 		carruselService.delete(id_carrusel);
-		return "redirect:/admin/carrusel";
+		return "redirect:/admin/carruseles";
 	}
 	
 	@GetMapping("/productos")
@@ -230,6 +241,33 @@ public class AdminController {
 	public String deleteUsuarios(Model model, @PathVariable Long id) {
 		usuarioService.delete(id);
 		return "redirect:/admin/usuarios";
+	}
+	
+	@GetMapping("/contactos")
+	public String contactos(Authentication auth, HttpSession session, Model model, Model model2) {
+		String username = auth.getName();
+		
+		if(session.getAttribute("usuarios") == null) {
+			Usuarios usuarios = usuarioService.findByUsername(username);
+			usuarios.setPassword(null);
+			session.setAttribute("usuarios", usuarios);
+		}
+		List<Contactos>contactos = contactoService.listar();
+		model.addAttribute("contactos", contactos);
+		model2.addAttribute("contacto", new Contactos());
+		return "admin/contactos";
+	}
+	
+	@PostMapping("/save/contactos")
+	public String saveContactos(@Validated Contactos con, Model model2) {
+		contactoService.save(con);
+		return "redirect:/admin/contactos";
+	}
+	
+	@GetMapping("/eliminar/contactos/{id_contacto}")
+	public String deleteContactos(Model model, @PathVariable int id_contacto) {
+		contactoService.delete(id_contacto);
+		return "redirect:/admin/contactos";
 	}
 	
 }
