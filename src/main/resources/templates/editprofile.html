@@ -2,7 +2,7 @@
 <html class="no-js" lang="es" xmlns:th="https://www.thymeleaf.org">
 	<head>
 	    <meta charset="utf-8">
-	    <title>Perfil</title>
+	    <title>Editar perfil</title>
 	    <meta name="keywords" content="keywords" />
 	    <meta name="description" content="description" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,7 +30,12 @@
                         <li>
 	                        <div th:if="${session.usuarios != null}">
 	                            <div th:if="${session.usuarios.rol == 'ADMIN'}" class="left-topbar">
-	                                <a class="link2 btn btn-danger btn-long" th:href="@{/admin/admin}"><span>Ver como administrador</span></a >
+	                                <a th:href="@{/admin/admin}" >
+										<svg xmlns="https://res.cloudinary.com/health-first/image/upload/v1657341716/Logos/admin_sbi2wf.svg" width="15" height="15" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+											<path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+										</svg>
+										<span> Administrador</span>
+									</a>
 	                             </div>
 	                             <div th:if="${session.usuarios.rol != 'ADMIN'}" class="left-topbar">
 	                             </div>
@@ -134,46 +139,47 @@
                 <p>En esta página puedes configurar tu perfíl de usuario</p>
                 <hr class="gray-line" />
                 <p class="pdb-20"></p>
-                <form th:action="@{/private/editprofile}" th:object="${usuario}" method="POST" >
+                <form th:action="@{/private/editprofile}" th:object="${usuarios}" method="POST" >
                     <div class="row">
-                    	<input id="id" class="input-form" type="hidden" disabled="" th:field=*{id}/> 
+                    	<input id="id" class="input-form" required type="hidden" th:field=*{id}/> 
+                    	<input id="rol" class="input-form" required type="hidden" th:field=*{rol}/> 
                         <div class="col-md-6">
                             <label>Nombres</label>
-                            <input class="input-form" type="text" placeholder="Nombres" th:field=*{nombre} /> 
+                            <input class="input-form" required type="text" minlength="3" maxlength="30" placeholder="Nombres" th:field=*{nombre} /> 
                         </div>
                         <div class="col-md-6">
                             <label>Apellidos</label>
-                            <input class="input-form" type="text" placeholder="Apellidos" th:field=*{apellido}/> 
+                            <input class="input-form" required type="text" minlength="3" maxlength="30" placeholder="Apellidos" th:field=*{apellido}/> 
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
                             <label>Teléfono</label>
-                            <input class="input-form" type="number" placeholder="999999999" th:field=*{telefono}/> 
+                            <input class="input-form" required type="number" min="900000000" max="999999999" placeholder="999999999" th:field=*{telefono}/> 
                         </div>
                         <div class="col-md-3">
                             <label>Fecha de nacimiento</label>
-                            <input class="input-form" type="date" th:field=*{fecha}/> 
+                            <input class="input-form" required type="date" min="1950-01-01" max="2004-01-01" th:field=*{fecha}/> 
                         </div>
                         <div class="col-md-6">
                             <label>Correo</label>
-                            <input class="input-form" type="email" placeholder="Correo" th:field=*{email}/> 
+                            <input class="input-form" required type="email" minlength="10" maxlength="60" placeholder="Email@example.com" th:field=*{email}/> 
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <label>Username</label>
-                            <input class="input-form" type="text" placeholder="Username" th:field=*{username}/> 
+                            <input class="input-form" required type="text" minlength="6" maxlength="18" placeholder="Username" th:field=*{username}/> 
                         </div>
                         <div class="col-md-6">
                             <label>Password</label>
-                            <input class="input-form" type="password" placeholder="*********" /> 
+                            <input class="input-form" required type="password" minlength="6" maxlength="18" placeholder="*********" th:field=*{password}/> 
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <label>Url Foto de perfil</label>
-                            <input class="input-form" disabled type="text" placeholder="https://" value="https://https://wac-cdn.atlassian.com/es/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=116"/> 
+                            <input class="input-form" required type="text" th:field=*{imagen} placeholder="https:///"> 
                         </div>
                     </div>
                     <div class="text-center">

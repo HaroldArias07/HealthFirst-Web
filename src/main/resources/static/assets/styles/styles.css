@@ -16927,13 +16927,13 @@ header .main-nav .current-menu-item > a {
 /* ---------------------------------------
 4.36 MAP
 ----------------------------------------- */
-#map {
+#mapa {
   width: 100%;
-  height: 500px;
+  height: 650px;
   margin-bottom: 70px;
 }
 @media (max-width: 767px) {
-  #map {
+  #mapa {
     height: 300px;
   }
 }

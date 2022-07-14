@@ -54,7 +54,7 @@ public class AdminController {
 	
 	@Autowired
 	private IContactoService contactoService;
-	
+
 	@GetMapping("/admin")
 	public String dashboard(Authentication auth, HttpSession session) {
 		String username = auth.getName();
@@ -89,7 +89,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/editar/blogs/{id_blog}")
-	public String editarBlogs(@PathVariable int id_blog, Model model2) {
+	public String editBlogs(@PathVariable int id_blog, Model model2) {
 		Optional<Blogs>blogs=blogService.listarId(id_blog);
 		model2.addAttribute("blog", blogs);
 		return "admin/editblogs";
@@ -123,7 +123,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/editar/carruseles/{id_carrusel}")
-	public String editarCarruseles(@PathVariable int id_carrusel, Model model2) {
+	public String editCarruseles(@PathVariable int id_carrusel, Model model2) {
 		Optional<Carrusels>carruseles=carruselService.listarId(id_carrusel);
 		model2.addAttribute("carrusel", carruseles);
 		return "admin/editcarruseles";
@@ -156,6 +156,13 @@ public class AdminController {
 		return "redirect:/admin/productos";
 	}
 	
+	@GetMapping("/editar/productos/{id_producto}")
+	public String editProductos(@PathVariable int id_producto, Model model2) {
+		Optional<Productos>productos=productoService.listarId(id_producto);
+		model2.addAttribute("producto", productos);
+		return "admin/editproductos";
+	}
+	
 	@GetMapping("/eliminar/productos/{id_producto}")
 	public String deleteProductos(Model model, @PathVariable int id_producto) {
 		productoService.delete(id_producto);
@@ -181,6 +188,13 @@ public class AdminController {
 	public String saveTiendas(@Validated Tiendas t, Model model2) {
 		tiendaService.save(t);
 		return "redirect:/admin/tiendas";
+	}
+	
+	@GetMapping("/editar/tiendas/{id_tienda}")
+	public String editTiendas(@PathVariable int id_tienda, Model model2) {
+		Optional<Tiendas>tiendas=tiendaService.listarId(id_tienda);
+		model2.addAttribute("tienda", tiendas);
+		return "admin/edittiendas";
 	}
 	
 	@GetMapping("/eliminar/tiendas/{id_tienda}")
@@ -210,6 +224,13 @@ public class AdminController {
 		return "redirect:/admin/testimonios";
 	}
 	
+	@GetMapping("/editar/testimonios/{id_testimonio}")
+	public String editTestimonios(@PathVariable int id_testimonio, Model model2) {
+		Optional<Testimonios>testimonios=testimonioService.listarId(id_testimonio);
+		model2.addAttribute("testimonio", testimonios);
+		return "admin/edittestimonios";
+	}
+	
 	@GetMapping("/eliminar/testimonios/{id_testimonio}")
 	public String deleteTestimonios(Model model, @PathVariable int id_testimonio) {
 		testimonioService.delete(id_testimonio);
@@ -233,8 +254,15 @@ public class AdminController {
 	
 	@PostMapping("/save/usuarios")
 	public String saveUsuarios(@Validated Usuarios u, Model model2) {
-		usuarioService.save(u);
+		model2.addAttribute("usuarios", usuarioService.registrar(u));
 		return "redirect:/admin/usuarios";
+	}
+	
+	@GetMapping("/editar/usuarios/{id}")
+	public String editUsuarios(@PathVariable Long id, Model model2) {
+		Optional<Usuarios>usuarios=usuarioService.listarId(id);
+		model2.addAttribute("usuario", usuarios);
+		return "admin/editusuarios";
 	}
 	
 	@GetMapping("/eliminar/usuarios/{id}")
@@ -262,6 +290,13 @@ public class AdminController {
 	public String saveContactos(@Validated Contactos con, Model model2) {
 		contactoService.save(con);
 		return "redirect:/admin/contactos";
+	}
+	
+	@GetMapping("/editar/contactos/{id_contacto}")
+	public String editarContactos(@PathVariable int id_contacto, Model model2) {
+		Optional<Contactos>contactos=contactoService.listarId(id_contacto);
+		model2.addAttribute("contacto", contactos);
+		return "admin/editcontactos";
 	}
 	
 	@GetMapping("/eliminar/contactos/{id_contacto}")

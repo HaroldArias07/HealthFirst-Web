@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Dato enviado</title>
+        <title>Perfil editado</title>
         <meta name="keywords" content="keywords" />
         <meta name="description" content="description" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,18 +22,23 @@
         <script src="/assets/scripts/libs/modernizr.js"></script>
     </head>
     <body class="home7">
+
+        <!-- /.topbar -->
         <hr class="gray-line" />
         <header>
             <div class="container">
                 <a class="logo">
                     <img src="https://res.cloudinary.com/health-first/image/upload/v1656470263/Logos/logo-hf-l_bcicfy.png" class="image-logo" alt="Logo CovidEssentials"/>
                 </a>
+                <!-- /.top-cart -->
             </div>
         </header>
         <div class="error-content">
-            <h1>¡Dato enviado exitosamente!</h1>
-            <p>Pronto nos comunicaremos contigo, gracias.<br />
-            <a th:href="@{/private/index}">Regresar al Inicio</a>
+            <h1>¡Perfil editado exitosamente!</h1>
+            <p>Vuelva a iniciar sesión para ver los cambios registrados<br />
+            <form th:action="@{/logout}" method="POST">
+            	<button class="btn btn-block btn-logout"><img class="img-logout" src="https://res.cloudinary.com/health-first/image/upload/v1639014745/Logos/logout_kugzgd.svg"><span> </span><a>CERRAR SESIÓN</a> </button>
+            </form>
 
         </div>
         <script src="assets/scripts/libs/jquery-1.11.2.min.js"></script>

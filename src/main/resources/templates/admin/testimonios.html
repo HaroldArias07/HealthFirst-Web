@@ -182,10 +182,9 @@
                                   *
                                 </td >
                                 <td>
-                                <!--
-                                  <button href="#" class="button-action-edit">
+	                              <a th:href="@{/admin/editar/testimonios/}+${testimonio.id_testimonio}" class="button-action-edit">
                                     <img class="icon-action" src="https://res.cloudinary.com/health-first/image/upload/v1639017872/Logos/edit-ic_iksypi.svg">
-                                  </button >-->
+                                  </a>
                                   <button th:href="@{/admin/eliminar/testimonios/}+${testimonio.id_testimonio}" 
                                   		  th:onclick="eliminarTestimonio([[${testimonio.id_testimonio}]])" class="button-action-delete">
                                     <img class="icon-action" src="https://res.cloudinary.com/health-first/image/upload/v1639017872/Logos/delete-ic_hi5e63.svg">
@@ -246,7 +245,7 @@
                             <div class="col-md-12 px-3">
                               <div class="form-group">
                                 <label>Descripción *</label>
-                                <textarea rows="4" class="form-control" required placeholder="Descripcion del Testimonio"></textarea>
+                                <textarea rows="4" th:field="*{descripcion_testimonio}"  class="form-control" required placeholder="Descripcion del Testimonio"></textarea>
                               </div>
                             </div>
                           </div>

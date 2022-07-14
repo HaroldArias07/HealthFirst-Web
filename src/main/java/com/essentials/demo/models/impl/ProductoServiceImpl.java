@@ -23,8 +23,7 @@ public class ProductoServiceImpl implements IProductoService {
 
 	@Override
 	public Optional<Productos> listarId(int id_producto) {
-		// TODO Auto-generated method stub
-		return null;
+		return productoDao.findById(id_producto);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.essentials.demo.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -204,17 +203,10 @@ public class PrivateController {
 		return "single-post";
 	}
 	
-	@GetMapping("/singleproduct")
-	public String singleproduct(Authentication auth, HttpSession session, Model model) {
-		String username = auth.getName();
-		
-		if(session.getAttribute("usuarios") == null) {
-			Usuarios usuarios = usuarioService.findByUsername(username);
-			usuarios.setPassword(null);
-			session.setAttribute("usuarios", usuarios);
-		}
-		List<Productos>productos = productoService.listar();
-		model.addAttribute("productos", productos);
+	@GetMapping("/singleproduct/{id_producto}")
+	public String buysingleproduct(@PathVariable int id_producto, Model model) {
+		Optional<Productos>productos=productoService.listarId(id_producto);
+		model.addAttribute("producto", productos.get());
 		return "single-product";
 	}
 	
@@ -230,20 +222,25 @@ public class PrivateController {
 		return "profile";
 	}
 	
-	@GetMapping("/editprofile")
-	public String editprofile(Model model) {
-		model.addAttribute("usuarios", new Usuarios());
-		return "register";
-	}
+	@GetMapping("/editprofile/{id}")
+	public String editProfile(@PathVariable Long id, Authentication auth, HttpSession session, Model model2) {
+		String username = auth.getName();
 		
-	@PostMapping("/editprofile")
-	public String editar(@Validated @ModelAttribute Usuarios usuarios, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			return "redirect:/private/profile";
-		} else {
-			model.addAttribute("usuario", usuarioService.registrar(usuarios));
+		if(session.getAttribute("usuarios") == null) {
+			Usuarios usuarios = usuarioService.findByUsername(username);
+			usuarios.setPassword(null);
+			session.setAttribute("usuarios", usuarios);
 		}
-		return "redirect:/private/profile";
+		
+		Optional<Usuarios>usuarios=usuarioService.listarId(id);
+		model2.addAttribute("usuarios", usuarios);
+		return "editprofile";
+	}
+	
+	@PostMapping("/editprofile")
+	public String saveProfile(@Validated Usuarios u, Model model2) {
+		model2.addAttribute("usuarios", usuarioService.registrar(u));
+		return "editado";
 	}
 	
 	@GetMapping("/eliminar/profile/{id}")

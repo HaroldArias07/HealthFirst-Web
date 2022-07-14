@@ -1,6 +1,7 @@
 package com.essentials.demo.models.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,6 +22,11 @@ public class UsuarioServiceImpl implements IUsuarioService{
 	@Override
 	public List<Usuarios> listar() {
 		return (List<Usuarios>)usuarioDao.findAll();
+	}
+	
+	@Override
+	public Optional<Usuarios> listarId(Long id) {
+		return usuarioDao.findById(id);
 	}
 	
 	@Override

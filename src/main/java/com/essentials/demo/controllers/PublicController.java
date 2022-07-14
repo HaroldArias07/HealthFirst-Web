@@ -1,11 +1,13 @@
 package com.essentials.demo.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.essentials.demo.models.entity.Blogs;
@@ -73,6 +75,13 @@ public class PublicController {
 		List<Productos>productos = productoService.listar();
 		model.addAttribute("productos", productos);
 		return "shop2";
+	}
+
+	@GetMapping("/singleproduct/{id_producto}")
+	public String buysingleproduct(@PathVariable int id_producto, Model model) {
+		Optional<Productos>productos=productoService.listarId(id_producto);
+		model.addAttribute("producto", productos.get());
+		return "single-product";
 	}
 	
 	@GetMapping("/blog")

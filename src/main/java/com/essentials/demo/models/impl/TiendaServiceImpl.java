@@ -23,8 +23,7 @@ public class TiendaServiceImpl implements ITiendaService {
 
 	@Override
 	public Optional<Tiendas> listarId(int id_tienda) {
-		// TODO Auto-generated method stub
-		return null;
+		return tiendaDao.findById(id_tienda);
 	}
 
 	@Override

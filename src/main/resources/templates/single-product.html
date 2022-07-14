@@ -24,13 +24,17 @@
     <body class="home7">
         <div class="topbar">
             <div class="container">
-            
              	<div class="left-topbar">
                     <ul class="list-inline">
                         <li>
 	                        <div th:if="${session.usuarios != null}">
 	                            <div th:if="${session.usuarios.rol == 'ADMIN'}" class="left-topbar">
-	                                <a class="link2 btn btn-danger btn-long" th:href="@{/admin/admin}"><span>Ver como administrador</span></a >
+	                                <a th:href="@{/admin/admin}" >
+										<svg xmlns="https://res.cloudinary.com/health-first/image/upload/v1657341716/Logos/admin_sbi2wf.svg" width="15" height="15" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+											<path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+										</svg>
+										<span> Administrador</span>
+									</a>
 	                             </div>
 	                             <div th:if="${session.usuarios.rol != 'ADMIN'}" class="left-topbar">
 	                             </div>
@@ -123,64 +127,107 @@
                 <!-- /.main-nav -->
             </div>
         </header>
-        <div class="main">
-            <div class="container">
-                <div class="main-content">
-                    <div class="product">
-                        <div class="row" th:each="producto:${productos}">
-                            <div class="col-md-6">
-                                <div class="images">
-                                    <div id="product-showcase">
-                                        <div class="gallery">
-                                            <div class="full">
-                                                <img th:src="${producto.imagen_producto}" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            <br><br><br>
-                            
-                            </div>
-                            
-                            <div class="col-md-6">
-
-                                <!-- /.breadcrumb -->
-                                <div class="summary">
-                                    <h2 class="product-name" th:text="${producto.nombre_producto}"></h2>
-                                    <div class="price">
-										S/ <span th:text="${producto.precio_producto}"></span >
-                                    </div>
-                                    <div class="short-desc">
-                                        <strong>Descripción del producto</strong> <span th:text="${producto.descripcion_producto}"></span >
-                                    </div>
-                                    <div class="product-action">
-                                        <div class="clearfix">
-                                         	<div class="quantity">
-                                                <input type="number" min="1" th:max="${producto.stock_producto}"/>
-                                         	</div>
-                                            <button type="submit" class="add-to-cart-btn">ADD TO CART</button>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <ul class="ul-product">
-                                        <li>Categorias <strong th:text="${producto.categoria_producto}"></strong ></li>
-                                        <li>Tipo: <strong th:text="${producto.tipo_producto}"></strong ></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.product-tabs -->
-                    </div>
-                    <!-- /.product -->
-
-                    <!-- /.related-products -->
-                </div>
-                <!-- /.main-content -->
-            </div>
-            <br>
-        </div>
-
+        
+        <form th:if="${session.usuarios == null}" th:href="@{/auth/login}" method="POST">
+        	<div class="main">
+            	<div class="container">
+	                <div class="main-content">
+	                    <div class="product">
+	                        <div class="row" >
+	                            <div class="col-md-6">
+	                                <div class="images">
+	                                    <div id="product-showcase">
+	                                        <div class="gallery">
+	                                            <div class="full">
+	                                                <img th:src="${producto.imagen_producto}" />
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <div class="col-md-6">
+	                                <div class="summary">
+	                                    <h2 class="product-name" th:text="${producto.nombre_producto}"></h2>
+	                                    <div class="price">
+											S/ <span th:text="${producto.precio_producto}"></span >
+	                                    </div>
+	                                    <div class="short-desc">
+	                                        <strong>Descripción del producto</strong> <span th:text="${producto.descripcion_producto}"></span >
+	                                    </div>
+	                                    <span>Stock: </span><span th:text="${producto.stock_producto}"></span >
+	                                    <div class="product-action">
+	                                    <br>
+	                                        <div class="clearfix">
+	                                         	<div class="quantity">
+	                                                <input th:value="1" type="number" min="1" th:max="${producto.stock_producto}"/>
+	                                         	</div>
+	                                            <button type="submit" class="add-to-cart-btn">ADD TO CART</button>
+	                                        </div>
+	                                    </div>
+	                                    <br>
+	                                    <ul class="ul-product">
+	                                        <li>Categorias <strong th:text="${producto.categoria_producto}"></strong ></li>
+	                                        <li>Tipo: <strong th:text="${producto.tipo_producto}"></strong ></li>
+	                                    </ul>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+        	</div>
+		</form>
+		
+		<form th:if="${session.usuarios != null}" th:action="@{/public/save/product}" method="POST">
+        	<div class="main">
+            	<div class="container">
+	                <div class="main-content">
+	                    <div class="product">
+	                        <div class="row" >
+	                            <div class="col-md-6">
+	                                <div class="images">
+	                                    <div id="product-showcase">
+	                                        <div class="gallery">
+	                                            <div class="full">
+	                                                <img th:src="${producto.imagen_producto}" />
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <div class="col-md-6">
+	                                <div class="summary">
+	                                    <h2 class="product-name" th:text="${producto.nombre_producto}"></h2>
+	                                    <div class="price">
+											S/ <span th:text="${producto.precio_producto}"></span >
+	                                    </div>
+	                                    <div class="short-desc">
+	                                        <strong>Descripción del producto</strong> <span th:text="${producto.descripcion_producto}"></span >
+	                                    </div>
+	                                    <span>Stock: </span><span th:text="${producto.stock_producto}"></span >
+	                                    <div class="product-action">
+	                                    <br>
+	                                        <div class="clearfix">
+	                                         	<div class="quantity">
+	                                                <input th:value="1" type="number" min="1" th:max="${producto.stock_producto}"/>
+	                                         	</div>
+	                                            <button type="submit" class="add-to-cart-btn">ADD TO CART</button>
+	                                        </div>
+	                                    </div>
+	                                    <br>
+	                                    <ul class="ul-product">
+	                                        <li>Categorias <strong th:text="${producto.categoria_producto}"></strong ></li>
+	                                        <li>Tipo: <strong th:text="${producto.tipo_producto}"></strong ></li>
+	                                    </ul>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+        	</div>
+		</form>
+		
         <hr class="gray-line" />
         <footer>
             <div class="container">

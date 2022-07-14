@@ -194,10 +194,9 @@
                                   *
                                 </td >
                                 <td>
-                                  <!--
-                                  <a th:href="@{/admin/editar/blogs/}+${blog.id_blog}" class="button-action-edit">
+                                  <a th:href="@{/admin/editar/contactos/}+${contacto.id_contacto}" class="button-action-edit">
                                     <img class="icon-action" src="https://res.cloudinary.com/health-first/image/upload/v1639017872/Logos/edit-ic_iksypi.svg">
-                                  </a>-->
+                                  </a>
                                   <button th:href="@{/admin/eliminar/contactos/}+${contacto.id_contacto}" 
                                   	 th:onclick="eliminarContactos([[${contacto.id_contacto}]])" class="button-action-delete" >
                                     <img class="icon-action" src="https://res.cloudinary.com/health-first/image/upload/v1639017872/Logos/delete-ic_hi5e63.svg">

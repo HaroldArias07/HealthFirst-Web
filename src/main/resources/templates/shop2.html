@@ -30,7 +30,12 @@
                         <li>
 	                        <div th:if="${session.usuarios != null}">
 	                            <div th:if="${session.usuarios.rol == 'ADMIN'}" class="left-topbar">
-	                                <a class="link2 btn btn-danger btn-long" th:href="@{/admin/admin}"><span>Ver como administrador</span></a >
+	                                <a th:href="@{/admin/admin}" >
+										<svg xmlns="https://res.cloudinary.com/health-first/image/upload/v1657341716/Logos/admin_sbi2wf.svg" width="15" height="15" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+											<path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+										</svg>
+										<span> Administrador</span>
+									</a>
 	                             </div>
 	                             <div th:if="${session.usuarios.rol != 'ADMIN'}" class="left-topbar">
 	                             </div>
@@ -195,17 +200,16 @@
                                                     <img class="img-responsive" th:src="${producto.imagen_producto}" alt="img" />
                                                 </a>
                                             </div>
-                                            <a href="#" class="details"><i class="pe-7s-search"></i></a>
                                         </div>
                                         <h4 class="product-name"><a href="single-product.html"><strong th:text="${producto.nombre_producto}"></strong ></a></h4>
                                         <p class="product-price">
                                         <ins><span class="amount"> S/</span> <span class="amount" th:text="${producto.precio_producto}"></span></ins>
                                         </p>
                                         <div class="group-buttons center-all">
-                                            <a th:if="${session.usuarios != null}" th:href="@{/private/singleproduct}" type="button" class="add-to-cart" data-toggle="tooltip" data-placement="top" title="Comprar">
+                                            <a th:if="${session.usuarios != null}" th:href="@{/private/singleproduct/}+${producto.id_producto}" type="button" class="add-to-cart" data-toggle="tooltip" data-placement="top" title="Comprar">
                                             	<span>Comprar</span> <i class="fa fa-shopping-cart"></i>
                                             </a  >
-                                            <a th:if="${session.usuarios == null}" th:href="@{/auth/login}" type="button" class="add-to-cart" data-toggle="tooltip" data-placement="top" title="Comprar">
+                                            <a th:if="${session.usuarios == null}" th:href="@{/public/singleproduct/}+${producto.id_producto}" type="button" class="add-to-cart" data-toggle="tooltip" data-placement="top" title="Comprar">
                                             	<span>Comprar</span> <i class="fa fa-shopping-cart"></i>
                                             </a  >
                                         </div>

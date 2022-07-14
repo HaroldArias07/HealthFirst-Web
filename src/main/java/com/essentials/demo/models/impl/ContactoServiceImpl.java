@@ -23,8 +23,7 @@ public class ContactoServiceImpl implements IContactoService {
 
 	@Override
 	public Optional<Contactos> listarId(int id_contacto) {
-		// TODO Auto-generated method stub
-		return null;
+		return contactoDao.findById(id_contacto);
 	}
 
 	@Override

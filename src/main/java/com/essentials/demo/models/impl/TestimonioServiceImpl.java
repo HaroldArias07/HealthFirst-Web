@@ -23,8 +23,7 @@ public class TestimonioServiceImpl implements ITestimonioService {
 
 	@Override
 	public Optional<Testimonios> listarId(int id_testimonio) {
-		// TODO Auto-generated method stub
-		return null;
+		return testimonioDao.findById(id_testimonio);
 	}
 
 	@Override
