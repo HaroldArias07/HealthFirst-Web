@@ -1,7 +1,7 @@
 function eliminarBlog(id) {
 	swal({
-		  title: "¿Esta seguro de Eliminar?",
-		  text: "Una vez eliminado no se prodra restablecer!",
+		  title: "¿Esta seguro de eliminar?",
+		  text: "¡Una vez eliminado no se prodra restablecer!",
 		  icon: "warning",
 		  buttons: true,
 		  dangerMode: true,
@@ -14,7 +14,7 @@ function eliminarBlog(id) {
 					console.log(res);
 				},			
 			  });
-		    swal("Poof! Registro eliminado!", {
+		    swal("¡Poof! Cuenta eliminada", {
 		      icon: "success",
 		    }).then((ok)=>{
 		    	if(ok){
@@ -22,15 +22,15 @@ function eliminarBlog(id) {
 		    	}
 		    });
 		  } else {
-			swal("Tu registro está seguro!")
+			swal("¡Tu registro está seguro!")
 		}
 		});
 }
 
 function eliminarCarruseles(id) {
 	swal({
-		  title: "¿Esta seguro de Eliminar?",
-		  text: "Una vez eliminado no se prodra restablecer!",
+		  title: "¿Esta seguro de eliminar?",
+		  text: "¡Una vez eliminado no se prodra restablecer!",
 		  icon: "warning",
 		  buttons: true,
 		  dangerMode: true,
@@ -43,7 +43,7 @@ function eliminarCarruseles(id) {
 					console.log(res);
 				},			
 			  });
-		    swal("Poof! Registro eliminado!", {
+		    swal("¡Poof! Cuenta eliminada", {
 		      icon: "success",
 		    }).then((ok)=>{
 		    	if(ok){
@@ -51,15 +51,15 @@ function eliminarCarruseles(id) {
 		    	}
 		    });
 		  } else {
-			swal("Tu registro está seguro!")
+			swal("¡Tu registro está seguro!")
 		}
 		});
 }
 
 function eliminarContactos(id) {
 	swal({
-		  title: "¿Esta seguro de Eliminar?",
-		  text: "Una vez eliminado no se prodra restablecer!",
+		  title: "¿Esta seguro de eliminar?",
+		  text: "¡Una vez eliminado no se prodra restablecer!",
 		  icon: "warning",
 		  buttons: true,
 		  dangerMode: true,
@@ -72,7 +72,7 @@ function eliminarContactos(id) {
 					console.log(res);
 				},			
 			  });
-		    swal("Poof! Registro eliminado!", {
+		    swal("¡Poof! Cuenta eliminada", {
 		      icon: "success",
 		    }).then((ok)=>{
 		    	if(ok){
@@ -80,15 +80,15 @@ function eliminarContactos(id) {
 		    	}
 		    });
 		  } else {
-			swal("Tu registro está seguro!")
+			swal("¡Tu registro está seguro!")
 		}
 		});
 }
 
 function eliminarProducto(id) {
 	swal({
-		  title: "¿Esta seguro de Eliminar?",
-		  text: "Una vez eliminado no se prodra restablecer!",
+		  title: "¿Esta seguro de eliminar?",
+		  text: "¡Una vez eliminado no se prodra restablecer!",
 		  icon: "warning",
 		  buttons: true,
 		  dangerMode: true,
@@ -101,7 +101,7 @@ function eliminarProducto(id) {
 					console.log(res);
 				},			
 			  });
-		    swal("Poof! Registro eliminado!", {
+		    swal("¡Poof! Cuenta eliminada", {
 		      icon: "success",
 		    }).then((ok)=>{
 		    	if(ok){
@@ -109,15 +109,15 @@ function eliminarProducto(id) {
 		    	}
 		    });
 		  } else {
-			swal("Tu registro está seguro!")
+			swal("¡Tu registro está seguro!")
 		}
 		});
 }
 
 function eliminarTestimonio(id) {
 	swal({
-		  title: "¿Esta seguro de Eliminar?",
-		  text: "Una vez eliminado no se prodra restablecer!",
+		  title: "¿Esta seguro de eliminar?",
+		  text: "¡Una vez eliminado no se prodra restablecer!",
 		  icon: "warning",
 		  buttons: true,
 		  dangerMode: true,
@@ -130,7 +130,7 @@ function eliminarTestimonio(id) {
 					console.log(res);
 				},			
 			  });
-		    swal("Poof! Registro eliminado!", {
+		    swal("¡Poof! Cuenta eliminada", {
 		      icon: "success",
 		    }).then((ok)=>{
 		    	if(ok){
@@ -138,15 +138,15 @@ function eliminarTestimonio(id) {
 		    	}
 		    });
 		  } else {
-			swal("Tu registro está seguro!")
+			swal("¡Tu registro está seguro!")
 		}
 		});
 }
 
 function eliminarTienda(id) {
 	swal({
-		  title: "¿Esta seguro de Eliminar?",
-		  text: "Una vez eliminado no se prodra restablecer!",
+		  title: "¿Esta seguro de eliminar?",
+		  text: "¡Una vez eliminado no se prodra restablecer!",
 		  icon: "warning",
 		  buttons: true,
 		  dangerMode: true,
@@ -159,7 +159,7 @@ function eliminarTienda(id) {
 					console.log(res);
 				},			
 			  });
-		    swal("Poof! Registro eliminado!", {
+		    swal("¡Poof! Cuenta eliminada", {
 		      icon: "success",
 		    }).then((ok)=>{
 		    	if(ok){
@@ -167,15 +167,15 @@ function eliminarTienda(id) {
 		    	}
 		    });
 		  } else {
-			swal("Tu registro está seguro!")
+			swal("¡Tu registro está seguro!")
 		}
 		});
 }
 
 function eliminarUsuario(id) {
 	swal({
-		  title: "¿Esta seguro de Eliminar?",
-		  text: "Una vez eliminado no se prodra restablecer!",
+		  title: "¿Esta seguro de eliminar?",
+		  text: "¡Una vez eliminado no se prodra restablecer!",
 		  icon: "warning",
 		  buttons: true,
 		  dangerMode: true,
@@ -188,7 +188,7 @@ function eliminarUsuario(id) {
 					console.log(res);
 				},			
 			  });
-		    swal("Poof! Registro eliminado!", {
+		    swal("¡Poof! Cuenta eliminada", {
 		      icon: "success",
 		    }).then((ok)=>{
 		    	if(ok){
@@ -196,15 +196,15 @@ function eliminarUsuario(id) {
 		    	}
 		    });
 		  } else {
-			swal("Tu registro está seguro!")
+			swal("¡Tu registro está seguro!")
 		}
 		});
 }
 
 function eliminarProfile(id) {
 	swal({
-		  title: "¿Esta seguro de Eliminar?",
-		  text: "Una vez eliminado no se prodra restablecer!",
+		  title: "¿Esta seguro de eliminar tu cuenta?",
+		  text: "¡Una vez eliminado no se prodra restablecer!",
 		  icon: "warning",
 		  buttons: true,
 		  dangerMode: true,
@@ -217,7 +217,7 @@ function eliminarProfile(id) {
 					console.log(res);
 				},			
 			  });
-		    swal("Poof! Registro eliminado!", {
+		    swal("¡Poof! Cuenta eliminada", {
 		      icon: "success",
 		    }).then((ok)=>{
 		    	if(ok){
@@ -225,7 +225,36 @@ function eliminarProfile(id) {
 		    	}
 		    });
 		  } else {
-			swal("Tu registro está seguro!")
+			swal("¡Tu cuenta está segura!")
+		}
+		});
+}
+
+function eliminarItem(id) {
+	swal({
+		  title: "¿Esta seguro de eliminar?",
+		  text: "¡El producto será removido de tu carrito de compras!",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((OK) => {
+		  if (OK) {
+			  $.ajax({
+				 url:"/private/eliminar/item/"+id,
+				 success: function(res) {
+					console.log(res);
+				},			
+			  });
+		    swal("Poof! Producto eliminado!", {
+		      icon: "success",
+		    }).then((ok)=>{
+		    	if(ok){
+		    		location.href="/private/cart";
+		    	}
+		    });
+		  } else {
+			swal("¡Tu producto está seguro!")
 		}
 		});
 }

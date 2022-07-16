@@ -121,95 +121,116 @@
                             <li th:if="${session.usuarios == null}">
                                 <a th:href="@{/public/contact}">CONTACTO</a>
                             </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/favorites}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                                        <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+                                    </svg>
+                                    <span> FAVORITOS</span>
+                                </a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/cart}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
+                                    </svg>
+                                    <span> MI CARRITO</span>
+                                </a>
+                            </li >
                         </ul>
                     </div>
-                    <!-- /.minimal-menu -->
                 </nav>
-                <!-- /.main-nav -->
             </div>
         </header>
-        <div class="theme-features">
-            <div class="container">
-                <h3>HEALTH FIRST</h3>
-                <h5>Sobre nosotros</h5>
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <div class="feature-item">
-                            <h4 class="text-center">¿QUIENES SOMOS?</h4>
-                            <p class="text-justify">Inicialmente solo nos enfocábamos en productos para la prevención de la Covid-19, puesto que nos encontrábamos en pleno auge de la pandemia, además era una necesidad primordial en la ciudad de Lima. Hoy en día dejó de tener la intensidad de necesidad como era en aquel momento (mediados de 2021), pero aún así no deja de ser una necesidad.</p >
-                            <p class="text-justify">Nos basamos principalmente en la necesidad de las personas por obtener productos para el cuidado de la salud, como por ejemplo; medicamentos, medicinas, pastillas, cremas, entre otros, desde la comodidad de su hogar sin tener que perder el tiempo buscando lo que necesita.</p >
-                            <p class="text-justify">En nuestra página podemos encontrar diferentes tipos de productos desde los más baratos y genéricos hasta los de mayor precio de una mejor calidad, esto porque contamos con diferentes tiendas, farmacias, boticas, entre otras. Además, también ofrecemos productos para la prevención del contagio del Covid-19.</p >
-                            <p class="text-justify">Nuestro modelo de negocio es simple de entender, les ofrecemos a los clientes los productos que nos ofrecen los proveedores, es decir, somos intermediarios entre clientes y proveedores de productos para la salud.</p >
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="feature-item">
-                            <img class="img-responsive" style="width:450px;" src="https://res.cloudinary.com/health-first/image/upload/v1656731152/Sobre%20nosotros/AboutUs1_gp24lj.png">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <br>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="feature-item">
-                            <img class="img-responsive" style="width:480px;" src="https://res.cloudinary.com/health-first/image/upload/v1656732524/Sobre%20nosotros/AboutUs2_ragfdc.png">
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="feature-item">
-                            <h4 class="text-center">FUNDADORES</h4>
-                            <p class="text-justify">Los egresados de la carrera de Diseño y Desarrollo de Software del Instituto Tecnológico Tecsup, con sede en Santa Anita - Lima, Harold Arias y su compañero Luis Valdivia tuvieron la idea de realizar como proyecto de Tesis un aplicativo que sea un apoyo para el sector salud de la ciudad Lima, Perú. Empezó como una idea simple sobre un aplicativo que disminuya el covid-19 mediante ventas de productos para su prevención, hasta modificarse a ser más de ventas de todo tipo de producto para la salud.</p>
-                            <p class="text-justify">Harold y Luis se conocieron en la carrera Diseño y Desarrollo de Software, donde se desempeñaron y aprendieron a como ser desarrollares con toda la capacidad de llevar a cabo diferentes tipos de proyectos. El trabajo en equipo siempre fue importante para avanzar como profesional que quiera desempeñarse en un equipo de trabajo con un excelente rendimiento.</p>
-                            <p class="text-justify">Entre el inicio del desarrollo y las modificaciones que el proyecto tuvo, el tiempo invertido fue de casi un año para concluir con el lanzamiento y funcionamiento inicial. Gracias a las modificaciones y consejos brindados por parte de asesores y docentes del instituto fue que se llegó a un buen producto final.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <br><br><br>
-                
-                <hr class="gray-line" />
-                
-                <div class="row">
-                    <br><br>
-                    <h3>PREGUNTAS FRECUENTES</h3>
-                    <h5>Health First</h5>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="feature-item pe-7s-star">
-                            <h4>¿PORQUE NOSOTROS?</h4>
-                            <p class="text-justify">Somos una de las pocas páginas web que ofrece el servicio y productos de diferente empresas que comercializan con productos de la salud.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="feature-item pe-7s-cash">
-                            <h4>¿QUE MEDIOS DE PAGO OFRECEN?</h4>
-                            <p class="text-justify">Nuestros medios de pagos o métodos de pago son dependiendo de los proveedores, pero generalmente se maneja tarjeta de débito/crédito, yape o efectivo.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="feature-item pe-7s-safe">
-                            <h4>¿LOS MEDIOS / METODOS DE PAGO SON SEGUROS?</h4>
-                            <p class="text-justify">Por supuesto, los métodos de pago que ofrecen los proveedores son 100% seguros, además, todos los proveedores que son asociados deben contar con licencia de funcionamiento.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="feature-item pe-7s-cart">
-                            <h4>¿CUENTAN CON UN SERVICIO DE DELIVERY?</h4>
-                            <p class="text-justify">Claro, pero éste servicio tiene una condición, que la venta sea al por mayor, es decir que se vendan grandes cantidades de productos para un solo cliente.</p>
-                        </div>
-                    </div>
+        <div class="main">
+        	<div class="header-page">
+                <div class="container">
+                    <h1>Sobre nosotros</h1>
                 </div>
             </div>
-        </div>
-
+	        <div class="theme-features">
+	            <div class="container">
+	                <h3>HEALTH FIRST</h3>
+	                <div class="row">
+	                    <div class="col-md-6 col-sm-6">
+	                        <div class="feature-item">
+	                            <h4 class="text-center">¿QUIENES SOMOS?</h4>
+	                            <p class="text-justify">Inicialmente solo nos enfocábamos en productos para la prevención de la Covid-19, puesto que nos encontrábamos en pleno auge de la pandemia, además era una necesidad primordial en la ciudad de Lima. Hoy en día dejó de tener la intensidad de necesidad como era en aquel momento (mediados de 2021), pero aún así no deja de ser una necesidad.</p >
+	                            <p class="text-justify">Nos basamos principalmente en la necesidad de las personas por obtener productos para el cuidado de la salud, como por ejemplo; medicamentos, medicinas, pastillas, cremas, entre otros, desde la comodidad de su hogar sin tener que perder el tiempo buscando lo que necesita.</p >
+	                            <p class="text-justify">En nuestra página podemos encontrar diferentes tipos de productos desde los más baratos y genéricos hasta los de mayor precio de una mejor calidad, esto porque contamos con diferentes tiendas, farmacias, boticas, entre otras. Además, también ofrecemos productos para la prevención del contagio del Covid-19.</p >
+	                            <p class="text-justify">Nuestro modelo de negocio es simple de entender, les ofrecemos a los clientes los productos que nos ofrecen los proveedores, es decir, somos intermediarios entre clientes y proveedores de productos para la salud.</p >
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6 col-sm-6">
+	                        <div class="feature-item">
+	                            <img class="img-responsive" style="width:450px;" src="https://res.cloudinary.com/health-first/image/upload/v1656731152/Sobre%20nosotros/AboutUs1_gp24lj.png">
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="row">
+	                    <br>
+	                    <div class="col-md-6 col-sm-6">
+	                        <div class="feature-item">
+	                            <img class="img-responsive" style="width:480px;" src="https://res.cloudinary.com/health-first/image/upload/v1656732524/Sobre%20nosotros/AboutUs2_ragfdc.png">
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6 col-sm-6">
+	                        <div class="feature-item">
+	                            <h4 class="text-center">FUNDADORES</h4>
+	                            <p class="text-justify">Los egresados de la carrera de Diseño y Desarrollo de Software del Instituto Tecnológico Tecsup, con sede en Santa Anita - Lima, Harold Arias y su compañero Luis Valdivia tuvieron la idea de realizar como proyecto de Tesis un aplicativo que sea un apoyo para el sector salud de la ciudad Lima, Perú. Empezó como una idea simple sobre un aplicativo que disminuya el covid-19 mediante ventas de productos para su prevención, hasta modificarse a ser más de ventas de todo tipo de producto para la salud.</p>
+	                            <p class="text-justify">Harold y Luis se conocieron en la carrera Diseño y Desarrollo de Software, donde se desempeñaron y aprendieron a como ser desarrollares con toda la capacidad de llevar a cabo diferentes tipos de proyectos. El trabajo en equipo siempre fue importante para avanzar como profesional que quiera desempeñarse en un equipo de trabajo con un excelente rendimiento.</p>
+	                            <p class="text-justify">Entre el inicio del desarrollo y las modificaciones que el proyecto tuvo, el tiempo invertido fue de casi un año para concluir con el lanzamiento y funcionamiento inicial. Gracias a las modificaciones y consejos brindados por parte de asesores y docentes del instituto fue que se llegó a un buen producto final.</p>
+	                        </div>
+	                    </div>
+	                </div>
+	                
+	                <br><br><br>
+	                
+	                <hr class="gray-line" />
+	                
+	                <div class="row">
+	                    <br><br>
+	                    <h3>PREGUNTAS FRECUENTES</h3>
+	                    <h5>Health First</h5>
+	                    <div class="col-md-6 col-sm-6">
+	                        <div class="feature-item pe-7s-star">
+	                            <h4>¿PORQUE NOSOTROS?</h4>
+	                            <p class="text-justify">Somos una de las pocas páginas web que ofrece el servicio y productos de diferente empresas que comercializan con productos de la salud.</p>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6 col-sm-6">
+	                        <div class="feature-item pe-7s-cash">
+	                            <h4>¿QUE MEDIOS DE PAGO OFRECEN?</h4>
+	                            <p class="text-justify">Nuestros medios de pagos o métodos de pago son dependiendo de los proveedores, pero generalmente se maneja tarjeta de débito/crédito, yape o efectivo.</p>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6 col-sm-6">
+	                        <div class="feature-item pe-7s-safe">
+	                            <h4>¿LOS MEDIOS / METODOS DE PAGO SON SEGUROS?</h4>
+	                            <p class="text-justify">Por supuesto, los métodos de pago que ofrecen los proveedores son 100% seguros, además, todos los proveedores que son asociados deben contar con licencia de funcionamiento.</p>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6 col-sm-6">
+	                        <div class="feature-item pe-7s-cart">
+	                            <h4>¿CUENTAN CON UN SERVICIO DE DELIVERY?</h4>
+	                            <p class="text-justify">Claro, pero éste servicio tiene una condición, que la venta sea al por mayor, es decir que se vendan grandes cantidades de productos para un solo cliente.</p>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+		</div>
         <hr class="gray-line" />
         <footer>
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 col-sm-6">
-                        <h3>ADDRESS INFO</h3>
+                        <h3>CONTACTO</h3>
                         <!--<div class="address">Mall Aventura - Florida - <br />Miami</div>-->
-                        <p>Tel. <a href="tel:+51 916541436">+51 916 541 436</a></p>
-                        <p>Email. <a href="mailto:healthfirst@gmail.com">healthfirst@gmail.com</a></p>
+                        <p>Teléfono: <a href="tel:+51 916541436">+51 916 541 436</a></p>
+                        <p>Correo: <a href="mailto:healthfirst@gmail.com" target="_blank">healthfirst@gmail.com</a></p>
                         
                     </div>
                     <div class="col-md-3 col-sm-6" th:if="${session.usuarios == null}">
@@ -230,7 +251,7 @@
                     </div>
                     
                     <div class="col-md-3 col-sm-6">
-                        <h3>POLITICAS</h3>
+                        <h3>POLÍTICAS</h3>
                         <ul class="list-link">
                             <li><a href="#">POLÍTICAS AMBIENTALES</a></li>
                             <li><a href="#">POLÍTICA PRIVADA</a></li>
@@ -247,31 +268,33 @@
                         </ul>
                     </div>
                     <div class="col-md-3 col-sm-6" th:if="${session.usuarios != null}">
-                        <h3>COMPAÑIA</h3>
+                        <h3>COMPAÑÍA</h3>
                         <ul class="list-link">
                             <li><a th:href="@{/private/aboutus}">NOSOTROS</a></li>
                             <li><a th:href="@{/private/stores}">TIENDAS</a></li>
                             <li><a th:href="@{/private/contact}">CONTACTO</a></li>
                         </ul>
                     </div>
-                    
                 </div>
                 <div class="bottom-footer">
                     <div class="copyright">
                         ©COPYRIGHT 2022. HEALTH FIRST. TODOS LOS DERECHOS RESERVADOS. 
                     </div>
-                    <!-- /.copyright -->
                     <ul class="list-payment">
-                        <li><a href="#"><img src="/assets/images/visa.png" alt="img" /></a></li>
-                        <li><a href="#"><img src="/assets/images/paypal.png" alt="img" /></a></li>
-                        <li><a href="#"><img src="/assets/images/2co.png" alt="img" /></a></li>
-                        <li><a href="#"><img src="/assets/images/ae.png" alt="img" /></a></li>
-                        <li><a href="#"><img src="/assets/images/skrill.png" alt="img" /></a></li>
+                        <li><a><img src="https://res.cloudinary.com/health-first/image/upload/v1657941118/Logos/Visa_rbnwmn.png" alt="img" /></a></li>
+                        <li><a><img src="https://res.cloudinary.com/health-first/image/upload/v1657941117/Logos/PayPal_uxgeql.png" alt="img" /></a></li>
                     </ul>
-                    <!-- /.list-payment -->
                 </div>
             </div>
         </footer>
+        
+        <!-- Back to Top -->
+        <button  onclick="scrollToTop()" id="backToTop" title="Volver arriba">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#fff" d="M374.6 246.6C368.4 252.9 360.2 256 352 256s-16.38-3.125-22.62-9.375L224 141.3V448c0 17.69-14.33 31.1-31.1 31.1S160 465.7 160 448V141.3L54.63 246.6c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0l160 160C387.1 213.9 387.1 234.1 374.6 246.6z" class="color000 svgShape"/></svg>
+        </button>
+        <!-- Scripts -->
+        
+        <script src="/assets/scripts/back.js"></script>
         <script src="/assets/scripts/libs/jquery-1.11.2.min.js"></script>
         <script src="/assets/scripts/libs/jquery-ui-1.11.4/jquery-ui.min.js"></script>
         <script src="/assets/scripts/libs/jquery.easing.1.3.js"></script>
@@ -283,8 +306,5 @@
         <script src="/assets/scripts/libs/allinone_bannerRotator.js"></script>
         <script src="/assets/scripts/libs/owl.carousel.min.js"></script>
         <script src="/assets/scripts/libs/jquery.countdown.min.js"></script>
-        <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-        <script src="assets/scripts/libs/gmaps.js"></script>
-        <script src="assets/scripts/functions.js"></script>
     </body>
 </html>

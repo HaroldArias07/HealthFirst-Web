@@ -165,7 +165,7 @@
 	                        <textarea required rows="4" th:field="*{descripcion_blog}" class="form-control" placeholder="Descripcion del blog"></textarea >
 	                      </div>
 	                    </div>
-	                    <div class="col-md-3 pr-1">
+	                    <div class="col-md-2 pr-1">
 	                      <div class="form-group">
 	                        <label>Rol *</label>
 	                        <select required th:field="*{rol_blog}" class="form-control">
@@ -175,10 +175,16 @@
 	                        </select >
 	                      </div>
 	                    </div>
-	                    <div class="col-md-9 px-3">
+	                    <div class="col-md-5 pr-3">
 	                      <div class="form-group">
 	                        <label>URL Imagen *</label>
 	                        <input required id="imagen" th:field="*{imagen_blog}" type="text" class="form-control" placeholder="https://">
+	                      </div>
+	                    </div>
+	                    <div class="col-md-5 pl-3">
+	                      <div class="form-group">
+	                        <label>URL Página *</label>
+	                        <input required th:field="*{link_blog}" type="text" class="form-control" placeholder="https://">
 	                      </div>
 	                    </div>
 	                  </div>

@@ -1,6 +1,7 @@
 package com.essentials.demo.models.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -118,7 +119,7 @@ public class Usuarios implements Serializable{
 		this.username = username;
 		this.password = password;
 	}
-	
+
 	public Usuarios() {
 		super();
 	}

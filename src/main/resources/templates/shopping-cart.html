@@ -87,10 +87,10 @@
                                 <a th:href="@{/public/index}">INICIO</a>
                             </li >
                             
-                            <li th:if="${session.usuarios != null}" class="current-menu-item">
+                            <li th:if="${session.usuarios != null}">
                                 <a th:href="@{/private/shop}">COMPRAR</a>
                             </li >
-                            <li th:if="${session.usuarios == null}" class="current-menu-item">
+                            <li th:if="${session.usuarios == null}">
                                 <a th:href="@{/public/shop}">COMPRAR</a>
                             </li >
                             
@@ -121,6 +121,24 @@
                             <li th:if="${session.usuarios == null}">
                                 <a th:href="@{/public/contact}">CONTACTO</a>
                             </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/favorites}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                                        <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+                                    </svg>
+                                    <span> FAVORITOS</span>
+                                </a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}" class="current-menu-item">
+                                <a th:href="@{/private/cart}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
+                                    </svg>
+                                    <span> MI CARRITO</span>
+                                </a>
+                            </li >
                         </ul>
                     </div>
                     <!-- /.minimal-menu -->
@@ -131,68 +149,43 @@
         <div class="main">
             <div class="container">
                 <div class="header-page">
-                    <h1>SHOPPING CART</h1>
+                    <h1>Carrito de compras</h1>
                 </div>
                 <!-- /.header-page -->
                 <div class="main-content">
-                    <form action="#" class="shop-form">
+                    <form class="shop-form">
                         <div class="table-responsive">
-                            <table class="shop-table table" cellspacing="0">
+                            <table class="shop-table table">
                                 <thead>
                                     <tr>
                                         <th class="product-remove"></th>
                                         <th class="product-thumbnail"></th>
-                                        <th class="product-name">Product</th>
-                                        <th class="product-price">Price</th>
-                                        <th class="product-quantity">Quantity</th>
-                                        <th class="product-subtotal">Total</th>
+                                        <th class="product-name">PRODUCTO</th>
+                                        <th class="product-price">PRECIO</th>
+                                        <th class="product-quantity">CANTIDAD</th>
+                                        <th class="product-subtotal">TOTAL</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="cart_item">
-                                        <td class="product-remove"><a href="#" class="remove"><i class="fa fa-times"></i></a></td>
+                                    <tr class="cart_item" th:each="carrito:${carritos}" th:if="${session.usuarios.id} == ${carrito.id_usuario_carrito}">
+                                        <td class="product-remove"><button type="button" th:href="@{/private/eliminar/item/}+${carrito.id_carrito}" 
+                                        th:onclick="eliminarItem([[${carrito.id_carrito}]])" class="remove"><i class="fa fa-times"></i></button></td>
                                         <td class="product-thumbnail">
                                             <a href="single-product.html">
-                                                <img class="img-responsive" src="/assets/images/small-product-1.jpg" alt="img" />
+                                                <img class="img-responsive" th:src="${carrito.imagen_producto_carrito}" alt="img" />
                                             </a>
                                         </td>
                                         <td class="product-name">
-                                            <a href="single-product.html">
-                                                COAT WITH WOOL WRAPAROUND COLLAR
-                                            </a>
+                                            <a th:text="${carrito.nombre_producto_carrito}"></a>
+                                            <span hidden="hidden" th:text="${carrito.id_carrito}"></span >
                                         </td>
-                                        <td class="product-price"><span class="amount">900USD</span></td>
-                                        <td class="product-quantity">
-                                            <div class="quantity">
-                                                <button class="minus-btn"><i class="fa fa-minus"></i></button>
-                                                <input type="text" value="2" />
-                                                <button class="plus-btn"><i class="fa fa-plus"></i></button>
-                                            </div>
+                                        <td class="product-price"><span class="amount">S/ </span><span class="amount" th:text="${carrito.precio_producto_carrito}"></span></td>
+                                        <td class="product-quantity"><span class="amount" th:text="${carrito.cantidad_producto_carrito}"></span></td>
+                                        <td th:valorNumerico="${carrito.monto_producto_carrito}" class="product-subtotal"><span class="amount">S/ </span>
+                                        	<span class="amount" th:text="${carrito.monto_producto_carrito}"></span>
                                         </td>
-                                        <td class="product-subtotal"><span class="amount">1800USD</span></td>
                                     </tr>
-                                    <tr class="cart_item">
-                                        <td class="product-remove"><a href="#" class="remove"><i class="fa fa-times"></i></a></td>
-                                        <td class="product-thumbnail">
-                                            <a href="single-product.html">
-                                                <img class="img-responsive" src="/assets/images/small-product-3.jpg" alt="img" />
-                                            </a>
-                                        </td>
-                                        <td class="product-name">
-                                            <a href="single-product.html">
-                                                COAT WITH WOOL WRAPAROUND COLLAR
-                                            </a>
-                                        </td>
-                                        <td class="product-price"><span class="amount">700USD</span></td>
-                                        <td class="product-quantity">
-                                            <div class="quantity">
-                                                <button class="minus-btn"><i class="fa fa-minus"></i></button>
-                                                <input type="text" value="1" />
-                                                <button class="plus-btn"><i class="fa fa-plus"></i></button>
-                                            </div>
-                                        </td>
-                                        <td class="product-subtotal"><span class="amount">700USD</span></td>
-                                    </tr>
+                                    <!-- 
                                     <tr class="cart-action">
                                         <td colspan="3">
                                             <div class="wrap-coupon">
@@ -206,28 +199,27 @@
                                             <button class="checkout-btn">PROCEED TO CHECKOUT</button>
                                         </td>
                                     </tr>
+                                     -->
                                 </tbody>
                             </table>
-                            <!-- /.shop-table -->
                         </div>
-                        <!-- /.table-responsive -->
                         <div class="row mgt-70">
                             <div class="col-md-3"></div>
                             <div class="col-md-6">
                                 <div class="shop-totals">
-                                    <h3>CART TOTALS</h3>
+                                    <h3>Total de compra</h3>
                                     <table class="totals-table">
                                         <tr>
-                                            <td>Cart Subtotal:</td>
-                                            <td><span class="amount">$1000.00</span></td>
+                                            <td>Subtotal:</td>
+                                            <td><span class="amount">S/ </span><span id="subtotal" class="amount" sumaTotal=""></span></td>
                                         </tr>
                                         <tr>
-                                            <td>Shipping and Handling:</td>
-                                            <td>Free Shipping</td>
+                                            <td>IGV:</td>
+                                            <td><span class="amount">S/ </span><span id="igv" class="amount"></span></td>
                                         </tr>
                                         <tr>
-                                            <td>Order Total:</td>
-                                            <td><span class="amount">$1000.00</span></td>
+                                            <td>Total:</td>
+                                            <td><span class="amount">S/ </span><span id="totalcarrito" class="amount"></span></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -244,10 +236,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 col-sm-6">
-                        <h3>ADDRESS INFO</h3>
+                        <h3>CONTACTO</h3>
                         <!--<div class="address">Mall Aventura - Florida - <br />Miami</div>-->
-                        <p>Tel. <a href="tel:+51 916541436">+51 916 541 436</a></p>
-                        <p>Email. <a href="mailto:healthfirst@gmail.com">healthfirst@gmail.com</a></p>
+                        <p>Teléfono: <a href="tel:+51 916541436">+51 916 541 436</a></p>
+                        <p>Correo: <a href="mailto:healthfirst@gmail.com" target="_blank">healthfirst@gmail.com</a></p>
                         
                     </div>
                     <div class="col-md-3 col-sm-6" th:if="${session.usuarios == null}">
@@ -268,7 +260,7 @@
                     </div>
                     
                     <div class="col-md-3 col-sm-6">
-                        <h3>POLITICAS</h3>
+                        <h3>POLÍTICAS</h3>
                         <ul class="list-link">
                             <li><a href="#">POLÍTICAS AMBIENTALES</a></li>
                             <li><a href="#">POLÍTICA PRIVADA</a></li>
@@ -285,31 +277,35 @@
                         </ul>
                     </div>
                     <div class="col-md-3 col-sm-6" th:if="${session.usuarios != null}">
-                        <h3>COMPAÑIA</h3>
+                        <h3>COMPAÑÍA</h3>
                         <ul class="list-link">
                             <li><a th:href="@{/private/aboutus}">NOSOTROS</a></li>
                             <li><a th:href="@{/private/stores}">TIENDAS</a></li>
                             <li><a th:href="@{/private/contact}">CONTACTO</a></li>
                         </ul>
                     </div>
-                    
                 </div>
                 <div class="bottom-footer">
                     <div class="copyright">
                         ©COPYRIGHT 2022. HEALTH FIRST. TODOS LOS DERECHOS RESERVADOS. 
                     </div>
-                    <!-- /.copyright -->
                     <ul class="list-payment">
-                        <li><a href="#"><img src="/assets/images/visa.png" alt="img" /></a></li>
-                        <li><a href="#"><img src="/assets/images/paypal.png" alt="img" /></a></li>
-                        <li><a href="#"><img src="/assets/images/2co.png" alt="img" /></a></li>
-                        <li><a href="#"><img src="/assets/images/ae.png" alt="img" /></a></li>
-                        <li><a href="#"><img src="/assets/images/skrill.png" alt="img" /></a></li>
+                        <li><a><img src="https://res.cloudinary.com/health-first/image/upload/v1657941118/Logos/Visa_rbnwmn.png" alt="img" /></a></li>
+                        <li><a><img src="https://res.cloudinary.com/health-first/image/upload/v1657941117/Logos/PayPal_uxgeql.png" alt="img" /></a></li>
                     </ul>
-                    <!-- /.list-payment -->
                 </div>
             </div>
         </footer>
+        
+        <!-- Back to Top -->
+        <button  onclick="scrollToTop()" id="backToTop" title="Volver arriba">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#fff" d="M374.6 246.6C368.4 252.9 360.2 256 352 256s-16.38-3.125-22.62-9.375L224 141.3V448c0 17.69-14.33 31.1-31.1 31.1S160 465.7 160 448V141.3L54.63 246.6c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0l160 160C387.1 213.9 387.1 234.1 374.6 246.6z" class="color000 svgShape"/></svg>
+        </button>
+        <!-- Scripts -->
+        
+        <script src="/assets/scripts/back.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="/assets/scripts/libs/jquery-1.11.2.min.js"></script>
         <script src="/assets/scripts/libs/jquery-ui-1.11.4/jquery-ui.min.js"></script>
         <script src="/assets/scripts/libs/jquery.easing.1.3.js"></script>
@@ -322,5 +318,26 @@
         <script src="/assets/scripts/libs/owl.carousel.min.js"></script>
         <script src="/assets/scripts/libs/jquery.countdown.min.js"></script>
         <script src="/assets/scripts/functions.js"></script>
+        <script src="/assets/functions/funciones.js"></script>
+        <script>
+	        var total = 0;
+	        $("td[valorNumerico]").each(function() {
+	          total += parseFloat($(this).attr("valorNumerico"));
+	        });
+	        $("span[sumaTotal]").attr("sumaTotal", total).text(total);
+        </script>
+        <script>
+        	var subtotal = document.getElementById("subtotal").innerHTML;
+        	var igv;
+        	var totalcarrito;
+        	
+        	igv = subtotal * 0.18;
+        	totalcarrito = parseFloat(subtotal) + parseFloat(igv);
+        	subtotal = parseFloat(subtotal)
+        		
+        	document.getElementById('subtotal').innerHTML = subtotal.toFixed(2);
+        	document.getElementById('igv').innerHTML = igv.toFixed(2);
+        	document.getElementById('totalcarrito').innerHTML = totalcarrito.toFixed(2);
+        </script>
     </body>
 </html>

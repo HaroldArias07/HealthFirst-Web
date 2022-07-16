@@ -16,13 +16,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.essentials.demo.models.entity.Blogs;
+import com.essentials.demo.models.entity.Carritos;
 import com.essentials.demo.models.entity.Carrusels;
 import com.essentials.demo.models.entity.Contactos;
 import com.essentials.demo.models.entity.Productos;
 import com.essentials.demo.models.entity.Testimonios;
 import com.essentials.demo.models.entity.Tiendas;
 import com.essentials.demo.models.entity.Usuarios;
+
 import com.essentials.demo.models.service.IBlogService;
+import com.essentials.demo.models.service.ICarritoService;
 import com.essentials.demo.models.service.ICarruselService;
 import com.essentials.demo.models.service.IContactoService;
 import com.essentials.demo.models.service.IProductoService;
@@ -45,6 +48,9 @@ public class PrivateController {
 	
 	@Autowired
 	private IProductoService productoService;
+	
+	@Autowired
+	private ICarritoService carritoService;
 	
 	@Autowired
 	private ITestimonioService testimonioService;
@@ -118,6 +124,20 @@ public class PrivateController {
 		List<Productos>productos = productoService.listar();
 		model.addAttribute("productos", productos);
 		return "shop2";
+	}
+	
+	@GetMapping("/cart")
+	public String cart(Authentication auth, HttpSession session, Model model) {
+		String username = auth.getName();
+		
+		if(session.getAttribute("usuarios") == null) {
+			Usuarios usuarios = usuarioService.findByUsername(username);
+			usuarios.setPassword(null);
+			session.setAttribute("usuarios", usuarios);
+		}
+		List<Carritos>carritos = carritoService.listar();
+		model.addAttribute("carritos", carritos);
+		return "shopping-cart";
 	}
 	
 	@GetMapping("/aboutus")
@@ -204,10 +224,31 @@ public class PrivateController {
 	}
 	
 	@GetMapping("/singleproduct/{id_producto}")
-	public String buysingleproduct(@PathVariable int id_producto, Model model) {
+	public String buysingleproduct(Authentication auth, HttpSession session, @PathVariable int id_producto, Model model, Model model2) {
+		String username = auth.getName();
+		
+		if(session.getAttribute("usuarios") == null) {
+			Usuarios usuarios = usuarioService.findByUsername(username);
+			usuarios.setPassword(null);
+			session.setAttribute("usuarios", usuarios);
+		}
+		
 		Optional<Productos>productos=productoService.listarId(id_producto);
 		model.addAttribute("producto", productos.get());
+		model2.addAttribute("carritos", new Carritos());
 		return "single-product";
+	}
+	
+	@PostMapping("/save/product")
+	public String saveProduct(@Validated Carritos ca) {
+		carritoService.save(ca);
+		return "redirect:/private/cart";
+	}
+	
+	@GetMapping("/eliminar/item/{id_carrito}")
+	public String deleteItem(Model model, @PathVariable int id_carrito) {
+		carritoService.delete(id_carrito);
+		return "redirect:/private/cart";
 	}
 	
 	@GetMapping("/profile")
