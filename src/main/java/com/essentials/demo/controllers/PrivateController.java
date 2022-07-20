@@ -19,6 +19,7 @@ import com.essentials.demo.models.entity.Blogs;
 import com.essentials.demo.models.entity.Carritos;
 import com.essentials.demo.models.entity.Carrusels;
 import com.essentials.demo.models.entity.Contactos;
+import com.essentials.demo.models.entity.Favoritos;
 import com.essentials.demo.models.entity.Productos;
 import com.essentials.demo.models.entity.Testimonios;
 import com.essentials.demo.models.entity.Tiendas;
@@ -28,6 +29,7 @@ import com.essentials.demo.models.service.IBlogService;
 import com.essentials.demo.models.service.ICarritoService;
 import com.essentials.demo.models.service.ICarruselService;
 import com.essentials.demo.models.service.IContactoService;
+import com.essentials.demo.models.service.IFavoritoService;
 import com.essentials.demo.models.service.IProductoService;
 import com.essentials.demo.models.service.ITestimonioService;
 import com.essentials.demo.models.service.ITiendaService;
@@ -48,6 +50,9 @@ public class PrivateController {
 	
 	@Autowired
 	private IProductoService productoService;
+	
+	@Autowired
+	private IFavoritoService favoritoService;
 	
 	@Autowired
 	private ICarritoService carritoService;
@@ -124,6 +129,20 @@ public class PrivateController {
 		List<Productos>productos = productoService.listar();
 		model.addAttribute("productos", productos);
 		return "shop2";
+	}
+	
+	@GetMapping("/favorites")
+	public String favorite(Authentication auth, HttpSession session, Model model) {
+		String username = auth.getName();
+		
+		if(session.getAttribute("usuarios") == null) {
+			Usuarios usuarios = usuarioService.findByUsername(username);
+			usuarios.setPassword(null);
+			session.setAttribute("usuarios", usuarios);
+		}
+		List<Favoritos>favoritos = favoritoService.listar();
+		model.addAttribute("favoritos", favoritos);
+		return "favorites";
 	}
 	
 	@GetMapping("/cart")

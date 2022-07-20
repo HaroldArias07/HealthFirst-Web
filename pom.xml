@@ -11,7 +11,7 @@
 	<groupId>com.essentials</groupId>
 	<artifactId>Covid19-essentials</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Covid19-essentials</name>
+	<name>Health First</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>

@@ -171,7 +171,7 @@
                                         <td class="product-remove"><button type="button" th:href="@{/private/eliminar/item/}+${carrito.id_carrito}" 
                                         th:onclick="eliminarItem([[${carrito.id_carrito}]])" class="remove"><i class="fa fa-times"></i></button></td>
                                         <td class="product-thumbnail">
-                                            <a href="single-product.html">
+                                            <a>
                                                 <img class="img-responsive" th:src="${carrito.imagen_producto_carrito}" alt="img" />
                                             </a>
                                         </td>

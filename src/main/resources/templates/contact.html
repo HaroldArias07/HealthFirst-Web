@@ -305,10 +305,22 @@
         <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
         <script src="/assets/scripts/libs/gmaps.js"></script>
         <script src="/assets/scripts/functions.js"></script>
-        <script type="text/javascript">     
+        <script type="text/javascript">
           /* FECHA */
-          let date = new Date();
-          document.querySelector('span[id="span_fecha"]').innerHTML = date.toISOString().split('T')[0]; 
+	      let date = new Date()
+		  
+	      let day = date.getDate()
+	      let month = date.getMonth() + 1
+	      let year = date.getFullYear()
+	
+	      //se coloca el 0 si el mes es menor a 10
+	      if(month < 10){
+	            var f = `${year}-0${month}-${day}`
+	      }else{
+	            var f = `${year}-${month}-${day}`
+	      }
+	      //se coloca la fecha en la etiqueta con id = "fecha"
+          document.querySelector('span[id="span_fecha"]').innerHTML = f
     	  
           /* DATOS MOSTADOS */
           let nombre = document.getElementById("span_nombre").innerHTML;
