@@ -156,6 +156,8 @@ public class PrivateController {
 		}
 		List<Carritos>carritos = carritoService.listar();
 		model.addAttribute("carritos", carritos);
+		List<Productos>productos = productoService.listar();
+		model.addAttribute("productos", productos);
 		return "shopping-cart";
 	}
 	

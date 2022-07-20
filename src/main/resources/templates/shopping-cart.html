@@ -169,7 +169,7 @@
                                 <tbody>
                                     <tr class="cart_item" th:each="carrito:${carritos}" th:if="${session.usuarios.id} == ${carrito.id_usuario_carrito}">
                                         <td class="product-remove"><button type="button" th:href="@{/private/eliminar/item/}+${carrito.id_carrito}" 
-                                        th:onclick="eliminarItem([[${carrito.id_carrito}]])" class="remove"><i class="fa fa-times"></i></button></td>
+                                        th:onclick="eliminarItem([[${carrito.id_carrito}]])" class="button-action-delete"><img class="icon-action" src="https://res.cloudinary.com/health-first/image/upload/v1639017872/Logos/delete-ic_hi5e63.svg"></button></td>
                                         <td class="product-thumbnail">
                                             <a>
                                                 <img class="img-responsive" th:src="${carrito.imagen_producto_carrito}" alt="img" />

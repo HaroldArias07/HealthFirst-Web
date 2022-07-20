@@ -223,7 +223,10 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        <h4 class="product-name"><a href="single-product.html"><strong th:text="${producto.nombre_producto}"></strong ></a></h4>
+                                        <h4 class="product-name">
+                                        	<a th:if="${session.usuarios != null}" th:href="@{/private/singleproduct/}+${producto.id_producto}"><strong th:text="${producto.nombre_producto}"></strong ></a>
+                                        	<a th:if="${session.usuarios == null}" th:href="@{/public/singleproduct/}+${producto.id_producto}"><strong th:text="${producto.nombre_producto}"></strong ></a>
+                                        </h4>
                                         <p class="product-price">
                                         <ins><span class="amount"> S/</span> <span class="amount" th:text="${producto.precio_producto}"></span></ins>
                                         </p>

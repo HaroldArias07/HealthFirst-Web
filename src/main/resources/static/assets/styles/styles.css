@@ -19866,3 +19866,19 @@ footer .bottom-footer .list-payment li a:active:before {
 html {
   scroll-behavior: smooth;
 }
+
+.button-action-delete {
+    background-color: rgba(255, 255, 255, 0);
+    height: 2rem;
+    border: rgba(0, 0, 0, 0);
+    text-decoration: none;
+    color: black;
+    border-radius: 30px;
+    transition: all 0.9s;
+    text-align: center;
+    width: 40%;
+}
+
+.icon-action {
+    width: 2rem;
+}
