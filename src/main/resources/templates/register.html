@@ -154,7 +154,7 @@
                     <div class="col-md-6">
                         <form th:action="@{/auth/register}" th:object="${usuarios}" class="login-form" method="POST">
                             <h3>REGISTRARME</h3>
-
+							<div id ="alerta" class="alert alert-danger" role="alert"></div>
                             <div class="row">
                                 <div class="col-md-6 pdr-5">
                                     <label for="your_firstname">NOMBRES *</label>
@@ -174,19 +174,21 @@
 
                                 <label for="your_id">CORREO *</label>
                                 <input class="input-form" th:field="*{email}" type="email" minlength="10" maxlength="60" placeholder="Correo" required/>
+                                <div th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}"></div>
                                 
                                 <input id="imagen" class="input-form" th:field="*{imagen}" type="hidden"/>
                                 <input id="rol" class="input-form" th:field="*{rol}" type="hidden"/>
                                 
                                 <label for="your_username">USUARIO *</label>
                                 <input class="input-form" th:field="*{username}" type="text" minlength="6" maxlength="18" placeholder="Username" required/>
+								<div th:if="${#fields.hasErrors('username')}" th:errorclass="error" th:errors="*{username}"></div>
 
                                 <label for="your_password">CONTRASEÑA *</label>
                                 <input class="input-form" th:field="*{password}" type="password" minlength="6" maxlength="18" placeholder="*********" required/>
 
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" checked disabled> ACEPTO LOS TERMINOS Y CONDICIONES
+                                        <input type="checkbox" checked required> ACEPTO LOS TERMINOS Y CONDICIONES
                                     </label>
                                 </div>
 
@@ -196,7 +198,7 @@
                                     <br>
                                         <a href="login.html">¿YA TIENES UNA CUENTA?</a>
                                     <br>
-                                 </div>
+                                </div>
                         </form>
                     </div>
                     <div class="col-md-3"></div>

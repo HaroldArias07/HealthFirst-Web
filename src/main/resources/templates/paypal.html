@@ -2,7 +2,7 @@
 <html class="no-js" lang="es" xmlns:th="https://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
-        <title>Inicio de Sesión</title>
+        <title>Paypal</title>
         <meta name="keywords" content="keywords" />
         <meta name="description" content="description" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,7 +24,6 @@
     <body class="home7">
 		<div class="topbar">
             <div class="container">
-            
              	<div class="left-topbar">
                     <ul class="list-inline">
                         <li>
@@ -131,7 +130,7 @@
                                 </a>
                             </li >
                             
-                            <li th:if="${session.usuarios != null}">
+                            <li th:if="${session.usuarios != null}" class="current-menu-item">
                                 <a th:href="@{/private/cart}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
                                         <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
@@ -141,37 +140,45 @@
                             </li >
                         </ul>
                     </div>
-                    <!-- /.minimal-menu -->
                 </nav>
-                <!-- /.main-nav -->
             </div>
         </header>
-        <div class="log-reg-content">
-        	<div id ="alerta" class="alert alert-danger" role="alert"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-6">
-                        <form th:action="@{/auth/login-post}" method="POST" class="login-form">
-                            <h3>INICIA SESIÓN</h3>
-                            <label for="your_id">USUARIO*</label>
-                            <input class="input-form" name="username" type="text" minlength="6" maxlength="18" required/>
-                            <label for="your_password">CONTRASEÑA* </label>
-                            <input class="input-form" name="password" type="password" minlength="6" maxlength="18"  required/>
-                            <button class="submit-btn" type="submit">INICIAR SESIÓN</button>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> RECORDARME?
-                                </label>
-                            </div>
-                            <a th:href="@{/auth/register}">¿NO TIENES UNA CUENTA? REGISTRARME</a>
-                        </form>
-                    </div>
-                    <div class="col-md-3"></div>
+        <div class="cards">
+                <div class="container-pay">
+                    <h4>Carrito <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i></span></h4>
+                    	<div th:each="carrito:${carritos}" th:if="${session.usuarios.id} == ${carrito.id_usuario_carrito}">
+                    		<p>
+                    			<a th:text="${carrito.cantidad_producto_carrito}"></a> <a th:text="${carrito.nombre_producto_carrito}"></a> 
+                    			<span class="price" th:valorNumerico="${carrito.monto_producto_carrito}" th:text="'S/ ' + ${carrito.monto_producto_carrito}"></span>
+                    		</p>
+                    	</div>
+                    <hr class="hr-total">
+                    <p>Subtotal <span class="price" style="color:black"><b>S/</b><b id="subtotal" sumaTotal=""></b></span></p>
+                    <p>IGV <span class="price" style="color:black"><b>S/</b><b id="igv"></b></span></p>
+                    <p>Total <span class="price" style="color:black"><b>S/</b><b id="totalcarrito"></b></span></p>
                 </div>
-            </div>
+                <div class="container-pay">
+                    <form method="POST"  th:action="@{/private/paypal}">
+                        <div>
+                            <h3>Proceso de pago</h3>
+                            <label>Tarjetas aceptadas</label>
+                            <div class="icon-container">
+                                <i class="fa fa-cc-visa" style="color:navy;"></i>
+                                <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                <i class="fa fa-cc-discover" style="color:orange;"></i>
+                            </div>
+                            <input type="hidden" id="price" name="price" required>
+                            <input type="hidden" id="currency" name="currency" value="USD" required>
+                            <input type="hidden" id="method" name="method" value="Paypal" required>
+                            <input type="hidden" id="intent" name="intent" value="sale" required>
+                            <input type="hidden" id="description" name="description" value="Compra de productos en Health First"  required>
+                        </div>
+
+                        <input type="submit" value="Continuar con la compra" class="btn-continue">
+                    </form>
+            	</div>
         </div>
-        <hr class="gray-line" />
         <footer>
             <div class="container">
                 <div class="row">
@@ -257,10 +264,29 @@
         <script src="/assets/scripts/libs/jquery.countdown.min.js"></script>
         <script src="/assets/scripts/functions.js"></script>
         <script>
-	        var URLactual = window.location;
-	        if (URLactual == "https://health-f.herokuapp.com/auth/login?error=true"){
-	        	document.getElementById('alerta').innerHTML= "El usuario o contraseña es incorrecto, ¡Vuelva a insertar los datos, por favor!"
-	        }
+	        var total = 0;
+	        $("span[valorNumerico]").each(function() {
+	          total += parseFloat($(this).attr("valorNumerico"));
+	        });
+	        $("b[sumaTotal]").attr("sumaTotal", total).text(total);
+        </script>
+        <script>
+        	var subtotal = document.getElementById("subtotal").innerHTML;
+        	var igv;
+        	var totalcarrito;
+        	
+        	igv = subtotal * 0.18;
+        	totalcarrito = parseFloat(subtotal) + parseFloat(igv);
+        	subtotal = parseFloat(subtotal)
+        	
+        	document.getElementById('subtotal').innerHTML = subtotal.toFixed(2);
+        	document.getElementById('igv').innerHTML = igv.toFixed(2);
+        	document.getElementById('totalcarrito').innerHTML = totalcarrito.toFixed(2);
+        	
+        	var dolar = 3.95; //valor actual del dolar
+        	var precio_PEN = totalcarrito; //precio total
+        	var precio_USD = precio_PEN / dolar; //conversión de PEN a USD
+        	document.getElementById("price").value = precio_USD.toFixed(2);
         </script>
     </body>
 </html>

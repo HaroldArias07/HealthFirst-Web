@@ -31,12 +31,11 @@ public class LoginController {
 	}
 	
 	@PostMapping("/auth/register")
-	public String register(@Validated @ModelAttribute Usuarios usuarios, BindingResult result, Model model) {
+	public String register(@ModelAttribute @Validated Usuarios usuarios, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			return "redirect:/auth/register";
-		} else {
-			model.addAttribute("usuarios", usuarioService.registrar(usuarios));
+			return "register";
 		}
+		model.addAttribute("usuarios", usuarioService.registrar(usuarios));
 		return "redirect:/auth/login";
 	}
 	

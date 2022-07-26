@@ -16778,6 +16778,7 @@ header .main-nav .current-menu-item > a {
   -moz-osx-font-smoothing: grayscale;
   position: relative;
 }
+
 .error-content a:before {
   content: "";
   position: absolute;
@@ -16800,6 +16801,116 @@ header .main-nav .current-menu-item > a {
   left: 0;
   right: 0;
 }
+
+.success-content {
+  padding-bottom: 100px;
+  padding-top: 120px;
+  text-align: center;
+}
+
+.success-content h1 {
+  border: 5px solid #eee;
+  color: #27B24A;
+  display: inline-block;
+  font-size: 80px;
+  line-height: 1;
+  margin: 0 0 20px;
+  padding: 30px 40px;
+}
+
+.success-content p {
+  color: #666;
+  font-size: 20px;
+}
+
+.success-content a {
+  color: #ca7279;
+  display: inline-block;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+.success-content a:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  background: #ca7279;
+  height: 1px;
+  -webkit-transition-property: "left, right";
+  transition-property: "left, right";
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.success-content a:hover:before,
+.success-content a:focus:before,
+.success-content a:active:before {
+  left: 0;
+  right: 0;
+}
+
+  .wrong-content {
+    padding-bottom: 100px;
+    padding-top: 120px;
+    text-align: center;
+  }
+  .wrong-content h1 {
+    border: 5px solid #eee;
+    color: #FA415B;
+    display: inline-block;
+    font-size: 80px;
+    line-height: 1;
+    margin: 0 0 20px;
+    padding: 30px 40px;
+  }
+
+  .wrong-content p {
+    color: #666;
+    font-size: 20px;
+  }
+  .wrong-content a {
+    color: #ca7279;
+    display: inline-block;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+  }
+  .wrong-content a:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    background: #ca7279;
+    height: 1px;
+    -webkit-transition-property: "left, right";
+    transition-property: "left, right";
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+  }
+  .wrong-content a:hover:before,
+  .wrong-content a:focus:before,
+  .wrong-content a:active:before {
+    left: 0;
+    right: 0;
+}
+
 /* ---------------------------------------
 4.34 MY SKILL
 ----------------------------------------- */
@@ -19881,4 +19992,68 @@ html {
 
 .icon-action {
     width: 2rem;
+}
+
+.error {
+	color: red;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  gap: 2rem;
+  margin: 4rem 19vw;
+  padding: 0;
+  list-style-type: none;
+}
+
+.container-pay {
+  background-color: #fffffc;
+  padding: 5px 20px 15px 20px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 2px 2px #ccc;
+}
+
+input[type=text] {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.icon-container {
+  margin-bottom: 20px;
+  padding: 7px 0;
+  font-size: 24px;
+}
+
+.btn-continue {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.btn-continue:hover {
+  background-color: #45a049;
+}
+
+.hr-total {
+  border: 1px solid lightgrey;
+}
+
+span.price {
+  float: right;
+  color: grey;
 }

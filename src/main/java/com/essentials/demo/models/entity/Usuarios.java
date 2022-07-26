@@ -2,6 +2,7 @@ package com.essentials.demo.models.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Usuarios")
+
 public class Usuarios implements Serializable{
 
 	@Id
@@ -19,9 +21,11 @@ public class Usuarios implements Serializable{
 	private String apellido;
 	private String telefono;
 	private String fecha;
+	@Column(unique=true)
 	private String email;
 	private String imagen;
 	private String rol;
+	@Column(unique=true)
 	private String username;
 	private String password;
 

@@ -2,7 +2,7 @@
 <html class="no-js" lang="es" xmlns:th="https://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
-        <title>Inicio de Sesión</title>
+        <title>Pago realizado</title>
         <meta name="keywords" content="keywords" />
         <meta name="description" content="description" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -131,7 +131,7 @@
                                 </a>
                             </li >
                             
-                            <li th:if="${session.usuarios != null}">
+                            <li th:if="${session.usuarios != null}" class="current-menu-item">
                                 <a th:href="@{/private/cart}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
                                         <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
@@ -141,35 +141,16 @@
                             </li >
                         </ul>
                     </div>
-                    <!-- /.minimal-menu -->
                 </nav>
-                <!-- /.main-nav -->
             </div>
         </header>
-        <div class="log-reg-content">
-        	<div id ="alerta" class="alert alert-danger" role="alert"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-6">
-                        <form th:action="@{/auth/login-post}" method="POST" class="login-form">
-                            <h3>INICIA SESIÓN</h3>
-                            <label for="your_id">USUARIO*</label>
-                            <input class="input-form" name="username" type="text" minlength="6" maxlength="18" required/>
-                            <label for="your_password">CONTRASEÑA* </label>
-                            <input class="input-form" name="password" type="password" minlength="6" maxlength="18"  required/>
-                            <button class="submit-btn" type="submit">INICIAR SESIÓN</button>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> RECORDARME?
-                                </label>
-                            </div>
-                            <a th:href="@{/auth/register}">¿NO TIENES UNA CUENTA? REGISTRARME</a>
-                        </form>
-                    </div>
-                    <div class="col-md-3"></div>
-                </div>
-            </div>
+        <div class="success-content">
+            <h1>
+                <img src="https://res.cloudinary.com/health-first/image/upload/v1658808571/Logos/check_hasnss.png" width="200">
+                COMPRA EXITOSA
+            </h1>
+            <p>Un administrador se pondrá en contacto con usted para la entrega
+			<br/>Regresar al <a th:href="@{/private/index}">Inicio</a ></p>
         </div>
         <hr class="gray-line" />
         <footer>
@@ -256,11 +237,5 @@
         <script src="/assets/scripts/libs/owl.carousel.min.js"></script>
         <script src="/assets/scripts/libs/jquery.countdown.min.js"></script>
         <script src="/assets/scripts/functions.js"></script>
-        <script>
-	        var URLactual = window.location;
-	        if (URLactual == "https://health-f.herokuapp.com/auth/login?error=true"){
-	        	document.getElementById('alerta').innerHTML= "El usuario o contraseña es incorrecto, ¡Vuelva a insertar los datos, por favor!"
-	        }
-        </script>
     </body>
 </html>

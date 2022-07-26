@@ -1,4 +1,4 @@
-package com.essentials.demo.controllers;
+	package com.essentials.demo.controllers;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +34,7 @@ import com.essentials.demo.models.service.IProductoService;
 import com.essentials.demo.models.service.ITestimonioService;
 import com.essentials.demo.models.service.ITiendaService;
 import com.essentials.demo.models.service.IUsuarioService;
+import com.essentials.demo.models.service.PaypalService;
 
 @Controller
 @RequestMapping("/private")
@@ -65,6 +66,9 @@ public class PrivateController {
 	
 	@Autowired
 	private IContactoService contactoService;
+	
+	@Autowired
+	PaypalService paypalService;
 	
 	@GetMapping("/index")
 	public String index(Authentication auth, HttpSession session, Model model, Model model2, Model model3, Model model4) {
@@ -102,7 +106,7 @@ public class PrivateController {
 		model.addAttribute("tiendas", tiendas);
 		return "stores";
 	}
-	
+
 	@GetMapping("/shop")
 	public String shop(Authentication auth, HttpSession session, Model model) {
 		String username = auth.getName();
@@ -270,6 +274,20 @@ public class PrivateController {
 	public String deleteItem(Model model, @PathVariable int id_carrito) {
 		carritoService.delete(id_carrito);
 		return "redirect:/private/cart";
+	}
+	
+	@GetMapping("/paypal")
+	public String paypal(Authentication auth, HttpSession session, Model model) {
+		String username = auth.getName();
+		
+		if(session.getAttribute("usuarios") == null) {
+			Usuarios usuarios = usuarioService.findByUsername(username);
+			usuarios.setPassword(null);
+			session.setAttribute("usuarios", usuarios);
+		}
+		List<Carritos>carritos = carritoService.listar();
+		model.addAttribute("carritos", carritos);
+		return "paypal";
 	}
 	
 	@GetMapping("/profile")

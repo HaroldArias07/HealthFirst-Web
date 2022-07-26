@@ -226,6 +226,13 @@
                             </div>
                             <div class="col-md-3"></div>
                         </div>
+                        <div class="row mgt-70">
+	                        <div class="col-md-3"></div>
+	                            <div class="col-md-6 text-center">
+	                        		<a id="paypal" th:href="@{/private/paypal}"><img src="https://www.paypalobjects.com/marketing/web/mx/logos-buttons/Paga-con_227x44.png"></img></a>
+	                        	</div>
+	                       	<div class="col-md-3"></div>
+                        </div>
                     </form>
                 </div>
                 <!-- /.main-content -->
@@ -339,5 +346,13 @@
         	document.getElementById('igv').innerHTML = igv.toFixed(2);
         	document.getElementById('totalcarrito').innerHTML = totalcarrito.toFixed(2);
         </script>
+        <script>
+			var paypal = document.getElementById("paypal");
+			  if (document.getElementById("totalcarrito").innerHTML==0) {
+			    paypal.style.display = "none";
+			  } else {
+			    paypal.style.display = "";
+			  }
+		</script>
     </body>
 </html>
