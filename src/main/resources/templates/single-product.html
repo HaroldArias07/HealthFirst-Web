@@ -144,6 +144,13 @@
             </div>
         </header>
         <input id="id_precio" step="any" type="hidden" th:value="${producto.precio_producto}">
+        
+		<a th:href="@{/auth/login}" th:if="${session.usuarios == null}">
+			<svg xmlns="http://www.w3.org/2000/svg" width="32" height="25" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+            	<path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+            </svg>
+		</a>
+		
         <form th:if="${session.usuarios == null}" th:href="@{/auth/login}" method="POST">
         	<div class="main">
             	<div class="container">
@@ -195,18 +202,38 @@
         	</div>
 		</form>
 		
+		<form th:if="${session.usuarios != null}" th:action="@{/private/save/favorite}" th:object=${favoritos} method="POST">
+			<span id="span_id_f" th:text="${session.usuarios.id}" style="visibility: hidden"></span>
+			<span id="span_producto_f" th:text="${producto.id_producto}" style="visibility: hidden"></span>
+			<span id="span_nombre_f" th:text="${producto.nombre_producto}" style="visibility: hidden"></span>
+			<span id="span_precio_f" th:text="${producto.precio_producto}" style="visibility: hidden"></span>
+			<span id="span_imagen_f" th:text="${producto.imagen_producto}" style="visibility: hidden"></span>
+			<!--  -->
+			<input id="id_usuario_f" type="hidden" th:field="*{id_usuario_favorito}">
+			<input id="id_producto_f" type="hidden" th:field="*{id_producto_favorito}">
+			<input id="nombre_producto_f" type="hidden" th:field="*{nombre_producto_favorito}">
+			<input id="precio_producto_f" type="hidden" th:field="*{precio_producto_favorito}">
+			<input id="imagen_producto_f" type="hidden" th:field="*{imagen_producto_favorito}">
+			<br>
+			<button type="submit">
+				<svg xmlns="http://www.w3.org/2000/svg" width="32" height="25" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                	<path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+                </svg>
+			</button>
+		</form>
+		
 		<form th:if="${session.usuarios != null}" th:action="@{/private/save/product}" th:object=${carritos} method="POST">
 			<span id="span_id" th:text="${session.usuarios.id}" style="visibility: hidden"></span>
 			<span id="span_nombre" th:text="${producto.nombre_producto}" style="visibility: hidden"></span>
 			<span id="span_precio" th:text="${producto.precio_producto}" style="visibility: hidden"></span>
 			<span id="span_imagen" th:text="${producto.imagen_producto}" style="visibility: hidden"></span>
-			<br>
-			<input id="id_usuario" type="hidden" th:field="*{id_usuario_carrito}" placeholder="Usuario">
-			<input id="nombre_producto" type="hidden" th:field="*{nombre_producto_carrito}" placeholder="Nombre producto">
-			<input id="cantidad_producto" type="hidden" th:field="*{cantidad_producto_carrito}" placeholder="Cantidad producto">
-			<input id="precio_producto" type="hidden" th:field="*{precio_producto_carrito}" placeholder="Precio producto">
-			<input id="monto_producto" type="hidden" th:field="*{monto_producto_carrito}" placeholder="Monto producto">
-			<input id="imagen_producto" type="hidden" th:field="*{imagen_producto_carrito}" placeholder="Imagen producto">
+			<!--  -->
+			<input id="id_usuario" type="hidden" th:field="*{id_usuario_carrito}">
+			<input id="nombre_producto" type="hidden" th:field="*{nombre_producto_carrito}" >
+			<input id="cantidad_producto" type="hidden" th:field="*{cantidad_producto_carrito}">
+			<input id="precio_producto" type="hidden" th:field="*{precio_producto_carrito}">
+			<input id="monto_producto" type="hidden" th:field="*{monto_producto_carrito}">
+			<input id="imagen_producto" type="hidden" th:field="*{imagen_producto_carrito}" >
 			
         	<div class="main">
             	<div class="container">
@@ -373,7 +400,22 @@
 		  	document.getElementById('imagen_producto').value= span_imagen;
 		  	
 		  	document.getElementById('cantidad_producto').value= 1;
+		</script>
+		<script type="text/javascript">
+          	let span_id_f = document.getElementById("span_id_f").innerHTML;
+		  	document.getElementById('id_usuario_f').value= span_id_f;
+		  	
+		  	let span_producto_f = document.getElementById("span_producto_f").innerHTML;
+		  	document.getElementById('id_producto_f').value= span_producto_f;
+		  	
+		  	let span_nombre_f = document.getElementById("span_nombre_f").innerHTML;
+		  	document.getElementById('nombre_producto_f').value= span_nombre_f;
+		  	
+		  	let span_precio_f = document.getElementById("span_precio_f").innerHTML;
+		  	document.getElementById('precio_producto_f').value= span_precio_f;
 
+		  	let span_imagen_f = document.getElementById("span_imagen_f").innerHTML;
+		  	document.getElementById('imagen_producto_f').value= span_imagen_f;
 		</script>
     </body>
 </html>

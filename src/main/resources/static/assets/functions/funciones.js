@@ -258,3 +258,32 @@ function eliminarItem(id) {
 		}
 		});
 }
+
+function eliminarFavorite(id) {
+	swal({
+		  title: "¿Esta seguro de eliminar?",
+		  text: "¡El producto será removido de tu lista de favoritos!",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((OK) => {
+		  if (OK) {
+			  $.ajax({
+				 url:"/private/eliminar/favorite/"+id,
+				 success: function(res) {
+					console.log(res);
+				},			
+			  });
+		    swal("Poof! Producto eliminado!", {
+		      icon: "success",
+		    }).then((ok)=>{
+		    	if(ok){
+		    		location.href="/private/favorites";
+		    	}
+		    });
+		  } else {
+			swal("¡Tu producto está seguro!")
+		}
+		});
+}

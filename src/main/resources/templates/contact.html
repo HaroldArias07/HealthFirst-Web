@@ -160,13 +160,13 @@
 	                    <div class="col-md-6 pdt-70" th:if="${session.usuarios == null}">
 	                        <h3>ENTRAR EN CONTACTO</h3>
 	                        <div class="alert alert-danger" role="alert">Necesitas estar logueado para insertar el texto</div>
-	                        <form action="sendmail.php" method="post" class="contact-form">
+	                        <form method="post" class="contact-form">
 	                            <label for="your_name">Su nombre completo *</label>
 	                            <input class="input-form" type="text" disabled name="your_name" id="your_name" placeholder="Nombre y Apellidos"/>
 	                            <label for="your_email">Su correo *</label>
-	                            <input class="input-form" type="email" disabled name="your_email" id="your_email" placeholder="Email@example.com"/>
+	                            <input class="input-form" type="text" disabled name="your_email" id="your_email" placeholder="Email@example.com"/>
 	                            <label for="your_email">Su teléfono *</label>
-	                            <input class="input-form" type="number" disabled name="your_number" id="your_number" placeholder="999999999"/>
+	                            <input class="input-form" type="text" disabled name="your_number" id="your_number" placeholder="999999999"/>
 	                            <label for="your_message">Su mensaje *</label>
 	                            <textarea class="textarea-form" disabled name="your_message" id="your_message" placeholder="Mensaje"></textarea>
 	                            <input class="btn btn-danger" type="submit" value="Enviar"/>
@@ -195,7 +195,7 @@
 	                            <label for="your_name">Su nombre completo *</label>
 	                            <input class="input-form" type="text" disabled id="your_name" placeholder="Nombre y Apellidos"/>
 	                            <label for="your_email">Su correo *</label>
-	                            <input class="input-form" type="email" disabled id="your_email" placeholder="Email@example.com"/>
+	                            <input class="input-form" type="text" disabled id="your_email" placeholder="Email@example.com"/>
 	                            <label for="your_number">Su teléfono *</label>
 	                            <input class="input-form" type="text" disabled id="your_number" placeholder="999999999"/>
 	                            <label for="your_message">Su mensaje *</label>

@@ -162,13 +162,12 @@
                                         <th class="product-thumbnail"></th>
                                         <th class="product-name">PRODUCTO</th>
                                         <th class="product-price">PRECIO</th>
-                                        <th class="product-see">DETALLE</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="cart_item" th:each="favorito:${favoritos}" th:if="${session.usuarios.id} == ${carrito.id_usuario_favorito}">
+                                    <tr class="cart_item" th:each="favorito:${favoritos}" th:if="${session.usuarios.id} == ${favorito.id_usuario_favorito}">
                                         <td class="product-remove"><button type="button" th:href="@{/private/eliminar/favorite/}+${favorito.id_favorito}" 
-                                        th:onclick="eliminarFavorite([[${favorito.id_favorito}]])" class="remove"><i class="fa fa-times"></i></button></td>
+                                        th:onclick="eliminarFavorite([[${favorito.id_favorito}]])" class="button-action-delete"><img class="icon-action" src="https://res.cloudinary.com/health-first/image/upload/v1639017872/Logos/delete-ic_hi5e63.svg"></button></button></td>
                                         <td class="product-thumbnail">
                                             <a>
                                                 <img class="img-responsive" th:src="${favorito.imagen_producto_favorito}" alt="img" />
@@ -177,9 +176,9 @@
                                         <td class="product-name">
                                             <a th:text="${favorito.nombre_producto_favorito}"></a>
                                             <span hidden="hidden" th:text="${favorito.id_favorito}"></span >
+                                            <span hidden="hidden" th:text="${favorito.id_usuario_favorito}"></span >
                                         </td>
                                         <td class="product-price"><span class="amount">S/ </span><span class="amount" th:text="${favorito.precio_producto_favorito}"></span></td>
-                                        <td class="product-subtotal"><a type="button" th:href="@{/private/eliminar/favorite/}+${favorito.id_favorito}"></a></td>
                                     </tr>
                                     <!-- 
                                     <tr class="cart-action">

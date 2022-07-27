@@ -14,6 +14,7 @@ public class Favoritos {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_favorito;
 	private String id_usuario_favorito;
+	private String id_producto_favorito;
 	private String nombre_producto_favorito;
 	private String precio_producto_favorito;
 	private String imagen_producto_favorito;
@@ -32,6 +33,14 @@ public class Favoritos {
 	
 	public void setId_usuario_favorito(String id_usuario_favorito) {
 		this.id_usuario_favorito = id_usuario_favorito;
+	}
+	
+	public String getId_producto_favorito() {
+		return id_producto_favorito;
+	}
+	
+	public void setId_producto_favorito(String id_producto_favorito) {
+		this.id_producto_favorito = id_producto_favorito;
 	}
 	
 	public String getNombre_producto_favorito() {
@@ -58,11 +67,12 @@ public class Favoritos {
 		this.imagen_producto_favorito = imagen_producto_favorito;
 	}
 	
-	public Favoritos(int id_favorito, String id_usuario_favorito, String nombre_producto_favorito,
-			String precio_producto_favorito, String imagen_producto_favorito) {
+	public Favoritos(int id_favorito, String id_usuario_favorito, String id_producto_favorito,
+			String nombre_producto_favorito, String precio_producto_favorito, String imagen_producto_favorito) {
 		super();
 		this.id_favorito = id_favorito;
 		this.id_usuario_favorito = id_usuario_favorito;
+		this.id_producto_favorito = id_producto_favorito;
 		this.nombre_producto_favorito = nombre_producto_favorito;
 		this.precio_producto_favorito = precio_producto_favorito;
 		this.imagen_producto_favorito = imagen_producto_favorito;
@@ -75,7 +85,10 @@ public class Favoritos {
 	@Override
 	public String toString() {
 		return "Favoritos [id_favorito=" + id_favorito + ", id_usuario_favorito=" + id_usuario_favorito
-				+ ", nombre_producto_favorito=" + nombre_producto_favorito + ", precio_producto_favorito="
-				+ precio_producto_favorito + ", imagen_producto_favorito=" + imagen_producto_favorito + "]";
+				+ ", id_producto_favorito=" + id_producto_favorito + ", nombre_producto_favorito="
+				+ nombre_producto_favorito + ", precio_producto_favorito=" + precio_producto_favorito
+				+ ", imagen_producto_favorito=" + imagen_producto_favorito + "]";
 	}
+	
+	
 }

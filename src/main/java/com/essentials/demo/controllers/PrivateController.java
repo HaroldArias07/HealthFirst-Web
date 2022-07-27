@@ -1,4 +1,4 @@
-	package com.essentials.demo.controllers;
+package com.essentials.demo.controllers;
 
 import java.util.List;
 import java.util.Optional;
@@ -149,6 +149,18 @@ public class PrivateController {
 		return "favorites";
 	}
 	
+	@PostMapping("/save/favorite")
+	public String saveFavorite(@Validated Favoritos f) {
+		favoritoService.save(f);
+		return "redirect:/private/favorites";
+	}
+	
+	@GetMapping("/eliminar/favorite/{id_favorito}")
+	public String deleteFavorite(Model model, @PathVariable int id_favorito) {
+		favoritoService.delete(id_favorito);
+		return "redirect:/private/favorites";
+	}
+	
 	@GetMapping("/cart")
 	public String cart(Authentication auth, HttpSession session, Model model) {
 		String username = auth.getName();
@@ -249,7 +261,7 @@ public class PrivateController {
 	}
 	
 	@GetMapping("/singleproduct/{id_producto}")
-	public String buysingleproduct(Authentication auth, HttpSession session, @PathVariable int id_producto, Model model, Model model2) {
+	public String buysingleproduct(Authentication auth, HttpSession session, @PathVariable int id_producto, Model model, Model model2, Model model3) {
 		String username = auth.getName();
 		
 		if(session.getAttribute("usuarios") == null) {
@@ -261,6 +273,7 @@ public class PrivateController {
 		Optional<Productos>productos=productoService.listarId(id_producto);
 		model.addAttribute("producto", productos.get());
 		model2.addAttribute("carritos", new Carritos());
+		model3.addAttribute("favoritos", new Favoritos());
 		return "single-product";
 	}
 	

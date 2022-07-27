@@ -147,7 +147,7 @@
             </div>
         </header>
         <div class="log-reg-content">
-        	<div id ="alerta" class="alert alert-danger" role="alert"></div>
+        	<div id ="alerta" role="alert"></div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-3"></div>
@@ -259,7 +259,8 @@
         <script>
 	        var URLactual = window.location;
 	        if (URLactual == "https://health-f.herokuapp.com/auth/login?error=true"){
-	        	document.getElementById('alerta').innerHTML= "El usuario o contraseña es incorrecto, ¡Vuelva a insertar los datos, por favor!"
+	        	document.getElementById('alerta').innerHTML= "El usuario o contraseña es incorrecto, ¡Vuelva a insertar los datos, por favor!";
+	        	document.getElementById('alerta').className = "alert alert-danger";
 	        }
         </script>
     </body>
