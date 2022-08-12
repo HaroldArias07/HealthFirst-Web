@@ -287,3 +287,90 @@ function eliminarFavorite(id) {
 		}
 		});
 }
+
+function eliminarCarrito(id) {
+	swal({
+		  title: "¿Esta seguro de eliminar?",
+		  text: "¡El producto será removido del carrito de compras!",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((OK) => {
+		  if (OK) {
+			  $.ajax({
+				 url:"/admin/eliminar/carritos/"+id,
+				 success: function(res) {
+					console.log(res);
+				},			
+			  });
+		    swal("Poof! Producto eliminado!", {
+		      icon: "success",
+		    }).then((ok)=>{
+		    	if(ok){
+		    		location.href="/admin/carritos";
+		    	}
+		    });
+		  } else {
+			swal("¡Tu producto está seguro!")
+		}
+		});
+}
+
+function eliminarCompra(id) {
+	swal({
+		  title: "¿Esta seguro de eliminar?",
+		  text: "¡La compra será removido del historial de compras!",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((OK) => {
+		  if (OK) {
+			  $.ajax({
+				 url:"/admin/eliminar/compras/"+id,
+				 success: function(res) {
+					console.log(res);
+				},			
+			  });
+		    swal("Poof! Compra eliminada!", {
+		      icon: "success",
+		    }).then((ok)=>{
+		    	if(ok){
+		    		location.href="/admin/compras";
+		    	}
+		    });
+		  } else {
+			swal("¡Tu compra está segura!")
+		}
+		});
+}
+
+function eliminarFavoritos(id) {
+	swal({
+		  title: "¿Esta seguro de eliminar?",
+		  text: "¡El producto será removido de favoritos!",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((OK) => {
+		  if (OK) {
+			  $.ajax({
+				 url:"/admin/eliminar/favoritos/"+id,
+				 success: function(res) {
+					console.log(res);
+				},			
+			  });
+		    swal("Poof! Favorito eliminado!", {
+		      icon: "success",
+		    }).then((ok)=>{
+		    	if(ok){
+		    		location.href="/admin/favoritos";
+		    	}
+		    });
+		  } else {
+			swal("¡Tu producto está seguro!")
+		}
+		});
+}

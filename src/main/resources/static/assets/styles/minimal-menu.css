@@ -282,7 +282,7 @@ MINIMAL CSS3 MENU
 		margin: 6px 5px;
 	}
 	.minimal-menu {
-		background: url("../images/sprinkles.png") repeat;
+		/*background: url("../images/sprinkles.png") repeat;*/
 		overflow: auto;
 		left: -100%;
 		top: 0;

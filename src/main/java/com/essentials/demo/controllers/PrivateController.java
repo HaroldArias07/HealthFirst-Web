@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.essentials.demo.models.entity.Blogs;
 import com.essentials.demo.models.entity.Carritos;
 import com.essentials.demo.models.entity.Carrusels;
+import com.essentials.demo.models.entity.Compras;
 import com.essentials.demo.models.entity.Contactos;
 import com.essentials.demo.models.entity.Favoritos;
 import com.essentials.demo.models.entity.Productos;
@@ -28,6 +29,7 @@ import com.essentials.demo.models.entity.Usuarios;
 import com.essentials.demo.models.service.IBlogService;
 import com.essentials.demo.models.service.ICarritoService;
 import com.essentials.demo.models.service.ICarruselService;
+import com.essentials.demo.models.service.ICompraService;
 import com.essentials.demo.models.service.IContactoService;
 import com.essentials.demo.models.service.IFavoritoService;
 import com.essentials.demo.models.service.IProductoService;
@@ -57,6 +59,9 @@ public class PrivateController {
 	
 	@Autowired
 	private ICarritoService carritoService;
+	
+	@Autowired
+	private ICompraService compraService;
 	
 	@Autowired
 	private ITestimonioService testimonioService;
@@ -133,6 +138,20 @@ public class PrivateController {
 		List<Productos>productos = productoService.listar();
 		model.addAttribute("productos", productos);
 		return "shop2";
+	}
+	
+	@GetMapping("/history")
+	public String history(Authentication auth, HttpSession session, Model model) {
+		String username = auth.getName();
+		
+		if(session.getAttribute("usuarios") == null) {
+			Usuarios usuarios = usuarioService.findByUsername(username);
+			usuarios.setPassword(null);
+			session.setAttribute("usuarios", usuarios);
+		}
+		List<Compras>history = compraService.listar();
+		model.addAttribute("histories", history);
+		return "history";
 	}
 	
 	@GetMapping("/favorites")
@@ -290,7 +309,7 @@ public class PrivateController {
 	}
 	
 	@GetMapping("/paypal")
-	public String paypal(Authentication auth, HttpSession session, Model model) {
+	public String paypal(Authentication auth, HttpSession session, Model model, Model model2) {
 		String username = auth.getName();
 		
 		if(session.getAttribute("usuarios") == null) {
@@ -300,6 +319,7 @@ public class PrivateController {
 		}
 		List<Carritos>carritos = carritoService.listar();
 		model.addAttribute("carritos", carritos);
+		model2.addAttribute("compra", new Compras());
 		return "paypal";
 	}
 	

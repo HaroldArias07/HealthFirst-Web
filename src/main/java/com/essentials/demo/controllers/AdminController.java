@@ -16,15 +16,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.essentials.demo.models.entity.Blogs;
+import com.essentials.demo.models.entity.Carritos;
 import com.essentials.demo.models.entity.Carrusels;
+import com.essentials.demo.models.entity.Compras;
 import com.essentials.demo.models.entity.Contactos;
+import com.essentials.demo.models.entity.Favoritos;
 import com.essentials.demo.models.entity.Productos;
 import com.essentials.demo.models.entity.Testimonios;
 import com.essentials.demo.models.entity.Tiendas;
 import com.essentials.demo.models.entity.Usuarios;
 import com.essentials.demo.models.service.IBlogService;
+import com.essentials.demo.models.service.ICarritoService;
 import com.essentials.demo.models.service.ICarruselService;
+import com.essentials.demo.models.service.ICompraService;
 import com.essentials.demo.models.service.IContactoService;
+import com.essentials.demo.models.service.IFavoritoService;
 import com.essentials.demo.models.service.IProductoService;
 import com.essentials.demo.models.service.ITestimonioService;
 import com.essentials.demo.models.service.ITiendaService;
@@ -42,6 +48,15 @@ public class AdminController {
 	
 	@Autowired
 	private IBlogService blogService;
+	
+	@Autowired
+	private ICarritoService carritoService;
+	
+	@Autowired
+	private ICompraService compraService;
+	
+	@Autowired
+	private IFavoritoService favoritoService;
 	
 	@Autowired
 	private IProductoService productoService;
@@ -101,8 +116,42 @@ public class AdminController {
 		return "redirect:/admin/blogs";
 	}
 	
+	@GetMapping("/carritos")
+	public String carritos(Authentication auth, HttpSession session, Model model, Model model2) {
+		String username = auth.getName();
+		
+		if(session.getAttribute("usuarios") == null) {
+			Usuarios usuarios = usuarioService.findByUsername(username);
+			usuarios.setPassword(null);
+			session.setAttribute("usuarios", usuarios);
+		}
+		List<Carritos>carritos = carritoService.listar();
+		model.addAttribute("carritos", carritos);
+		model2.addAttribute("carrito", new Carritos());
+		return "admin/carritos";
+	}
+	
+	@PostMapping("/save/carritos")
+	public String saveCarritos(@Validated Carritos ca, Model model2) {
+		carritoService.save(ca);
+		return "redirect:/admin/carritos";
+	}
+	
+	@GetMapping("/editar/carritos/{id_carrito}")
+	public String editCarritos(@PathVariable int id_carrito, Model model2) {
+		Optional<Carritos>carritos=carritoService.listarId(id_carrito);
+		model2.addAttribute("carrito", carritos);
+		return "admin/editcarritos";
+	}
+
+	@GetMapping("/eliminar/carritos/{id_carrito}")
+	public String deleteCarritos(Model model, @PathVariable int id_carrito) {
+		carritoService.delete(id_carrito);
+		return "redirect:/admin/carritos";
+	}
+	
 	@GetMapping("/carruseles")
-	public String carrusel(Authentication auth, HttpSession session, Model model, Model model2) {
+	public String carruseles(Authentication auth, HttpSession session, Model model, Model model2) {
 		String username = auth.getName();
 		
 		if(session.getAttribute("usuarios") == null) {
@@ -117,7 +166,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("/save/carruseles")
-	public String saveCarrusels(@Validated Carrusels c, Model model2) {
+	public String saveCarruseles(@Validated Carrusels c, Model model2) {
 		carruselService.save(c);
 		return "redirect:/admin/carruseles";
 	}
@@ -133,6 +182,74 @@ public class AdminController {
 	public String deleteCarrusels(Model model, @PathVariable int id_carrusel) {
 		carruselService.delete(id_carrusel);
 		return "redirect:/admin/carruseles";
+	}
+	
+	@GetMapping("/compras")
+	public String compras(Authentication auth, HttpSession session, Model model, Model model2) {
+		String username = auth.getName();
+		
+		if(session.getAttribute("usuarios") == null) {
+			Usuarios usuarios = usuarioService.findByUsername(username);
+			usuarios.setPassword(null);
+			session.setAttribute("usuarios", usuarios);
+		}
+		List<Compras>compras = compraService.listar();
+		model.addAttribute("compras", compras);
+		model2.addAttribute("compra", new Compras());
+		return "admin/compras";
+	}
+	
+	@PostMapping("/save/compras")
+	public String saveCompras(@Validated Compras com, Model model2) {
+		compraService.save(com);
+		return "redirect:/admin/compras";
+	}
+	
+	@GetMapping("/editar/compras/{id_compra}")
+	public String editCompras(@PathVariable int id_compra, Model model2) {
+		Optional<Compras>compras=compraService.listarId(id_compra);
+		model2.addAttribute("compra", compras);
+		return "admin/editcompras";
+	}
+
+	@GetMapping("/eliminar/compras/{id_compra}")
+	public String deleteCompras(Model model, @PathVariable int id_compra) {
+		compraService.delete(id_compra);
+		return "redirect:/admin/compras";
+	}
+	
+	@GetMapping("/favoritos")
+	public String favoritos(Authentication auth, HttpSession session, Model model, Model model2) {
+		String username = auth.getName();
+		
+		if(session.getAttribute("usuarios") == null) {
+			Usuarios usuarios = usuarioService.findByUsername(username);
+			usuarios.setPassword(null);
+			session.setAttribute("usuarios", usuarios);
+		}
+		List<Favoritos>favoritos = favoritoService.listar();
+		model.addAttribute("favoritos", favoritos);
+		model2.addAttribute("favorito", new Favoritos());
+		return "admin/favoritos";
+	}
+	
+	@PostMapping("/save/favoritos")
+	public String saveFavoritos(@Validated Favoritos f, Model model2) {
+		favoritoService.save(f);
+		return "redirect:/admin/favoritos";
+	}
+	
+	@GetMapping("/editar/favoritos/{id_favorito}")
+	public String editFavoritos(@PathVariable int id_favorito, Model model2) {
+		Optional<Favoritos>favoritos=favoritoService.listarId(id_favorito);
+		model2.addAttribute("favorito", favoritos);
+		return "admin/editfavoritos";
+	}
+
+	@GetMapping("/eliminar/favoritos/{id_favorito}")
+	public String deleteFavoritos(Model model, @PathVariable int id_favorito) {
+		favoritoService.delete(id_favorito);
+		return "redirect:/admin/favoritos";
 	}
 	
 	@GetMapping("/productos")

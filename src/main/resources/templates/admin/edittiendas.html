@@ -19,7 +19,6 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="/../assets/demo/demo.css" rel="stylesheet" />
 </head>
-
 	<body class="">
 	  <div class="wrapper ">
 	    <div class="sidebar" data-color="white" data-active-color="danger">
@@ -48,15 +47,33 @@
 	            </a>
 	          </li>
 	          <li>
+	            <a th:href="@{/admin/carritos}">
+	              <i class="nc-icon nc-cart-simple"></i>
+	              <p>Carritos</p>
+	            </a>
+	          </li>
+	          <li>
 	            <a th:href="@{/admin/carruseles}">
 	              <i class="nc-icon nc-album-2"></i>
 	              <p>Carruseles</p>
 	            </a>
 	          </li>
 	          <li>
+	            <a th:href="@{/admin/compras}">
+	              <i class="nc-icon nc-tag-content"></i>
+	              <p>Compras</p>
+	            </a>
+	          </li>
+	          <li>
 	            <a th:href="@{/admin/contactos}">
 	              <i class="nc-icon nc-email-85"></i>
 	              <p>Contactos</p>
+	            </a>
+	          </li>
+	          <li>
+	            <a th:href="@{/admin/favoritos}">
+	              <i class="nc-icon nc-favourite-28"></i>
+	              <p>Favoritos</p>
 	            </a>
 	          </li>
 	          <li>
@@ -71,12 +88,12 @@
 	              <p>Testimonios</p>
 	            </a>
 	          </li>
-	          <li class="active ">
+	          <li class="active">
 	            <a th:href="@{/admin/tiendas}">
 	              <i class="nc-icon nc-shop"></i>
 	              <p>Tiendas</p>
 	            </a>
-	          </li >
+	          </li>
 	          <li>
 	            <a th:href="@{/admin/usuarios}">
 	              <i class="nc-icon nc-single-02"></i>
@@ -142,8 +159,9 @@
                           <div class="form-group">
                             <label>País *</label>
                             <select class="form-control" th:field="*{pais_tienda}">
-                              <option value="Perú">Perú</option>
-                              <option value="EEUU">Estados Unidos</option>
+	                            <option value="Perú_AT">Perú Ate</option>
+	                            <option value="Perú_SA">Perú Santa Anita</option>
+	                            <option value="Perú_CL">Perú Cercado de Lima</option>
                             </select>
                           </div>
                         </div>
@@ -202,15 +220,6 @@
   <script src="/../assets/js/core/jquery.min.js"></script>
   <script src="/../assets/js/core/popper.min.js"></script>
   <script src="/../assets/js/core/bootstrap.min.js"></script>
-  <script src="/../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <!-- Chart JS -->
-  <script src="/../assets/js/plugins/chartjs.min.js"></script>
-  <!--  Notifications Plugin    -->
-  <script src="/../assets/js/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="/../assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script><!-- Paper Dashboard DEMO methods, don't include it in your project! -->
   <script src="/../assets/demo/demo.js"></script>
 </body>
 

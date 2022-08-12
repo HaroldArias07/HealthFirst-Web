@@ -7,7 +7,7 @@
   <link rel="shortcut icon" href="https://res.cloudinary.com/health-first/image/upload/v1656470075/Logos/logo-hf_ywc9o3.png" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Productos
+    Favoritos
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -70,13 +70,13 @@
 	              <p>Contactos</p>
 	            </a>
 	          </li>
-	          <li>
+	          <li class="active">
 	            <a th:href="@{/admin/favoritos}">
 	              <i class="nc-icon nc-favourite-28"></i>
 	              <p>Favoritos</p>
 	            </a>
 	          </li>
-	          <li class="active">
+	          <li>
 	            <a th:href="@{/admin/productos}">
 	              <i class="nc-icon nc-box-2"></i>
 	              <p>Productos</p>
@@ -115,7 +115,7 @@
 	                <span class="navbar-toggler-bar bar3"></span>
 	              </button>
 	            </div>
-	            <a class="navbar-brand" href="javascript:;">Tabla de Productos</a>
+	            <a class="navbar-brand" href="javascript:;">Tabla de Favoritos</a>
 	          </div>
 	          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
 	            <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -142,7 +142,7 @@
           <div class="mx-auto col-sm-12 main-section" id="myTab" role="tablist">
             <ul class="nav nav-tabs justify-content-end">
               <li class="nav-item">
-              <a class="nav-link active" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="false">Productos</a>
+              <a class="nav-link active" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="false">Favoritos</a>
               </li>
               <li class="nav-item">
               <a class="nav-link" id="form-tab" data-toggle="tab" href="#form" role="tab" aria-controls="form" aria-selected="true">Nuevo registro</a>				   	
@@ -155,7 +155,7 @@
                   <div class="col-md-12">
                     <div class="card">
                       <div class="card-header">
-                        <h4 class="card-title">Productos</h4>
+                        <h4 class="card-title">Favoritos</h4>
                       </div>
                       <div class="card-body">
                         <div class="table-responsive">
@@ -165,25 +165,16 @@
                                 ID
                               </th>
                               <th>
-                                NOMBRE
+                                ID_USUARIO
+                              </th>
+                              <th>
+                                PRODUCTO
                               </th>
                               <th>
                                 PRECIO
                               </th>
                               <th>
-                                STOCK
-                              </th>
-                              <th>
-                                CATEGORIA
-                              </th>
-                              <th>
-                                TIPO
-                              </th>
-                              <th>
-                                DESCRIPCIÓN
-                              </th>
-                              <th>
-                                IMAGEN-URL
+                                IMAGEN
                               </th>
                               <th>
                                 ACCIONES
@@ -191,39 +182,30 @@
                             </thead>
                             <tbody>
                               <!-- INICIO TD -->
-                              <tr th:each="producto:${productos}">
-                                <td th:text="${producto.id_producto}">
+                              <tr th:each="favorito:${favoritos}">
+                                <td th:text="${favorito.id_favorito}">
                                   *
                                 </td >
-                                <td th:text="${producto.nombre_producto}">
+                                <td th:text="${favorito.id_usuario_favorito}">
                                   *
                                 </td >
-                                <td>
-                                  S/ <span th:text="${producto.precio_producto}">*</span >
-                                </td >
-                                <td th:text="${producto.stock_producto}">
-                                  *
-                                </td >
-                                <td th:text="${producto.categoria_producto}">
-                                  *
-                                </td >
-                                <td th:text="${producto.tipo_producto}">
-                                  *
-                                </td >
-                                <td th:text="${producto.descripcion_producto}">
-                                  *
-                                </td >
-                                <td th:text="${producto.imagen_producto}">
+                                <td th:text="${favorito.nombre_producto_favorito}">
                                   *
                                 </td >
                                 <td>
-                                  <a th:href="@{/admin/editar/productos/}+${producto.id_producto}" class="button-action-edit">
+                                  S/ <span th:text="${favorito.precio_producto_favorito}">*</span >
+                                </td >
+                                <td th:text="${favorito.imagen_producto_favorito}">
+                                  *
+                                </td >
+                                <td>
+                                  <a th:href="@{/admin/editar/favoritos/}+${favorito.id_favorito}" class="button-action-edit">
                                     <img class="icon-action" src="https://res.cloudinary.com/health-first/image/upload/v1639017872/Logos/edit-ic_iksypi.svg">
                                   </a>
-                                  <button th:href="@{/admin/eliminar/productos/}+${producto.id_producto}" 
-                                  		  th:onclick="eliminarProducto([[${producto.id_producto}]])" class="button-action-delete">
+                                  <button th:href="@{/admin/eliminar/favoritos/}+${favorito.id_favorito}" 
+                                  	 th:onclick="eliminarFavoritos([[${favorito.id_favorito}]])" class="button-action-delete" >
                                     <img class="icon-action" src="https://res.cloudinary.com/health-first/image/upload/v1639017872/Logos/delete-ic_hi5e63.svg">
-                                  </button> 
+                                  </button >
                                 </td>
                               </tr >
                               <!-- FIN TR -->
@@ -241,55 +223,35 @@
                   <div class="col-md-12">
                     <div class="card card-user">
                       <div class="card-header">
-                        <h5 class="card-title">Agregar Nuevo Producto</h5>
+                        <h5 class="card-title">Agregar Nuevo Favorito</h5>
                       </div>
                       <div class="card-body">
-                        <form th:action="@{/admin/save/productos}" th:object=${producto} method="POST">
+                        <form th:action="@{/admin/save/favoritos}" th:object=${favorito} method="POST">
                           <div class="row">
-                            <div class="col-md-6 pr-1">
+                            <div class="col-md-3 pr-1">
                               <div class="form-group">
-                                <label>Nombre *</label>
-                                <input type="text" th:field="*{nombre_producto}" class="form-control" required placeholder="Nombre producto">
+                                <label>Id Usuario *</label>
+                                <input th:field="*{id_usuario_favorito}" type="number" class="form-control" min="1" required placeholder="1">
+                              </div>
+                            </div>
+                            <div class="col-md-6 px-1">
+                              <div class="form-group">
+                                <label>Nombre del Producto *</label>
+                                <input required th:field="*{nombre_producto_favorito}" type="text" class="form-control" placeholder="Nombre del producto">
                               </div>
                             </div>
                             <div class="col-md-3 pl-1">
                               <div class="form-group">
-                                <label>Precio *</label>
-                                <input type="number" step=any th:field="*{precio_producto}" min=1 class="form-control" required placeholder="Precio">
-                              </div>
-                            </div>
-                            <div class="col-md-3 pl-1">
-                              <div class="form-group">
-                                <label>Stock *</label>
-                                <input type="number" class="form-control" min=1 th:field="*{stock_producto}" required placeholder="Stock">
+                                <label>Precio del Producto *</label>
+                                <input required th:field="*{precio_producto_favorito}" min="0.5" type="number" step="any" class="form-control" placeholder="1">
                               </div>
                             </div>
                           </div>
                           <div class="row">
-                            <div class="col-md-2 pr-1">
-                              <div class="form-group">
-                                <label>Categoría *</label>
-                                <input type="text" class="form-control" th:field="*{categoria_producto}" required placeholder="Categoría">
-                              </div>
-                            </div>
-                            <div class="col-md-2 pl-1">
-                              <div class="form-group">
-                                <label>Tipo *</label>
-                                <input type="text" class="form-control" th:field="*{tipo_producto}" required placeholder="Tipo">
-                              </div>
-                            </div>
-                            <div class="col-md-8 pl-1">
+                            <div class="col-md-12 pr-3">
                               <div class="form-group">
                                 <label>URL Imagen *</label>
-                                <input id="imagen" type="text" class="form-control" th:field="*{imagen_producto}" required placeholder="https://">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-12 px-3">
-                              <div class="form-group">
-                                <label>Descripción *</label>
-                                <textarea rows="4" class="form-control" th:field="*{descripcion_producto}" required placeholder="Descripcion del producto"></textarea>
+                                <input required id="imagen" th:field="*{imagen_producto_favorito}" type="text" class="form-control" placeholder="https://">
                               </div>
                             </div>
                           </div>
@@ -308,8 +270,8 @@
             </div>
           </div>
         </div>
-    </div>
-	  <footer class="footer footer-black  footer-white ">
+      </div>
+	  <footer class="footer footer-black  footer-white">
 		  <div class="container-fluid">
 			  <div class="row">
 				  <div class="credits ml-auto">
@@ -320,7 +282,7 @@
 			  </div>
 		  </div>
 	  </footer>
-	</div>
+    </div>
   </div>
   <!--   Core JS Files   -->
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>

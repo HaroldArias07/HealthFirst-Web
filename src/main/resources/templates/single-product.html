@@ -135,7 +135,16 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
                                         <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
                                     </svg>
-                                    <span> MI CARRITO</span>
+                                    <span> CARRITO</span>
+                                </a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/history}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="20" fill="currentColor" viewBox="0 0 48 48">
+									    <path d="M25.99 6c-9.95 0-17.99 8.06-17.99 18h-6l7.79 7.79.14.29 8.07-8.08h-6c0-7.73 6.27-14 14-14s14 6.27 14 14-6.27 14-14 14c-3.87 0-7.36-1.58-9.89-4.11l-2.83 2.83c3.25 3.26 7.74 5.28 12.71 5.28 9.95 0 18.01-8.06 18.01-18s-8.06-18-18.01-18zm-1.99 10v10l8.56 5.08 1.44-2.43-7-4.15v-8.5h-3z" opacity=".9"/>
+									</svg>
+                                    <span> HISTORIAL</span>
                                 </a>
                             </li >
                         </ul>
@@ -145,7 +154,7 @@
         </header>
         <input id="id_precio" step="any" type="hidden" th:value="${producto.precio_producto}">
         
-		<a th:href="@{/auth/login}" th:if="${session.usuarios == null}">
+		<a th:href="@{/auth/login}" th:if="${session.usuarios == null}" class="favorite-a">
 			<svg xmlns="http://www.w3.org/2000/svg" width="32" height="25" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
             	<path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
             </svg>
@@ -204,23 +213,21 @@
 		
 		<form th:if="${session.usuarios != null}" th:action="@{/private/save/favorite}" th:object=${favoritos} method="POST">
 			<span id="span_id_f" th:text="${session.usuarios.id}" style="visibility: hidden"></span>
-			<span id="span_producto_f" th:text="${producto.id_producto}" style="visibility: hidden"></span>
 			<span id="span_nombre_f" th:text="${producto.nombre_producto}" style="visibility: hidden"></span>
 			<span id="span_precio_f" th:text="${producto.precio_producto}" style="visibility: hidden"></span>
 			<span id="span_imagen_f" th:text="${producto.imagen_producto}" style="visibility: hidden"></span>
 			<!--  -->
 			<input id="id_usuario_f" type="hidden" th:field="*{id_usuario_favorito}">
-			<input id="id_producto_f" type="hidden" th:field="*{id_producto_favorito}">
 			<input id="nombre_producto_f" type="hidden" th:field="*{nombre_producto_favorito}">
 			<input id="precio_producto_f" type="hidden" th:field="*{precio_producto_favorito}">
 			<input id="imagen_producto_f" type="hidden" th:field="*{imagen_producto_favorito}">
 			<br>
-			<button type="submit">
+			<button type="submit" class="favorite-btn">
 				<svg xmlns="http://www.w3.org/2000/svg" width="32" height="25" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
                 	<path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
                 </svg>
 			</button>
-		</form>
+		</form>   
 		
 		<form th:if="${session.usuarios != null}" th:action="@{/private/save/product}" th:object=${carritos} method="POST">
 			<span id="span_id" th:text="${session.usuarios.id}" style="visibility: hidden"></span>
@@ -372,6 +379,7 @@
         <script src="/assets/scripts/libs/easyResponsiveTabs.js"></script>
         <script src="/assets/scripts/libs/jquery.raty-fa.js"></script>
         <script src="/assets/scripts/functions.js"></script>
+        <script src="/assets/functions/funciones.js"></script>
         <script type="text/javascript">
 	        function cotizar(){
 		        let precio = document.getElementById("id_precio").value;
@@ -404,9 +412,6 @@
 		<script type="text/javascript">
           	let span_id_f = document.getElementById("span_id_f").innerHTML;
 		  	document.getElementById('id_usuario_f').value= span_id_f;
-		  	
-		  	let span_producto_f = document.getElementById("span_producto_f").innerHTML;
-		  	document.getElementById('id_producto_f').value= span_producto_f;
 		  	
 		  	let span_nombre_f = document.getElementById("span_nombre_f").innerHTML;
 		  	document.getElementById('nombre_producto_f').value= span_nombre_f;

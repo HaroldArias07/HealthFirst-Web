@@ -2,12 +2,15 @@ package com.essentials.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.essentials.demo.models.entity.Compras;
 import com.essentials.demo.models.entity.Order;
+import com.essentials.demo.models.service.ICompraService;
 import com.essentials.demo.models.service.PaypalService;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
@@ -18,17 +21,21 @@ public class PaypalController {
 
 	@Autowired
 	PaypalService paypalService;
+	
+	@Autowired
+	private ICompraService compraService;
 
 	public static final String SUCCESS_URL = "private/success";
 	public static final String CANCEL_URL = "private/cancel";
 	
 	@PostMapping("/private/paypal")
-	public String payment(@ModelAttribute("order") Order order) {
+	public String payment(@ModelAttribute("order") Order order, @Validated Compras com) {
 		try {
 			Payment payment = paypalService.createPayment(order.getPrice(), order.getCurrency(), order.getMethod(), 
 					order.getIntent(), order.getDescription(), "http://localhost:8095/" + CANCEL_URL, "http://localhost:8095/" + SUCCESS_URL);
 			for(Links link:payment.getLinks()) {
 				if(link.getRel().equals("approval_url")) {
+					compraService.save(com);
 					return "redirect:"+link.getHref();
 				}
 			}

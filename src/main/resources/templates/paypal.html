@@ -130,12 +130,21 @@
                                 </a>
                             </li >
                             
-                            <li th:if="${session.usuarios != null}" class="current-menu-item">
+                            <li th:if="${session.usuarios != null}">
                                 <a th:href="@{/private/cart}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
                                         <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
                                     </svg>
-                                    <span> MI CARRITO</span>
+                                    <span> CARRITO</span>
+                                </a>
+                            </li >
+                            
+                            <li th:if="${session.usuarios != null}">
+                                <a th:href="@{/private/history}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="20" fill="currentColor" viewBox="0 0 48 48">
+									    <path d="M25.99 6c-9.95 0-17.99 8.06-17.99 18h-6l7.79 7.79.14.29 8.07-8.08h-6c0-7.73 6.27-14 14-14s14 6.27 14 14-6.27 14-14 14c-3.87 0-7.36-1.58-9.89-4.11l-2.83 2.83c3.25 3.26 7.74 5.28 12.71 5.28 9.95 0 18.01-8.06 18.01-18s-8.06-18-18.01-18zm-1.99 10v10l8.56 5.08 1.44-2.43-7-4.15v-8.5h-3z" opacity=".9"/>
+									</svg>
+                                    <span> HISTORIAL</span>
                                 </a>
                             </li >
                         </ul>
@@ -148,17 +157,17 @@
                     <h4>Carrito <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i></span></h4>
                     	<div th:each="carrito:${carritos}" th:if="${session.usuarios.id} == ${carrito.id_usuario_carrito}">
                     		<p>
-                    			<a th:text="${carrito.cantidad_producto_carrito}"></a> <a th:text="${carrito.nombre_producto_carrito}"></a> 
+                    			<a th:text="${carrito.cantidad_producto_carrito}"></a> <a th:nombreProducto="${carrito.nombre_producto_carrito}" th:text="${carrito.nombre_producto_carrito}"></a> 
                     			<span class="price" th:valorNumerico="${carrito.monto_producto_carrito}" th:text="'S/ ' + ${carrito.monto_producto_carrito}"></span>
                     		</p>
                     	</div>
                     <hr class="hr-total">
-                    <p>Subtotal <span class="price" style="color:black"><b>S/</b><b id="subtotal" sumaTotal=""></b></span></p>
-                    <p>IGV <span class="price" style="color:black"><b>S/</b><b id="igv"></b></span></p>
-                    <p>Total <span class="price" style="color:black"><b>S/</b><b id="totalcarrito"></b></span></p>
+                    <p>Subtotal <span class="price" style="color:black"><b>S/ </b><b id="subtotal" sumaTotal=""></b></span></p>
+                    <p>IGV <span class="price" style="color:black"><b>S/ </b><b id="igv"></b></span></p>
+                    <p>Total <span class="price" style="color:black"><b>S/ </b><b id="totalcarrito"></b></span></p>
                 </div>
                 <div class="container-pay">
-                    <form method="POST"  th:action="@{/private/paypal}">
+                    <form method="POST" th:action="@{/private/paypal}" th:object=${compra}>
                         <div>
                             <h3>Proceso de pago</h3>
                             <label>Tarjetas aceptadas</label>
@@ -168,11 +177,19 @@
                                 <i class="fa fa-cc-mastercard" style="color:red;"></i>
                                 <i class="fa fa-cc-discover" style="color:orange;"></i>
                             </div>
-                            <input type="hidden" id="price" name="price" required>
-                            <input type="hidden" id="currency" name="currency" value="USD" required>
-                            <input type="hidden" id="method" name="method" value="Paypal" required>
-                            <input type="hidden" id="intent" name="intent" value="sale" required>
-                            <input type="hidden" id="description" name="description" value="Compra de productos en Health First"  required>
+                            <span id="span_usuario" th:text="${session.usuarios.id}" style="visibility: hidden"></span>
+                            <!--  -->
+                            <input type="hidden" id="usuario" th:field="*{id_usuario_compra}">
+                            <input type="hidden" id="productos" th:field="*{productos_compra}" productosTotal="">
+                            <input type="hidden" id="precio" th:field="*{precio_compra}">
+                            <input type="hidden" id="metodo" th:field="*{metodo_pago_compra}">
+                            <input type="hidden" id="estado" th:field="*{estado_compra}">
+                            <!--  -->
+                            <input type="hidden" id="price" name="price">
+                            <input type="hidden" id="currency" name="currency" value="USD">
+                            <input type="hidden" id="method" name="method" value="Paypal">
+                            <input type="hidden" id="intent" name="intent" value="sale">
+                            <input type="hidden" id="description" name="description" value="Compra de productos en Health First">
                         </div>
 
                         <input type="submit" value="Continuar con la compra" class="btn-continue">
@@ -287,6 +304,20 @@
         	var precio_PEN = totalcarrito; //precio total
         	var precio_USD = precio_PEN / dolar; //conversión de PEN a USD
         	document.getElementById("price").value = precio_USD.toFixed(2);
+        	
+        	/* GUARDAR VALORES EN BD */
+        	let id_usuario = document.getElementById("span_usuario").innerHTML;
+		  	document.getElementById('usuario').value= id_usuario;
+
+		  	document.getElementById('metodo').value= "Paypal";
+		  	document.getElementById('estado').value= "Pedido realizado";
+		  	document.getElementById('precio').value= totalcarrito.toFixed(2);
+		  	
+		  	var nombres = "";
+	        $("a[nombreProducto]").each(function() {
+	        	nombres += $(this).attr("nombreProducto") + ", ";
+	        });
+	        document.getElementById('productos').value= nombres.slice(0, -2);
         </script>
     </body>
 </html>
