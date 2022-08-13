@@ -32,7 +32,7 @@ public class PaypalController {
 	public String payment(@ModelAttribute("order") Order order, @Validated Compras com) {
 		try {
 			Payment payment = paypalService.createPayment(order.getPrice(), order.getCurrency(), order.getMethod(), 
-					order.getIntent(), order.getDescription(), "http://localhost:8095/" + CANCEL_URL, "http://localhost:8095/" + SUCCESS_URL);
+					order.getIntent(), order.getDescription(), "https://health-f.herokuapp.com/" + CANCEL_URL, "https://health-f.herokuapp.com/" + SUCCESS_URL);
 			for(Links link:payment.getLinks()) {
 				if(link.getRel().equals("approval_url")) {
 					compraService.save(com);
